@@ -1,0 +1,89 @@
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  min-height: calc(100vh - 130px);
+  padding: 30px 0;
+  .main {
+    display: flex;
+    width: 90%;
+    margin: auto;
+    .user {
+      width: 400px;
+      .title {
+        font-size: 30px;
+        margin-bottom: 20px;
+      }
+      .body {
+        margin-right: 40px;
+        form {
+          .form-content {
+            margin: 10px 0;
+            display: flex;
+            flex-direction: column;
+            label {
+              margin-bottom: 5px;
+              font-size: 20px;
+            }
+            input {
+              height: 40px;
+              padding-left: 10px;
+              border: none;
+              outline: none;
+              font-size: 18px;
+              background-color: rgb(249, 247, 250);
+            }
+            button {
+              border: 2px solid blue;
+              height: 40px;
+              background-color: black;
+              color: white;
+              border: none;
+              outline: none;
+              text-transform: uppercase;
+              font-weight: bold;
+              width: 120px;
+              margin-top: 20px;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+    .orders {
+      width: 1200px;
+      .title {
+        font-size: 30px;
+        margin-bottom: 20px;
+      }
+      .body {
+        table,
+        th,
+        td {
+          border: 1px solid gray;
+          border-collapse: collapse;
+        }
+        table thead tr th {
+          width: 200px;
+          height: 40px;
+        }
+        table tbody tr {
+          height: 40px;
+          background-color: rgb(236, 237, 237);
+          td {
+            text-align: center;
+            button {
+              border: none;
+              background-color: white;
+              height: 30px;
+              width: 100px;
+              text-transform: uppercase;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export default Wrapper;
