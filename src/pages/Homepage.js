@@ -24,12 +24,6 @@ function Homepage() {
     return <Loading />;
   }
 
-  return (
-    <>
-      <h1>Testing body....</h1>
-    </>
-  );
-
   // Filters products according to searched keywords
   let productList = products
     .filter((item) =>
