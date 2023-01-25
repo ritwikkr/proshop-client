@@ -68,7 +68,7 @@ function Header() {
             {data ? (
               <div className="user">
                 <p onClick={() => toggleAccountSection()}>
-                  {data.name} <AiFillCaretDown />
+                  {data.user.name} <AiFillCaretDown />
                 </p>
                 <ul className={show ? "showAccount" : null}>
                   <Link to={"/profile"}>
