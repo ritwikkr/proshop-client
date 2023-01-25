@@ -59,7 +59,8 @@ function Header() {
                 <BsFillCartFill />
               </div>
               <p>
-                cart <span>{cartItems.length}</span>
+                cart
+                {cartItems.length > 0 && <span>{cartItems.length}</span>}
               </p>
             </Link>
           </div>

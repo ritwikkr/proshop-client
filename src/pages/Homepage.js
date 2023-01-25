@@ -25,6 +25,7 @@ function Homepage() {
   }
 
   // Filters products according to searched keywords
+
   let productList = products
     .filter((item) =>
       item.name.toLowerCase().includes(searchText.toLowerCase())

@@ -1,11 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import BASE_URL from "../../helper/url";
 
 // Action
 export const createSession = createAsyncThunk(
   "createSession",
   async ({ sessionType, userData }) => {
-    const response = await axios.post(`/api/v1/user/${sessionType}`, userData);
+    const response = await axios.post(
+      `${BASE_URL}/api/v1/user/${sessionType}`,
+      userData
+    );
     return response.data;
   }
 );
@@ -13,13 +17,16 @@ export const createSession = createAsyncThunk(
 export const addUserAddress = createAsyncThunk(
   "addUserAddress",
   async (body) => {
-    const response = await axios.put(`/api/v1/user/addAddress`, body);
+    const response = await axios.put(
+      `${BASE_URL}/api/v1/user/addAddress`,
+      body
+    );
     localStorage.setItem("user", JSON.stringify(response.data));
   }
 );
 
 export const updateUser = createAsyncThunk("updateUser", async (body) => {
-  const response = await axios.put(`/api/v1/user/update`, body);
+  const response = await axios.put(`${BASE_URL}/api/v1/user/update`, body);
   return response.data;
 });
 
