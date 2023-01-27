@@ -3,6 +3,7 @@ import Wrapper from "../wrapper/LoginPageWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { createSession } from "../store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
+import Alert from "../components/Alert";
 
 function Loginpage() {
   const [showLogin, setShowLogin] = useState(true);
@@ -15,7 +16,7 @@ function Loginpage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.user);
+  const { data, isLoading, isError } = useSelector((state) => state.user);
   useEffect(() => {
     if (data) {
       navigate("/");
@@ -50,6 +51,9 @@ function Loginpage() {
           <h1> {showLogin ? <p>sign in</p> : <p>sign up</p>} </h1>
         </div>
         <div className="body">
+          {isLoading && <Alert msg={"Signing in..."} />}
+          {console.log(isError)}
+          {isError && <Alert msg={isError} type="error" />}
           <form onSubmit={formSubmitHandler}>
             {!showLogin && (
               <div className="form-content">
@@ -110,7 +114,7 @@ function Loginpage() {
             <div className="form-content">
               {showLogin ? (
                 <p>
-                  new customer?{" "}
+                  new customer?
                   <span onClick={() => setShowLogin(false)}>register</span>
                 </p>
               ) : (

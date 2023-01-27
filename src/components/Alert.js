@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-function Alert({ msg }) {
+function Alert({ msg, type = "success" }) {
   return (
     <Wrapper>
-      <p>{msg}</p>
+      <div className={`home ${type}`}>
+        <p>{msg}</p>
+      </div>
     </Wrapper>
   );
 }
@@ -12,9 +14,19 @@ function Alert({ msg }) {
 export default Alert;
 
 const Wrapper = styled.div`
-  text-align: center;
   width: 400px;
-  padding: 10px;
+  height: 50px;
   font-weight: bold;
-  background-color: rgb(202, 229, 245);
+  margin-bottom: 40px;
+  .home {
+    background-color: rgb(202, 229, 245);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .error {
+    background-color: red;
+  }
 `;

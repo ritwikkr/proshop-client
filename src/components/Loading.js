@@ -12,12 +12,13 @@ function Loading() {
 export default Loading;
 
 const Wrapper = styled.div`
-  border: 2px solid red;
+  /* border: 2px solid red; */
   height: calc(100vh - 80px);
   display: flex;
   justify-content: center;
   align-items: center;
   .loader {
+    border: 2px solid blue;
     border: 16px solid #f3f3f3;
     border-radius: 50%;
     border-top: 16px solid #3498db;

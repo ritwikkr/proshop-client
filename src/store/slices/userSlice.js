@@ -5,12 +5,16 @@ import BASE_URL from "../../helper/url";
 // Action
 export const createSession = createAsyncThunk(
   "createSession",
-  async ({ sessionType, userData }) => {
-    const response = await axios.post(
-      `${BASE_URL}/api/v1/user/${sessionType}`,
-      userData
-    );
-    return response.data;
+  async ({ sessionType, userData }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/v1/user/${sessionType}`,
+        userData
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 
@@ -52,16 +56,16 @@ const userSlice = createSlice({
       state.isError = false;
     });
     builder.addCase(createSession.fulfilled, (state, action) => {
-      console.log(action);
       state.isLoading = false;
       state.data = action.payload;
       state.isError = false;
       localStorage.setItem("user", JSON.stringify(action.payload));
     });
     builder.addCase(createSession.rejected, (state, action) => {
+      console.log(action.payload);
       state.isLoading = false;
       state.data = null;
-      state.isError = action.payload;
+      state.isError = action.payload.err;
     });
 
     builder.addCase(addUserAddress.pending, (state, action) => {});

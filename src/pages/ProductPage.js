@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../store/slices/cartSlice";
 import Alert from "../components/Alert";
 import { togglePopUp } from "../store/slices/showNavPopupSlice";
+import Loading from "../components/Loading";
 
 function ProductPage() {
   // Component State
@@ -26,7 +27,7 @@ function ProductPage() {
 
   // Loading
   if (isLoading) {
-    return <h1>Loading</h1>;
+    return <Loading />;
   }
 
   const { name, image, rating, numReviews, price, description, countInStock } =

@@ -9,19 +9,19 @@ function DemoCarousel() {
   return (
     <Wrapper>
       <Carousel>
-        <Link to={"/productPage/63b3e77e1890f649873c07f7"}>
+        <Link to={"/productPage/63b7c5bb960520d93f84c9b8"}>
           <div className="image">
             <img src="/images/airpods.jpg" alt="ps4" />
             <p className="legend">Legend 1</p>
           </div>
         </Link>
-        <Link to={"/productPage/63b3e7c37aef7e89c45753ce"}>
+        <Link to={"/productPage/63b7c5bb960520d93f84c9bd"}>
           <div className="image">
             <img src="/images/alexa.jpg" alt="ps4 pro" />
             <p className="legend">Legend 2</p>
           </div>
         </Link>
-        <Link to={"/productPage/63b3e7ad8a5f725e00648cc0"}>
+        <Link to={"/productPage/63b7c5bb960520d93f84c9ba"}>
           <div className="image">
             <img src="/images/camera.jpg" alt="ps4 pro2" />
             <p className="legend">Legend 3</p>
