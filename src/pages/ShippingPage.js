@@ -20,10 +20,11 @@ function ShippingPage() {
 
   useEffect(() => {
     setUserAddress({
-      address: data.user.address ? data.user.address[0].house : "",
-      city: data.user.address ? data.user.address[0].city : "",
-      postal_code: data.user.address ? data.user.address[0].postal : "",
-      country: data.user.address ? data.user.address[0].country : "",
+      address: data.user.address.length > 0 ? data.user.address[0].house : "",
+      city: data.user.address.length > 0 ? data.user.address[0].city : "",
+      postal_code:
+        data.user.address.length > 0 ? data.user.address[0].postal : "",
+      country: data.user.address.length > 0 ? data.user.address[0].country : "",
     });
   }, [data.address, data.user]);
 
