@@ -20,13 +20,12 @@ function ShippingPage() {
 
   useEffect(() => {
     setUserAddress({
-      address: data.address[0].house,
-      city: data.address[0].city,
-      postal_code: data.address[0].postal,
-      country: data.address[0].country,
+      address: data.user.address ? data.user.address[0].house : "",
+      city: data.user.address ? data.user.address[0].city : "",
+      postal_code: data.user.address ? data.user.address[0].postal : "",
+      country: data.user.address ? data.user.address[0].country : "",
     });
-    console.log(data.address[0]);
-  }, [data.address]);
+  }, [data.address, data.user]);
 
   function formSubmitHandler(e) {
     e.preventDefault();
@@ -34,7 +33,7 @@ function ShippingPage() {
     if (!address || !city || !postal_code || !country) {
       return;
     }
-    dispatch(addUserAddress({ useraddress, userId: data._id }));
+    dispatch(addUserAddress({ useraddress, userId: data.user._id }));
     navigate("/paymentMethod");
   }
 

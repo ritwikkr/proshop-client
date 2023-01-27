@@ -21,11 +21,18 @@ export const createSession = createAsyncThunk(
 export const addUserAddress = createAsyncThunk(
   "addUserAddress",
   async (body) => {
-    const response = await axios.put(
-      `${BASE_URL}/api/v1/user/addAddress`,
-      body
-    );
-    localStorage.setItem("user", JSON.stringify(response.data));
+    try {
+      console.log(body);
+      const response = await axios.put(
+        `${BASE_URL}/api/v1/user/addAddress`,
+        body
+      );
+      console.log(response);
+      // localStorage.setItem("user", JSON.stringify(response.data));
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
@@ -62,13 +69,16 @@ const userSlice = createSlice({
       localStorage.setItem("user", JSON.stringify(action.payload));
     });
     builder.addCase(createSession.rejected, (state, action) => {
-      console.log(action.payload);
       state.isLoading = false;
       state.data = null;
       state.isError = action.payload.err;
     });
 
     builder.addCase(addUserAddress.pending, (state, action) => {});
+    builder.addCase(addUserAddress.fulfilled, (state, action) => {
+      console.log(action.payload);
+      // state.data.user.address = action.payload;
+    });
     // updateUser
     builder.addCase(updateUser.pending, (state, action) => {
       state.isLoading = true;
