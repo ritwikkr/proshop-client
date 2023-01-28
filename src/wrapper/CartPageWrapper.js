@@ -5,8 +5,8 @@ const Wrapper = styled.div`
   display: flex;
   width: 90%;
   margin: auto;
+  justify-content: space-between;
   .cart {
-    width: 1200px;
     .back-btn {
       button {
         text-transform: uppercase;
@@ -29,20 +29,23 @@ const Wrapper = styled.div`
         display: flex;
         align-items: flex-start;
         padding: 10px;
-        .image {
-          width: 120px;
-          margin-right: 20px;
-          img {
-            border-radius: 5px;
-            width: 100%;
-            height: 100%;
+        .prod-view {
+          display: flex;
+          .image {
+            width: 120px;
+            margin-right: 20px;
+            img {
+              border-radius: 5px;
+              width: 100%;
+              height: 100%;
+            }
           }
-        }
-        .product-title {
-          text-transform: capitalize;
-          letter-spacing: 1.1px;
-          width: 250px;
-          margin-right: 20px;
+          .product-title {
+            text-transform: capitalize;
+            letter-spacing: 1.1px;
+            width: 250px;
+            margin-right: 20px;
+          }
         }
         .price {
           margin-right: 30px;
@@ -98,6 +101,58 @@ const Wrapper = styled.div`
         &:disabled {
           cursor: not-allowed;
           opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 950px) {
+    display: block;
+    .subtotal {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  @media only screen and (max-width: 690px) {
+    .cart {
+      > .body {
+        .item {
+          position: relative;
+          .prod-view {
+            width: fit-content;
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 560px) {
+    .cart {
+      .body {
+        .item {
+          .prod-view {
+            width: 200px;
+            .product-title {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 390px) {
+    .cart {
+      .body {
+        .item {
+          position: relative;
+          .remove {
+            position: absolute;
+            left: 60%;
+            top: 30%;
+          }
         }
       }
     }

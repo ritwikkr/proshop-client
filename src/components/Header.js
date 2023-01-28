@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { BsFillCartFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { AiFillCaretDown } from "react-icons/ai";
 
 import Wrapper from "../wrapper/HeaderWrapper";
@@ -20,7 +19,11 @@ function Header() {
 
   // Show Header PopUp
   function toggleAccountSection() {
-    dispatch(togglePopUp(true));
+    if (show) {
+      dispatch(togglePopUp(false));
+    } else {
+      dispatch(togglePopUp(true));
+    }
   }
 
   // Dispatches the searched keyword into Global State
@@ -87,9 +90,6 @@ function Header() {
               </Link>
             )}
           </div>
-        </div>
-        <div className="options">
-          <GiHamburgerMenu />
         </div>
       </div>
     </Wrapper>

@@ -2,11 +2,9 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   min-height: calc(100vh - 130px);
-  padding: 30px 0;
+  padding: 60px;
   .main {
     display: flex;
-    width: 90%;
-    margin: auto;
     .user {
       width: 400px;
       .title {
@@ -25,6 +23,7 @@ const Wrapper = styled.div`
               font-size: 20px;
             }
             input {
+              width: 100%;
               height: 40px;
               padding-left: 10px;
               border: none;
@@ -41,7 +40,7 @@ const Wrapper = styled.div`
               outline: none;
               text-transform: uppercase;
               font-weight: bold;
-              width: 120px;
+              width: 100%;
               margin-top: 20px;
               cursor: pointer;
             }
@@ -81,6 +80,30 @@ const Wrapper = styled.div`
             }
           }
         }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1100px) {
+    width: 100vw;
+    .main {
+      width: 100%;
+      display: block;
+      .user {
+        margin: auto;
+        input {
+          width: 100%;
+        }
+      }
+      .orders {
+        display: none;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    .main {
+      .user {
       }
     }
   }

@@ -7,23 +7,31 @@ import Payment from "../components/Payment";
 
 function PlaceOrderPage() {
   const { data } = useSelector((state) => state.cart);
+  const { data: userData } = useSelector((state) => state.user);
   const totalItemPrice = data.reduce(
     (acc, item) => acc + item.price * item.qty,
     0
   );
+
+  const address = userData.user.address.reduce((acc, item) => {
+    return;
+  }, "");
   const dispatch = useDispatch();
   const totalTaxPrice = 0.08 * totalItemPrice;
   return (
     <Wrapper onClick={() => dispatch(togglePopUp(false))}>
       <div className="main">
-        <div className="proress-bar">
+        <div className="progress-bar">
           <ProgressBar shipping paymentMethod placeOrder />
         </div>
         <div className="body">
           <div className="product-details">
             <div className="shipping">
               <h2 className="title">shipping</h2>
-              <p>Address: address</p>
+              <p>
+                Address:
+                {`${userData.user.address[0].house}, ${userData.user.address[0].city},  ${userData.user.address[0].country} - ${userData.user.address[0].postal}`}
+              </p>
             </div>
             <hr />
             <div className="payment-method">

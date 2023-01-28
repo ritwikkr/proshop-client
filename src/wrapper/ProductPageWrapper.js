@@ -19,9 +19,10 @@ const Wrapper = styled.div`
   }
   .dashboard {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     .image {
-      width: 600px;
+      width: 500px;
       img {
         width: 100%;
         height: 100%;
@@ -47,7 +48,7 @@ const Wrapper = styled.div`
       }
     }
     .price-box {
-      width: 300px;
+      width: 400px;
       border: 1px solid lightgray;
       height: fit-content;
       .price,
@@ -120,9 +121,81 @@ const Wrapper = styled.div`
     }
   }
   .reviews {
-    /* border: 2px solid red; */
     margin: 40px 0;
     width: 800px;
+  }
+
+  @media only screen and (max-width: 1595px) {
+    .dashboard {
+      justify-content: center;
+      /* .image {
+        width: 400px;
+        border: 2px solid red;
+        > img {
+          width: 100%;
+          height: 100%;
+        }
+      } */
+      .prod-details {
+        width: 25%;
+      }
+      .price-box {
+        width: 20%;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1350px) {
+    .dashboard {
+      .image {
+        width: 400px;
+        img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1100px) {
+    .dashboard {
+      /* display: block; */
+      > .price-box {
+        /* border: 2px solid blue; */
+        width: 80%;
+        margin-top: 20px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 910px) {
+    .dashboard {
+      .image {
+        width: 300px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    .reviews {
+      width: 100%;
+    }
+  }
+
+  @media only screen and (max-width: 785px) {
+    .dashboard {
+      /* border: 2px solid red; */
+      display: block;
+      .prod-details {
+        margin: 20px 0 0 0;
+        width: 100%;
+      }
+      .price-box {
+        /* border: 2px solid blue; */
+        width: 100%;
+      }
+    }
   }
 `;
 

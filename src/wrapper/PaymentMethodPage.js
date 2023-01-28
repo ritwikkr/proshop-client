@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   min-height: calc(100vh - 130px);
-  border: 2px solid red;
+  padding: 20px;
   .main {
+    border: 2px solid red;
     /* border: 2px solid blue; */
-    width: 600px;
-    margin: 20px auto 0;
+    max-width: 600px;
+    margin: auto;
     .body {
       margin-top: 30px;
       h1 {

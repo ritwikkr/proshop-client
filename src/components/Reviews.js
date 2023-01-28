@@ -32,7 +32,7 @@ function Reviews() {
         <hr />
         <div className="give-review">
           <p className="title">write a customer review</p>
-          <Alert />
+          {/* <Alert /> */}
         </div>
       </div>
     </Wrapper>

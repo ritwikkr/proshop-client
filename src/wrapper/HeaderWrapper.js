@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   height: 80px;
+  position: relative;
   padding: 10px;
   background-color: rgb(46, 50, 56);
   color: rgb(220, 224, 231);
@@ -42,6 +43,7 @@ const Wrapper = styled.div`
     }
     > .navigation {
       display: flex;
+      align-items: center;
       .cart,
       .profile {
         display: flex;
@@ -107,15 +109,55 @@ const Wrapper = styled.div`
     }
   }
   @media only screen and (max-width: 900px) {
+    height: 100px;
+    width: 100%;
+    /* padding: 0; */
+    .body {
+      /* border: 2px solid blue; */
+      display: flex;
+      align-items: flex-start;
+      .left {
+        .search-bar {
+          width: 80%;
+          /* border: 2px solid blue; */
+          position: absolute;
+          left: 50%;
+          display: flex;
+          top: 50%;
+          transform: translateX(-50%);
+          input {
+            flex: 1;
+          }
+        }
+      }
+      .navigation {
+        /* border: 2px solid red; */
+        margin-top: 5px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 550px) {
+    .body {
+      .left {
+        .logo {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 400px) {
     .body {
       .navigation {
-        display: none;
-      }
-      .options {
-        display: block;
-        /* border: 2px solid red; */
-        font-size: 30px;
-        cursor: pointer;
+        .profile {
+          .user {
+            ul {
+              width: 100px;
+              border: 2px solid yellow;
+            }
+          }
+        }
       }
     }
   }

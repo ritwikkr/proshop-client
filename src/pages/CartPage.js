@@ -46,11 +46,13 @@ function CartPage() {
             <>
               {data.map((item) => (
                 <div className="item" key={item._id}>
-                  <div className="image">
-                    <img src={item.image} alt="" />
-                  </div>
-                  <div className="product-title">
-                    <p>{item.name}</p>
+                  <div className="prod-view">
+                    <div className="image">
+                      <img src={item.image} alt="" />
+                    </div>
+                    <div className="product-title">
+                      <p>{item.name}</p>
+                    </div>
                   </div>
                   <div className="price">
                     <p>${item.price}</p>

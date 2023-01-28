@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   min-height: calc(100vh - 130px);
+  padding: 20px;
   .main {
-    width: 1200px;
+    max-width: 1200px;
     margin: auto;
     .progress-bar {
       width: 600px;
@@ -12,6 +13,7 @@ const Wrapper = styled.div`
     > .body {
       margin-top: 50px;
       display: flex;
+      justify-content: space-between;
       .product-details {
         width: 60%;
         .shipping {
@@ -90,6 +92,71 @@ const Wrapper = styled.div`
               background-color: black;
               color: white;
               text-transform: uppercase;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 980px) {
+    .main {
+      > .body {
+        .product-details {
+          .order-items {
+            ul {
+              li {
+                display: block;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 800px) {
+    .main {
+      > .body {
+        flex-wrap: wrap;
+        .product-details {
+          width: 100%;
+          .order-items {
+            ul {
+              li {
+                display: flex;
+              }
+              /* border: 2px solid red; */
+            }
+          }
+        }
+        .order-summary {
+          width: 100%;
+          margin-top: 40px;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 650px) {
+    .main {
+      .progress-bar {
+        width: 100%;
+        /* border: 2px solid black; */
+      }
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .main {
+      .body {
+        .product-details {
+          .order-items {
+            ul {
+              li {
+                display: block;
+              }
             }
           }
         }

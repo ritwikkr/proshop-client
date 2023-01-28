@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  min-height: calc(100vh - 150px);
+  min-height: calc(100vh - 130px);
+  padding: 20px;
   .main {
-    /* border: 2px solid red; */
-    width: 600px;
+    max-width: 600px;
     margin: 20px auto 0;
     .content {
       margin-top: 50px;
