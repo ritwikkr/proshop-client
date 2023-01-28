@@ -62,6 +62,11 @@ const Wrapper = styled.div`
         }
         .user {
           position: relative;
+          .caret {
+            margin-left: -1px;
+            background-color: rgb(46, 50, 56);
+            color: white;
+          }
           ul {
             position: absolute;
             z-index: 10;
@@ -111,15 +116,12 @@ const Wrapper = styled.div`
   @media only screen and (max-width: 900px) {
     height: 100px;
     width: 100%;
-    /* padding: 0; */
     .body {
-      /* border: 2px solid blue; */
       display: flex;
       align-items: flex-start;
       .left {
         .search-bar {
           width: 80%;
-          /* border: 2px solid blue; */
           position: absolute;
           left: 50%;
           display: flex;
@@ -131,7 +133,6 @@ const Wrapper = styled.div`
         }
       }
       .navigation {
-        /* border: 2px solid red; */
         margin-top: 5px;
       }
     }
@@ -142,21 +143,6 @@ const Wrapper = styled.div`
       .left {
         .logo {
           margin-right: 0;
-        }
-      }
-    }
-  }
-
-  @media only screen and (max-width: 400px) {
-    .body {
-      .navigation {
-        .profile {
-          .user {
-            ul {
-              width: 100px;
-              border: 2px solid yellow;
-            }
-          }
         }
       }
     }

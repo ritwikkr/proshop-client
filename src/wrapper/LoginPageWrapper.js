@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   min-height: calc(100vh - 170px);
   .session-form {
-    width: 400px;
+    max-width: 400px;
     margin: 40px auto 0;
     .head {
       text-transform: uppercase;
@@ -38,7 +38,7 @@ const Wrapper = styled.div`
             background-color: black;
             color: white;
             cursor: pointer;
-            width: 100px;
+            width: 100%;
             margin: 20px 0;
           }
           > p {
@@ -51,6 +51,13 @@ const Wrapper = styled.div`
           }
         }
       }
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    padding: 20px;
+    .session-form {
+      border: 2px solid red;
     }
   }
 `;

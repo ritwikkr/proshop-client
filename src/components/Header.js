@@ -71,7 +71,10 @@ function Header() {
             {data ? (
               <div className="user">
                 <p onClick={() => toggleAccountSection()}>
-                  {data.user.name} <AiFillCaretDown />
+                  {data.user.name.slice(0, 7)}
+                  <span className="caret">
+                    <AiFillCaretDown />
+                  </span>
                 </p>
                 <ul className={show ? "showAccount" : null}>
                   <Link to={"/profile"}>
@@ -86,7 +89,7 @@ function Header() {
                 <div className="icon">
                   <FaUserAlt />
                 </div>
-                <p>Sign In</p>
+                <p>Sign</p>
               </Link>
             )}
           </div>

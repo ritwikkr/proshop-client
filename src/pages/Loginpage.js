@@ -52,7 +52,6 @@ function Loginpage() {
         </div>
         <div className="body">
           {isLoading && <Alert msg={"Signing in..."} />}
-          {console.log(isError)}
           {isError && <Alert msg={isError} type="error" />}
           <form onSubmit={formSubmitHandler}>
             {!showLogin && (
