@@ -57,7 +57,6 @@ const Wrapper = styled.div`
   @media only screen and (max-width: 600px) {
     padding: 20px;
     .session-form {
-      border: 2px solid red;
     }
   }
 `;

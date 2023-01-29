@@ -10,7 +10,7 @@ function DemoCarousel() {
     <Wrapper>
       <Carousel>
         <Link to={"/productPage/63b7c5bb960520d93f84c9b8"}>
-          <div className="image">
+          <div className="image" key={1}>
             <img src="/images/airpods.jpg" alt="ps4" />
             <p className="legend">Legend 1</p>
           </div>

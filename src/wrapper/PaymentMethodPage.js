@@ -4,8 +4,6 @@ const Wrapper = styled.div`
   min-height: calc(100vh - 130px);
   padding: 20px;
   .main {
-    border: 2px solid red;
-    /* border: 2px solid blue; */
     max-width: 600px;
     margin: auto;
     .body {

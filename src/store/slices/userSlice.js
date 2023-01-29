@@ -22,13 +22,10 @@ export const addUserAddress = createAsyncThunk(
   "addUserAddress",
   async (body) => {
     try {
-      console.log(body);
       const response = await axios.put(
         `${BASE_URL}/api/v1/user/addAddress`,
         body
       );
-      console.log(response);
-      // localStorage.setItem("user", JSON.stringify(response.data));
       return response.data;
     } catch (error) {
       console.log(error);
@@ -76,8 +73,8 @@ const userSlice = createSlice({
 
     builder.addCase(addUserAddress.pending, (state, action) => {});
     builder.addCase(addUserAddress.fulfilled, (state, action) => {
-      console.log(action.payload);
       // state.data.user.address = action.payload;
+      state.data = action.payload;
     });
     // updateUser
     builder.addCase(updateUser.pending, (state, action) => {

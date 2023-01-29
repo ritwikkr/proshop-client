@@ -14,7 +14,7 @@ function Alert({ msg, type = "success" }) {
 export default Alert;
 
 const Wrapper = styled.div`
-  width: 400px;
+  width: 100%;
   height: 50px;
   font-weight: bold;
   margin-bottom: 40px;

@@ -71,7 +71,7 @@ function Header() {
             {data ? (
               <div className="user">
                 <p onClick={() => toggleAccountSection()}>
-                  {data.user.name.slice(0, 7)}
+                  {data.user.name.slice(0, 6)}
                   <span className="caret">
                     <AiFillCaretDown />
                   </span>
