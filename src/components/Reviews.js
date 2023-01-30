@@ -1,6 +1,5 @@
 import React from "react";
 import Wrapper from "../wrapper/ReviewsWrapper";
-import Alert from "./Alert";
 import Ratings from "./Ratings";
 
 function Reviews() {
@@ -32,7 +31,6 @@ function Reviews() {
         <hr />
         <div className="give-review">
           <p className="title">write a customer review</p>
-          {/* <Alert /> */}
         </div>
       </div>
     </Wrapper>

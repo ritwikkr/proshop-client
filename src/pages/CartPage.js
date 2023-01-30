@@ -22,7 +22,7 @@ function CartPage() {
 
   function proceedHandler() {
     if (!userData) {
-      return navigate("/login");
+      return navigate("/login?shipping");
     }
     navigate("/shipping");
   }

@@ -50,7 +50,6 @@ function Payment() {
       } catch (error) {
         alert(error);
         setLoading(false);
-        console.log(error);
       }
     };
   }

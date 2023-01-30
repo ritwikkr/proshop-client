@@ -14,7 +14,11 @@ function ProgressBar({ shipping, paymentMethod, placeOrder }) {
             <Link to={"/shipping"}>Shipping</Link>
           </li>
           <li className={paymentMethod ? "active" : null}>
-            <Link to={"/paymentMethod"}>Payment</Link>
+            {data.user.address[0] ? (
+              <Link to={"/paymentMethod"}>Payment</Link>
+            ) : (
+              <p>Payment</p>
+            )}
           </li>
           <li className={placeOrder ? "active" : null}>Place Order</li>
         </ul>

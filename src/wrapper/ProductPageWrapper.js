@@ -5,6 +5,7 @@ const Wrapper = styled.div`
   width: 80%;
   margin: auto;
   .back-btn {
+    position: relative;
     margin: 20px 0;
     display: flex;
     justify-content: space-between;
@@ -87,14 +88,6 @@ const Wrapper = styled.div`
             text-align: center;
           }
         }
-        /* select {
-          border: none;
-          width: 70px;
-          height: 30px;
-          background-color: rgb(239, 239, 239);
-          padding: 5px;
-          outline: none;
-        } */
       }
       .btn {
         padding-right: 10px;
@@ -128,14 +121,6 @@ const Wrapper = styled.div`
   @media only screen and (max-width: 1595px) {
     .dashboard {
       justify-content: center;
-      /* .image {
-        width: 400px;
-        border: 2px solid red;
-        > img {
-          width: 100%;
-          height: 100%;
-        }
-      } */
       .prod-details {
         width: 25%;
       }
@@ -159,9 +144,7 @@ const Wrapper = styled.div`
 
   @media only screen and (max-width: 1100px) {
     .dashboard {
-      /* display: block; */
       > .price-box {
-        /* border: 2px solid blue; */
         width: 80%;
         margin-top: 20px;
       }
@@ -185,14 +168,12 @@ const Wrapper = styled.div`
 
   @media only screen and (max-width: 785px) {
     .dashboard {
-      /* border: 2px solid red; */
       display: block;
       .prod-details {
         margin: 20px 0 0 0;
         width: 100%;
       }
       .price-box {
-        /* border: 2px solid blue; */
         width: 100%;
       }
     }

@@ -98,6 +98,14 @@ const Wrapper = styled.div`
       }
     }
   }
+  .end {
+    background-color: rgb(206, 245, 252);
+    color: rgb(45, 94, 100);
+    border: 2px solid rgb(45, 94, 100);
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+  }
 
   @media only screen and (max-width: 980px) {
     .main {
@@ -126,7 +134,6 @@ const Wrapper = styled.div`
               li {
                 display: flex;
               }
-              /* border: 2px solid red; */
             }
           }
         }
@@ -143,7 +150,6 @@ const Wrapper = styled.div`
     .main {
       .progress-bar {
         width: 100%;
-        /* border: 2px solid black; */
       }
     }
   }

@@ -7,14 +7,12 @@ export const createSession = createAsyncThunk(
   "createSession",
   async ({ sessionType, userData }, { rejectWithValue }) => {
     try {
-      console.log(userData);
       const response = await axios.post(
         `${BASE_URL}/api/v1/user/${sessionType}`,
         userData
       );
       return response.data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.response.data);
     }
   }
@@ -80,9 +78,7 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.data.user = action.payload;
     });
-    builder.addCase(addUserAddress.rejected, (state, action) => {
-      // console.log(action.error);
-    });
+    builder.addCase(addUserAddress.rejected, (state, action) => {});
     // updateUser
     builder.addCase(updateUser.pending, (state, action) => {
       state.isLoading = true;
@@ -100,4 +96,3 @@ const userSlice = createSlice({
 
 export const { logOut } = userSlice.actions;
 export default userSlice.reducer;
-

@@ -29,4 +29,8 @@ const Wrapper = styled.div`
   .error {
     background-color: red;
   }
+
+  @media only screen and (max-width: 900px) {
+    width: 100%;
+  }
 `;

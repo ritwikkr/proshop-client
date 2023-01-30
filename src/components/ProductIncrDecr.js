@@ -7,7 +7,6 @@ function ProductIncrDecr({ quant, id }) {
   const { data } = useSelector((state) => state.product);
   const dispatch = useDispatch();
 
-  console.log(data);
   const [qty, setQty] = useState(quant);
 
   function increaseQty() {

@@ -91,6 +91,10 @@ function PlaceOrderPage() {
           </div>
         </div>
       </div>
+      <div className="end">
+        <h1>Thank you so much guys!!!</h1>
+        <h2>Payment Integration Coming Soooon</h2>
+      </div>
     </Wrapper>
   );
 }

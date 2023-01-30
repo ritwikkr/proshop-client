@@ -10,11 +10,8 @@ export const fetchProduct = createAsyncThunk(
       const response = await axios.get(
         `${BASE_URL}/api/v1/product/getProduct/${id}`
       );
-      console.log(response);
-      console.log(`object 2`);
       return response.data;
     } catch (error) {
-      console.log(`object`);
       console.log(error);
     }
   }

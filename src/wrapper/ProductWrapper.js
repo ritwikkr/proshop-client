@@ -22,7 +22,6 @@ const Wrapper = styled.div`
       .title {
         letter-spacing: 1.2px;
         line-height: 22px;
-        /* border: 1px solid red; */
         height: 45px;
       }
       .rating {

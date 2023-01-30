@@ -15,8 +15,6 @@ const Wrapper = styled.div`
       .body {
         form {
           .form-content {
-            /* border: 2px solid blue; */
-            /* height: 60px; */
             margin-bottom: 20px;
             display: flex;
             flex-direction: column;

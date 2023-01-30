@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Wrapper from "../wrapper/LoginPageWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { createSession } from "../store/slices/userSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Alert from "../components/Alert";
 
 function Loginpage() {
@@ -15,13 +15,18 @@ function Loginpage() {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { data, isLoading, isError } = useSelector((state) => state.user);
+
   useEffect(() => {
     if (data) {
+      if (location.search.includes("shipping")) {
+        return navigate("/shipping");
+      }
       navigate("/");
     }
-  }, [data, navigate]);
+  }, [data, navigate, location.search]);
 
   function formSubmitHandler(e) {
     e.preventDefault();

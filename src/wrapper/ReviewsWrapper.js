@@ -10,7 +10,6 @@ const Wrapper = styled.div`
   }
   .body {
     .review {
-      /* border: 2px solid blue; */
       padding: 10px;
       p.content {
         margin-top: 10px;

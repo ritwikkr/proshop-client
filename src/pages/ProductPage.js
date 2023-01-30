@@ -17,7 +17,6 @@ function ProductPage() {
 
   const dispatch = useDispatch();
   const { data, isLoading } = useSelector((state) => state.product);
-  const { data: cart } = useSelector((state) => state.cart);
 
   // Fetched the product from back-end through product ID
   const { id } = useParams();
@@ -32,16 +31,6 @@ function ProductPage() {
 
   const { name, image, rating, numReviews, price, description, countInStock } =
     data;
-
-  // Out of Stock function
-  function outOfStockHandler() {
-    const product = cart.find((item) => item._id === data._id);
-    let outOfStock = false;
-    if (data.countInStock - product.qty <= 0) {
-      outOfStock = true;
-    }
-    console.log(outOfStock);
-  }
 
   // Product Quantity
   function increaseQty() {

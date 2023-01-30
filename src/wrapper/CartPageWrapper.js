@@ -25,6 +25,12 @@ const Wrapper = styled.div`
       }
     }
     .body {
+      > h1 {
+        a {
+          text-decoration: underline;
+          color: blue;
+        }
+      }
       .item {
         display: flex;
         align-items: flex-start;

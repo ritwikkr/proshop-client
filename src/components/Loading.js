@@ -12,7 +12,6 @@ function Loading() {
 export default Loading;
 
 const Wrapper = styled.div`
-  /* border: 2px solid red; */
   height: calc(100vh - 80px);
   display: flex;
   justify-content: center;

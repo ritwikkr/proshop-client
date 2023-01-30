@@ -16,7 +16,6 @@ const cartSlice = createSlice({
         state.data = state.data.map((item) => {
           if (item._id === action.payload._id) {
             const qty = Number(action.payload.qty || 1);
-            // console.log(qty);
             return { ...item, qty: Number(item.qty) + qty };
           } else {
             return item;
