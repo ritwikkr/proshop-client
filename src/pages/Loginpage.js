@@ -32,13 +32,10 @@ function Loginpage() {
         createSession({ sessionType: "login", userData: { email, password } })
       );
     } else {
-      if (password !== confirmPassword) {
-        return;
-      }
       dispatch(
         createSession({
           sessionType: "signup",
-          userData: { name, email, password },
+          userData: { name, email, password, confirmPassword },
         })
       );
     }

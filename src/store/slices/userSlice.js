@@ -7,12 +7,14 @@ export const createSession = createAsyncThunk(
   "createSession",
   async ({ sessionType, userData }, { rejectWithValue }) => {
     try {
+      console.log(userData);
       const response = await axios.post(
         `${BASE_URL}/api/v1/user/${sessionType}`,
         userData
       );
       return response.data;
     } catch (error) {
+      console.log(error);
       return rejectWithValue(error.response.data);
     }
   }
