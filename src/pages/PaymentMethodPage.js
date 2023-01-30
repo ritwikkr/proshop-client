@@ -3,10 +3,17 @@ import ProgressBar from "../components/ProgressBar";
 import Wrapper from "../wrapper/PaymentMethodPage";
 import { Link } from "react-router-dom";
 import { togglePopUp } from "../store/slices/showNavPopupSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Loading from "../components/Loading";
 
 function PaymentMethodPage() {
   const dispatch = useDispatch();
+
+  const { isLoading } = useSelector((state) => state.user);
+
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <Wrapper onClick={() => dispatch(togglePopUp(false))}>
       <div className="main">

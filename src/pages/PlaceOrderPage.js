@@ -13,9 +13,6 @@ function PlaceOrderPage() {
     0
   );
 
-  const address = userData.user.address.reduce((acc, item) => {
-    return;
-  }, "");
   const dispatch = useDispatch();
   const totalTaxPrice = 0.08 * totalItemPrice;
   return (

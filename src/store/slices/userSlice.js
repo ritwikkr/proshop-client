@@ -73,8 +73,12 @@ const userSlice = createSlice({
       state.isError = action.payload.error;
     });
 
-    builder.addCase(addUserAddress.pending, (state, action) => {});
+    builder.addCase(addUserAddress.pending, (state, action) => {
+      console.log(`in pending`);
+      state.isLoading = true;
+    });
     builder.addCase(addUserAddress.fulfilled, (state, action) => {
+      state.isLoading = false;
       state.data.user = action.payload;
     });
     builder.addCase(addUserAddress.rejected, (state, action) => {
