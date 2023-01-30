@@ -68,13 +68,15 @@ const userSlice = createSlice({
     builder.addCase(createSession.rejected, (state, action) => {
       state.isLoading = false;
       state.data = null;
-      state.isError = action.payload.err;
+      state.isError = action.payload.error;
     });
 
     builder.addCase(addUserAddress.pending, (state, action) => {});
     builder.addCase(addUserAddress.fulfilled, (state, action) => {
-      // state.data.user.address = action.payload;
-      state.data = action.payload;
+      state.data.user = action.payload;
+    });
+    builder.addCase(addUserAddress.rejected, (state, action) => {
+      // console.log(action.error);
     });
     // updateUser
     builder.addCase(updateUser.pending, (state, action) => {
