@@ -74,7 +74,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(addUserAddress.pending, (state, action) => {
-      console.log(`in pending`);
       state.isLoading = true;
     });
     builder.addCase(addUserAddress.fulfilled, (state, action) => {
@@ -101,3 +100,4 @@ const userSlice = createSlice({
 
 export const { logOut } = userSlice.actions;
 export default userSlice.reducer;
+
