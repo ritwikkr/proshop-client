@@ -101,7 +101,7 @@ const Wrapper = styled.div`
   .end {
     background-color: rgb(206, 245, 252);
     color: rgb(45, 94, 100);
-    border: 2px solid rgb(45, 94, 100);
+    border: 2px dashed rgb(45, 94, 100);
     text-align: center;
     margin-top: 40px;
     padding: 20px;
