@@ -17,6 +17,9 @@ const Wrapper = styled.div`
       background-color: black;
       cursor: pointer;
       font-weight: 900;
+      &:disabled {
+        cursor: not-allowed;
+      }
     }
   }
   @media only screen and (max-width: 650px) {

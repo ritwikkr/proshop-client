@@ -12,7 +12,7 @@ function Loading() {
 export default Loading;
 
 const Wrapper = styled.div`
-  height: calc(100vh - 80px);
+  height: calc(100vh - 130px);
   display: flex;
   justify-content: center;
   align-items: center;
