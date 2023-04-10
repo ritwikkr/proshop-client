@@ -34,6 +34,7 @@ function Header() {
   // Logout Handler Function
   function logoutHandler() {
     dispatch(logOut());
+    dispatch(togglePopUp(false));
     navigate("/");
   }
 
