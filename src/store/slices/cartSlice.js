@@ -32,10 +32,7 @@ const cartSlice = createSlice({
     },
     emptyCart: (state) => {
       state.data = [];
-<<<<<<< HEAD
       localStorage.removeItem("cart");
-=======
->>>>>>> origin/master
     },
   },
 });

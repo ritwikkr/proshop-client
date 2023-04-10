@@ -48,10 +48,6 @@ const Wrapper = styled.div`
       }
     }
     .orders {
-<<<<<<< HEAD
-=======
-      width: 1200px;
->>>>>>> origin/master
       .title {
         font-size: 30px;
         margin-bottom: 20px;
@@ -65,10 +61,6 @@ const Wrapper = styled.div`
           border-collapse: collapse;
         }
         table thead tr th {
-<<<<<<< HEAD
-=======
-          width: 200px;
->>>>>>> origin/master
           height: 40px;
         }
         table tbody tr {
@@ -103,7 +95,6 @@ const Wrapper = styled.div`
         }
       }
       .orders {
-<<<<<<< HEAD
         > .body {
           > table {
             tbody tr td {
@@ -115,16 +106,12 @@ const Wrapper = styled.div`
             }
           }
         }
-=======
-        display: none;
->>>>>>> origin/master
       }
     }
   }
 
   @media only screen and (max-width: 900px) {
     .main {
-<<<<<<< HEAD
       .orders {
         > .body {
           > table {
@@ -143,9 +130,6 @@ const Wrapper = styled.div`
       border: 2px solid red;
       > .orders {
         display: none;
-=======
-      .user {
->>>>>>> origin/master
       }
     }
   }

@@ -8,10 +8,7 @@ const Wrapper = styled.div`
   }
   > .body {
     display: flex;
-<<<<<<< HEAD
     flex-wrap: wrap;
-=======
->>>>>>> origin/master
     > .left {
       margin-right: 40px;
       flex: 1;
@@ -39,7 +36,6 @@ const Wrapper = styled.div`
       }
     }
   }
-<<<<<<< HEAD
   @media only screen and (max-width: 650px) {
     > .body {
       > .right {
@@ -47,8 +43,6 @@ const Wrapper = styled.div`
       }
     }
   }
-=======
->>>>>>> origin/master
 `;
 
 export default Wrapper;
