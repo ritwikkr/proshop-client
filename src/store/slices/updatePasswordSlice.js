@@ -7,6 +7,7 @@ export const updateUserPassword = createAsyncThunk(
   async () => {
     try {
       const { data } = axios.put(`${BASE_URL}/api/v1/user/`);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
