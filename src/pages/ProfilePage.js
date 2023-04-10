@@ -74,9 +74,15 @@ function ProfilePage() {
               <div className="form-content">
                 <button type="submit">update</button>
               </div>
+<<<<<<< HEAD
               {/* <div className="form-content">
                 <Link to={"/password"}>Change Password</Link>
               </div> */}
+=======
+              <div className="form-content">
+                <Link to={"/password"}>Change Password</Link>
+              </div>
+>>>>>>> origin/master
             </form>
           </div>
         </div>

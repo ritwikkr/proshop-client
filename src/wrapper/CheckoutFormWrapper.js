@@ -19,9 +19,12 @@ const Wrapper = styled.div`
       font-weight: 900;
     }
   }
+<<<<<<< HEAD
   @media only screen and (max-width: 650px) {
     width: 100%;
   }
+=======
+>>>>>>> origin/master
 `;
 
 export default Wrapper;
