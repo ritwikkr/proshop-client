@@ -23,10 +23,6 @@ const MyCheckoutForm = ({ totalPrice, orderDetail }) => {
     event.preventDefault();
 
     setIsLoading(true);
-    // Perform some async task, like a fetch call or setTimeout
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
 
     const result = await stripe.createPaymentMethod({
       type: "card",
