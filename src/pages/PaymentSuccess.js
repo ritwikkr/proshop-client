@@ -22,6 +22,9 @@ function PaymentSuccess() {
       <div className={`payment-success ${animate ? "animate" : ""}`}>
         <h1 className="title">Payment Successful!</h1>
         <p className="message">Thank you for your purchase!</p>
+        <p className="profile">
+          You can check your order in <Link to={"/profile"}>Profile Page</Link>
+        </p>
         <Link to="/" className="link">
           Back to Home
         </Link>
@@ -67,8 +70,16 @@ const Wrapper = styled.div`
     font-size: 24px;
     font-weight: 400;
     opacity: 0;
+    margin-bottom: 20px;
     transform: translateY(20px);
     animation: fade-in 0.3s ease forwards, slide-down 0.3s ease forwards;
+  }
+
+  .profile {
+    > a {
+      text-decoration: underline;
+      color: blue;
+    }
   }
 
   .link {
