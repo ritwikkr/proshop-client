@@ -11,6 +11,7 @@ function PaymentMethodPage() {
   if (isLoading) {
     return <PaymentMethodPreLoader />;
   }
+
   return (
     <Wrapper>
       <div className="main">

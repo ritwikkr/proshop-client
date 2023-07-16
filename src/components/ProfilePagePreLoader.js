@@ -4,13 +4,14 @@ import styled from "styled-components";
 function ProfilePagePreLoader() {
   return (
     <Wrapper>
-      <div className="page-container">
-        <nav className="navigation-bar skeleton"></nav>
-        <div className="content-wrapper">
-          <div className="content-box skeleton"></div>
-          <div className="content-box skeleton"></div>
-          <div className="content-box skeleton"></div>
-        </div>
+      <div class="page-container">
+        <header class="header"></header>
+        <header class="header"></header>
+        <header class="header"></header>
+        <header class="header"></header>
+        <header class="header"></header>
+        <header class="header"></header>
+        <header class="header"></header>
       </div>
     </Wrapper>
   );
@@ -25,24 +26,12 @@ const Wrapper = styled.div`
     padding: 20px;
   }
 
-  .skeleton {
-    background-color: #f1f1f1;
-    border-radius: 8px;
-    margin-bottom: 20px;
-  }
-
-  .navigation-bar {
+  .header {
     height: 60px;
-  }
-
-  .content-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .content-box {
-    height: 80px;
-    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: gray;
+    animation: skeleton-loading 1s infinite alternate;
   }
 
   @keyframes skeleton-loading {

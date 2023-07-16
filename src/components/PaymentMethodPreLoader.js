@@ -4,10 +4,12 @@ import styled from "styled-components";
 function PaymentMethodPreLoader() {
   return (
     <Wrapper>
-      <div className="page-container">
-        <nav className="navigation-bar skeleton"></nav>
-        <div className="content-box skeleton">
-          <button className="content-button"></button>
+      <div class="page-container">
+        <div class="box-container">
+          <div class="box skeleton"></div>
+          <div class="box-with-button skeleton">
+            <button class="button"></button>
+          </div>
         </div>
       </div>
     </Wrapper>
@@ -21,30 +23,39 @@ const Wrapper = styled.div`
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    height: 81.5vh;
   }
 
-  .skeleton {
-    background-color: #f1f1f1;
-    border-radius: 8px;
-    margin-bottom: 20px;
-  }
-
-  .navigation-bar {
-    height: 60px;
-  }
-
-  .content-box {
-    height: 200px;
+  .box-container {
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    padding-bottom: 20px;
+    flex-direction: column;
+    gap: 20px;
   }
 
-  .content-button {
+  .box,
+  .box-with-button {
+    height: 100px;
+    background-color: lightgray;
+    border-radius: 8px;
+    padding: 20px;
+    animation: skeleton-loading 1s infinite alternate;
+  }
+
+  .box-with-button {
+    height: 200px;
+    position: relative;
+    padding-bottom: 40px; /* Add space for the button */
+  }
+
+  .button {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 120px;
     height: 40px;
-    background-color: #e0e0e0;
+    background-color: gray;
+    border-radius: 4px;
     border: transparent;
   }
 

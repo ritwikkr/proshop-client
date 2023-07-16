@@ -4,15 +4,17 @@ import styled from "styled-components";
 function ProductPagePreLoader() {
   return (
     <Wrapper>
-      <div className="product-details">
-        <div className="product-image skeleton"></div>
-        <div className="product-info skeleton">
-          <div className="product-title"></div>
-          <div className="product-rating"></div>
-          <div className="product-description"></div>
+      <div class="page-container">
+        <div class="product-details skeleton">
+          <div class="product-image"></div>
+          <div class="product-info">
+            <div class="product-title"></div>
+            <div class="product-rating"></div>
+            <div class="product-description"></div>
+          </div>
+          <div class="product-price-add-to-cart"></div>
+          <div class="product-reviews"></div>
         </div>
-        <div className="product-price-add-to-cart skeleton"></div>
-        <div className="product-reviews skeleton"></div>
       </div>
     </Wrapper>
   );
@@ -21,33 +23,51 @@ function ProductPagePreLoader() {
 export default ProductPagePreLoader;
 
 const Wrapper = styled.div`
-  .product-details {
-    display: flex;
-    flex-direction: column;
+  .page-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
   }
 
-  .skeleton {
+  .header {
+    height: 60px;
     background-color: #f1f1f1;
-    border-radius: 8px;
     margin-bottom: 20px;
   }
 
+  .skeleton {
+    background-color: lightgray;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    animation: skeleton-loading 1s infinite alternate;
+  }
+
+  @keyframes skeleton-loading {
+    0% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .product-details {
+    position: relative;
+    padding: 20px;
+    overflow: hidden; /* Add this line to hide the overflow */
+  }
+
   .product-image {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: 300px;
   }
 
   .product-info {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    margin-bottom: 20px;
   }
 
   .product-title {
-    width: 60%;
+    width: 80%;
     height: 20px;
   }
 
@@ -57,23 +77,12 @@ const Wrapper = styled.div`
   }
 
   .product-description {
-    width: 80%;
-    height: 100px;
+    width: 100%;
+    height: 80px;
   }
 
   .product-price-add-to-cart {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .product-price-add-to-cart .price {
-    width: 40%;
-    height: 20px;
-  }
-
-  .product-price-add-to-cart .add-to-cart {
-    width: 120px;
+    width: 100%;
     height: 40px;
   }
 
@@ -82,12 +91,28 @@ const Wrapper = styled.div`
     height: 200px;
   }
 
-  @keyframes skeleton-loading {
+  .product-details::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%; /* Modify this value to control the starting position */
+    width: 200%; /* Modify this value to control the width of the shining effect */
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.9),
+      transparent
+    );
+    animation: product-details-shining 2s linear infinite;
+  }
+
+  @keyframes product-details-shining {
     0% {
-      opacity: 0.5;
+      left: -100%;
     }
     100% {
-      opacity: 1;
+      left: 100%; /* Modify this value to control the ending position */
     }
   }
 `;
