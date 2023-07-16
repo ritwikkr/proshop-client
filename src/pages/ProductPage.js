@@ -7,7 +7,7 @@ import { fetchProduct } from "../store/slices/singleProductSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../store/slices/cartSlice";
 import Alert from "../components/Alert";
-import Loading from "../components/Loading";
+import ProductPagePreLoader from "../components/ProductPagePreLoader";
 
 function ProductPage() {
   // Component State
@@ -25,7 +25,7 @@ function ProductPage() {
 
   // Loading
   if (isLoading) {
-    return <Loading />;
+    return <ProductPagePreLoader />;
   }
 
   const { name, image, rating, numReviews, price, description, countInStock } =

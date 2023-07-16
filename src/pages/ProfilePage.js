@@ -6,6 +6,7 @@ import Wrapper from "../wrapper/ProfilePageWrapper";
 import { updateUser } from "../store/slices/userSlice";
 import Alert from "../components/Alert";
 import { fetchOrders } from "../store/slices/orderSlice";
+import ProfilePagePreLoader from "../components/ProfilePagePreLoader";
 
 function ProfilePage() {
   const data = useSelector((state) => state.user);
@@ -80,9 +81,7 @@ function ProfilePage() {
           </div>
         </div>
         {orderData.isLoading ? (
-          <>
-            <h1>Loading...</h1>
-          </>
+          <ProfilePagePreLoader />
         ) : (
           <div className="orders">
             <div className="title">

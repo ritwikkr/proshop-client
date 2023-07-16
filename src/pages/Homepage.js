@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import DemoCarousel from "../components/Carousel";
 import Product from "../components/Product";
 import Wrapper from "../wrapper/HomePageWrapper";
-import Loading from "../components/Loading";
+import HomePagePreLoader from "../components/HomePagePreLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../store/slices/productsSlice";
 
@@ -20,7 +20,7 @@ function Homepage() {
 
   // Loading
   if (isLoading) {
-    return <Loading />;
+    return <HomePagePreLoader />;
   }
 
   // Filters products according to searched keywords

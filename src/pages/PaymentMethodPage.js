@@ -3,13 +3,13 @@ import ProgressBar from "../components/ProgressBar";
 import Wrapper from "../wrapper/PaymentMethodPage";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Loading from "../components/Loading";
+import PaymentMethodPreLoader from "../components/PaymentMethodPreLoader";
 
 function PaymentMethodPage() {
   const { isLoading } = useSelector((state) => state.user);
 
   if (isLoading) {
-    return <Loading />;
+    return <PaymentMethodPreLoader />;
   }
   return (
     <Wrapper>
