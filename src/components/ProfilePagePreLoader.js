@@ -4,12 +4,12 @@ import styled from "styled-components";
 function ProfilePagePreLoader() {
   return (
     <Wrapper>
-      <div class="page-container">
-        <nav class="navigation-bar skeleton"></nav>
-        <div class="content-wrapper">
-          <div class="content-box skeleton"></div>
-          <div class="content-box skeleton"></div>
-          <div class="content-box skeleton"></div>
+      <div className="page-container">
+        <nav className="navigation-bar skeleton"></nav>
+        <div className="content-wrapper">
+          <div className="content-box skeleton"></div>
+          <div className="content-box skeleton"></div>
+          <div className="content-box skeleton"></div>
         </div>
       </div>
     </Wrapper>

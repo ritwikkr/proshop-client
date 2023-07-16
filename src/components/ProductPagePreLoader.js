@@ -4,15 +4,15 @@ import styled from "styled-components";
 function ProductPagePreLoader() {
   return (
     <Wrapper>
-      <div class="product-details">
-        <div class="product-image skeleton"></div>
-        <div class="product-info skeleton">
-          <div class="product-title"></div>
-          <div class="product-rating"></div>
-          <div class="product-description"></div>
+      <div className="product-details">
+        <div className="product-image skeleton"></div>
+        <div className="product-info skeleton">
+          <div className="product-title"></div>
+          <div className="product-rating"></div>
+          <div className="product-description"></div>
         </div>
-        <div class="product-price-add-to-cart skeleton"></div>
-        <div class="product-reviews skeleton"></div>
+        <div className="product-price-add-to-cart skeleton"></div>
+        <div className="product-reviews skeleton"></div>
       </div>
     </Wrapper>
   );

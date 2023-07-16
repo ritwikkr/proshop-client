@@ -4,11 +4,11 @@ import styled from "styled-components";
 function HomePagePreLoader() {
   return (
     <Wrapper>
-      <div class="container">
-        <div class="header skeleton"></div>
-        <div class="banner skeleton"></div>
-        <div class="content skeleton"></div>
-        <div class="sidebar skeleton"></div>
+      <div className="container">
+        <div className="header skeleton"></div>
+        <div className="banner skeleton"></div>
+        <div className="content skeleton"></div>
+        <div className="sidebar skeleton"></div>
       </div>
     </Wrapper>
   );
