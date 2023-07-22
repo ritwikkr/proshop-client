@@ -24,7 +24,6 @@ function Homepage() {
   }
 
   // Filters products according to searched keywords
-
   let productList = products
     .filter((item) =>
       item.name.toLowerCase().includes(searchText.toLowerCase())
@@ -34,7 +33,7 @@ function Homepage() {
   return (
     <Wrapper>
       <div className="body">
-        <DemoCarousel />
+        {searchText.length === 0 && <DemoCarousel />}
         <div className="featured">
           <h2>latest products</h2>
           <div className="products">
