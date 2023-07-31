@@ -2,6 +2,9 @@ import React from "react";
 import Wrapper from "../wrapper/ProductCardWrapper";
 
 function ProductCard({ item }) {
+  // Round the item price to two decimal places
+  const roundedPrice = item.price.toFixed(2);
+
   return (
     <Wrapper>
       <li>
@@ -12,7 +15,7 @@ function ProductCard({ item }) {
           <p>{item.name}</p>
         </div>
         <div className="product-qty">
-          {item.qty} x $ {item.price} = $ {item.qty * item.price}
+          {item.qty} x $ {roundedPrice} = $ {(item.qty * item.price).toFixed(2)}
         </div>
       </li>
       <hr />
