@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Wrapper from "../wrapper/LoginPageWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { createSession } from "../store/slices/userSlice";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import Alert from "../components/Alert";
 
 function Loginpage() {
@@ -122,10 +122,15 @@ function Loginpage() {
             </div>
             <div className="form-content">
               {showLogin ? (
-                <p>
-                  new customer?
-                  <span onClick={() => setShowLogin(false)}>register</span>
-                </p>
+                <>
+                  <Link to={"/forgot-password"}>
+                    <p>Forgot Password</p>
+                  </Link>
+                  <p>
+                    new customer?
+                    <span onClick={() => setShowLogin(false)}>register</span>
+                  </p>
+                </>
               ) : (
                 <p>
                   already registered?

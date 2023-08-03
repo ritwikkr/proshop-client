@@ -53,6 +53,21 @@ export const updatePassword = createAsyncThunk(
   }
 );
 
+export const forgotPassword = createAsyncThunk(
+  "forgotPassword",
+  async (user) => {
+    try {
+      const { data } = await axios.post(
+        `${BASE_URL}/api/v1/user/forgotPassword`,
+        { user }
+      );
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
