@@ -17,6 +17,25 @@ const Wrapper = styled.div`
         justify-content: center;
         flex-wrap: wrap;
       }
+      > .pagination {
+        > .page-number-list {
+          display: flex;
+          justify-content: center;
+          margin-top: 10px;
+          .page-number {
+            border: 1px solid #ccc;
+            background-color: white;
+            color: #333;
+            padding: 5px 10px;
+            margin: 0 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            &:hover {
+              background-color: #f0f0f0;
+            }
+          }
+        }
+      }
     }
   }
 `;
