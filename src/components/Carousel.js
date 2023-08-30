@@ -4,37 +4,22 @@ import { Carousel } from "react-responsive-carousel";
 import Wrapper from "../wrapper/CarouselWrapper";
 import { Link } from "react-router-dom";
 
-function DemoCarousel() {
+function DemoCarousel({ products }) {
+  const featuredProduct = products.filter(
+    (product) => product.featured === true
+  );
+
   return (
     <Wrapper>
       <Carousel>
-        <Link to={"/productPage/63b7c5bb960520d93f84c9b8"}>
-          <div className="image" key={1}>
-            <img
-              src="https://ritwikproshop.s3.ap-south-1.amazonaws.com/playstation.jpg"
-              alt="ps4"
-            />
-            <p className="legend">Legend 1</p>
-          </div>
-        </Link>
-        <Link to={"/productPage/63b7c5bb960520d93f84c9bd"}>
-          <div className="image">
-            <img
-              src="https://ritwikproshop.s3.ap-south-1.amazonaws.com/alexa.jpg"
-              alt="alexa"
-            />
-            <p className="legend">Legend 2</p>
-          </div>
-        </Link>
-        <Link to={"/productPage/63b7c5bb960520d93f84c9ba"}>
-          <div className="image">
-            <img
-              src="https://ritwikproshop.s3.ap-south-1.amazonaws.com/camera.jpg"
-              alt="camera"
-            />
-            <p className="legend">Legend 3</p>
-          </div>
-        </Link>
+        {featuredProduct.map((item) => (
+          <Link to={`/productPage/${item._id}`}>
+            <div className="image">
+              <img src={item.image} alt={item.name} />
+              <p className="legend">{item.name}</p>
+            </div>
+          </Link>
+        ))}
       </Carousel>
     </Wrapper>
   );

@@ -53,7 +53,7 @@ function Homepage() {
   return (
     <Wrapper>
       <div className="body">
-        {searchText.length === 0 && <DemoCarousel />}
+        {searchText.length === 0 && <DemoCarousel products={products} />}
         <div className="featured">
           <h2>latest products</h2>
           <div className="products">
