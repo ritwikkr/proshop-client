@@ -13,6 +13,20 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
+export const fetchFeaturedProducts = createAsyncThunk(
+  "fetchFeaturedProducts",
+  async () => {
+    try {
+      const { data } = await axios.get(
+        `${BASE_URL}/api/v1/product/getFeaturedProduct`
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const productsSlice = createSlice({
   name: "products",
   initialState: {
@@ -20,6 +34,7 @@ export const productsSlice = createSlice({
     products: null,
     totalCount: 0,
     isError: false,
+    featuredProducts: [],
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state, action) => {
@@ -34,6 +49,16 @@ export const productsSlice = createSlice({
       state.isLoading = false;
       state.isError = action.payload;
     });
+
+    // Featured Product
+    builder.addCase(fetchFeaturedProducts.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchFeaturedProducts.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.featuredProducts = action.payload;
+    });
+    builder.addCase(fetchFeaturedProducts.rejected, (state, action) => {});
   },
 });
 

@@ -4,7 +4,10 @@ import Product from "../components/Product";
 import Wrapper from "../wrapper/HomePageWrapper";
 import HomePagePreLoader from "../components/HomePagePreLoader";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../store/slices/productsSlice";
+import {
+  fetchProducts,
+  fetchFeaturedProducts,
+} from "../store/slices/productsSlice";
 
 function Homepage() {
   // Component State
@@ -17,8 +20,13 @@ function Homepage() {
     dispatch(fetchProducts({ page: currentPage, pageSize }));
   }, [dispatch, currentPage]);
 
+  // Fetch Featured Products
+  useEffect(() => {
+    dispatch(fetchFeaturedProducts());
+  }, [dispatch]);
+
   // Extracts products from Global State
-  const { isLoading, products, totalCount } = useSelector(
+  const { isLoading, products, totalCount, featuredProducts } = useSelector(
     (state) => state.products
   );
   // Extracts search words from Global State
@@ -34,7 +42,7 @@ function Homepage() {
 
   // Filters products according to searched keywords
   let productList = products
-    .filter((item) =>
+    ?.filter((item) =>
       item.name.toLowerCase().includes(searchText.toLowerCase())
     )
     .map((item) => <Product key={item._id} {...item} />);
@@ -53,11 +61,13 @@ function Homepage() {
   return (
     <Wrapper>
       <div className="body">
-        {searchText.length === 0 && <DemoCarousel products={products} />}
+        {searchText.length === 0 && (
+          <DemoCarousel featuredProducts={featuredProducts} />
+        )}
         <div className="featured">
           <h2>latest products</h2>
           <div className="products">
-            {productList.length === 0 ? (
+            {productList?.length === 0 ? (
               <p>No items to show. Please Refresh</p>
             ) : (
               productList
