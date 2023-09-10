@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-function ProgressBar({ shipping, paymentMethod, placeOrder }) {
+function ProgressBar({ shipping, paymentMethod, placeOrder, selectAddress }) {
   const { data } = useSelector((state) => state.user);
   return (
     <Wrapper>
@@ -12,6 +12,9 @@ function ProgressBar({ shipping, paymentMethod, placeOrder }) {
           <li className={data ? "active" : null}>Sign In</li>
           <li className={shipping ? "active" : null}>
             <Link to={"/shipping"}>Shipping</Link>
+          </li>
+          <li className={selectAddress ? "active" : null}>
+            <Link to={"/select-address"}>Select Delivery Address</Link>
           </li>
           <li className={paymentMethod ? "active" : null}>
             {data.user.address[0] ? (

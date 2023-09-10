@@ -55,6 +55,9 @@ const Wrapper = styled.div`
               }
             }
           }
+          > .selected {
+            background-color: black;
+          }
         }
       }
 

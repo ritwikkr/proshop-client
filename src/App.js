@@ -15,6 +15,7 @@ import PasswordUpdate from "./pages/PasswordUpdate";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import CheckoutPage from "./pages/CheckoutPage";
 import ForgotPassword from "./pages/ForgotPassword";
+import SelectDeliveryAddress from "./pages/SelectDeliveryAddress";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/cart" element={<Cartpage />} />
         <Route path="/login" element={<Loginpage />} />
         <Route path="/shipping" element={<ShippingPage />} />
+        <Route path="/select-address" element={<SelectDeliveryAddress />} />
         <Route path="/paymentMethod" element={<PaymentMethodPage />} />
         <Route path="/order" element={<PlaceOrderPage />} />
         <Route path="/profile" element={<ProfilePage />} />

@@ -35,7 +35,7 @@ function ShippingPage() {
       return;
     }
     dispatch(addUserAddress({ useraddress, userId: data.user._id }));
-    navigate("/paymentMethod");
+    navigate("/select-address");
   }
 
   return (
