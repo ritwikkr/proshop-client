@@ -8,8 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 function ShippingPage() {
   // Component State
   const [useraddress, setUserAddress] = useState({
+    name: "",
+    phoneNumber: "",
     address: "",
     city: "",
+    state: "",
     postal_code: "",
     country: "",
   });
@@ -49,6 +52,34 @@ function ShippingPage() {
           <div className="body">
             <form onSubmit={formSubmitHandler}>
               <div className="form-content">
+                <label htmlFor="name">Name</label>
+                <input
+                  type="text"
+                  value={useraddress.name}
+                  placeholder="Enter Name"
+                  onChange={(e) =>
+                    setUserAddress({
+                      ...useraddress,
+                      name: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className="form-content">
+                <label htmlFor="phone-number">Phone Number</label>
+                <input
+                  type="number"
+                  value={useraddress.phoneNumber}
+                  placeholder="Enter Phone Number"
+                  onChange={(e) =>
+                    setUserAddress({
+                      ...useraddress,
+                      phoneNumber: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className="form-content">
                 <label htmlFor="address">Address</label>
                 <input
                   type="text"
@@ -72,6 +103,16 @@ function ShippingPage() {
                   value={useraddress.city}
                   onChange={(e) =>
                     setUserAddress({ ...useraddress, city: e.target.value })
+                  }
+                />
+              </div>
+              <div className="form-content">
+                <label htmlFor="state">State</label>
+                <input
+                  type="text"
+                  placeholder="Enter State"
+                  onChange={(e) =>
+                    setUserAddress({ ...useraddress, state: e.target.value })
                   }
                 />
               </div>
