@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
 
 import Wrapper from "../wrapper/SelectDeliveryAddressStyle";
 import ProgressBar from "../components/ProgressBar";
@@ -25,8 +26,8 @@ function SelectDeliveryAddress() {
           <div className="delivery-address">
             <h3>Select Delivery Address</h3>
             <div className="body">
-              {data?.user?.address.map((address) => (
-                <div className="address">
+              {data?.user?.address.map((address, index) => (
+                <div className="address" key={index}>
                   <label>
                     <input
                       type="radio"
@@ -49,6 +50,10 @@ function SelectDeliveryAddress() {
                   </label>
                 </div>
               ))}
+              <div className="add-address">
+                <AiOutlinePlus />
+                <p>Add Address</p>
+              </div>
             </div>
           </div>
           <div className="subtotal"></div>

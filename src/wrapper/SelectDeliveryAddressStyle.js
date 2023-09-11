@@ -43,6 +43,18 @@ const Wrapper = styled.div`
               }
             }
           }
+          > .add-address {
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+            margin-top: 20px;
+            padding: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            > p {
+              margin-left: 5px;
+            }
+          }
         }
       }
     }
