@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function ShippingPage() {
   // Component State
-  const [useraddress, setUserAddress] = useState({
+  const [userAddress, setUserAddress] = useState({
     name: "",
     phoneNumber: "",
     address: "",
@@ -33,11 +33,11 @@ function ShippingPage() {
 
   function formSubmitHandler(e) {
     e.preventDefault();
-    const { address, city, postal_code, country } = useraddress;
+    const { address, city, postal_code, country } = userAddress;
     if (!address || !city || !postal_code || !country) {
       return;
     }
-    dispatch(addUserAddress({ useraddress, userId: data.user._id }));
+    dispatch(addUserAddress({ userAddress, userId: data.user._id }));
     navigate("/select-address");
   }
 
@@ -55,11 +55,11 @@ function ShippingPage() {
                 <label htmlFor="name">Name</label>
                 <input
                   type="text"
-                  value={useraddress.name}
+                  value={userAddress.name}
                   placeholder="Enter Name"
                   onChange={(e) =>
                     setUserAddress({
-                      ...useraddress,
+                      ...userAddress,
                       name: e.target.value,
                     })
                   }
@@ -69,11 +69,11 @@ function ShippingPage() {
                 <label htmlFor="phone-number">Phone Number</label>
                 <input
                   type="number"
-                  value={useraddress.phoneNumber}
+                  value={userAddress.phoneNumber}
                   placeholder="Enter Phone Number"
                   onChange={(e) =>
                     setUserAddress({
-                      ...useraddress,
+                      ...userAddress,
                       phoneNumber: e.target.value,
                     })
                   }
@@ -85,10 +85,10 @@ function ShippingPage() {
                   type="text"
                   id="address"
                   placeholder="Enter Address"
-                  value={useraddress.address}
+                  value={userAddress.address}
                   onChange={(e) =>
                     setUserAddress({
-                      ...useraddress,
+                      ...userAddress,
                       address: e.target.value,
                     })
                   }
@@ -100,9 +100,9 @@ function ShippingPage() {
                   type="text"
                   id="city"
                   placeholder="Enter City"
-                  value={useraddress.city}
+                  value={userAddress.city}
                   onChange={(e) =>
-                    setUserAddress({ ...useraddress, city: e.target.value })
+                    setUserAddress({ ...userAddress, city: e.target.value })
                   }
                 />
               </div>
@@ -112,7 +112,7 @@ function ShippingPage() {
                   type="text"
                   placeholder="Enter State"
                   onChange={(e) =>
-                    setUserAddress({ ...useraddress, state: e.target.value })
+                    setUserAddress({ ...userAddress, state: e.target.value })
                   }
                 />
               </div>
@@ -122,10 +122,10 @@ function ShippingPage() {
                   type="number"
                   id="code"
                   placeholder="Enter Postal Code"
-                  value={useraddress.postal_code}
+                  value={userAddress.postal_code}
                   onChange={(e) =>
                     setUserAddress({
-                      ...useraddress,
+                      ...userAddress,
                       postal_code: e.target.value,
                     })
                   }
@@ -137,10 +137,10 @@ function ShippingPage() {
                   type="text"
                   id="country"
                   placeholder="Enter Country"
-                  value={useraddress.country}
+                  value={userAddress.country}
                   onChange={(e) =>
                     setUserAddress({
-                      ...useraddress,
+                      ...userAddress,
                       country: e.target.value,
                     })
                   }

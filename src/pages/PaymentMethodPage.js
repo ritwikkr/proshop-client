@@ -15,7 +15,7 @@ function PaymentMethodPage() {
   return (
     <Wrapper>
       <div className="main">
-        <ProgressBar paymentMethod shipping />
+        <ProgressBar paymentMethod shipping selectAddress />
         <div className="body">
           <h1>payment method</h1>
           <div className="select-method">

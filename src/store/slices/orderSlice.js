@@ -36,8 +36,17 @@ const orderSlice = createSlice({
     data: [],
     isError: false,
     errorMsg: null,
+    deliveryAddress: JSON.parse(localStorage.getItem("deliveryAddress")) || {},
   },
-  reducers: {},
+  reducers: {
+    setDeliveryDetails: (state, action) => {
+      state.deliveryAddress = action.payload;
+      localStorage.setItem(
+        "deliveryAddress",
+        JSON.stringify(state.deliveryAddress)
+      );
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(createOrder.pending, (state, action) => {
       state.isLoading = true;
@@ -62,4 +71,5 @@ const orderSlice = createSlice({
   },
 });
 
+export const { setDeliveryDetails } = orderSlice.actions;
 export default orderSlice.reducer;

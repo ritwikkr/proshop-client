@@ -9,9 +9,11 @@ import ProductCard from "../components/ProductCard";
 function CheckoutPage() {
   const { data } = useSelector((state) => state.cart);
   const { data: userData } = useSelector((state) => state.user);
+  const { deliveryAddress } = useSelector((state) => state.order);
   const totalPrice = data.reduce((acc, items) => {
     return (acc += items.price * items.qty);
   }, 0);
+  console.log(deliveryAddress);
   return (
     <Wrapper>
       <div className="head"></div>
@@ -21,10 +23,10 @@ function CheckoutPage() {
             <h2>SHIPPING</h2>
             <p className="name">Name: {userData.user.name}</p>
             <p className="email">Email: {userData.user.email}</p>
+            <p className="number">Phone: {deliveryAddress.phoneNumber}</p>
             <p className="address">
-              Address: {userData.user.address[0].house},
-              {userData.user.address[0].city}, {userData.user.address[0].postal}
-              , {userData.user.address[0].country}
+              Address: {deliveryAddress.address}, {deliveryAddress.city},
+              {deliveryAddress.state}, {deliveryAddress.postal}
             </p>
           </div>
           <div className="payment">

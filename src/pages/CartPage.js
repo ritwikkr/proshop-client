@@ -21,9 +21,9 @@ function CartPage() {
 
   function proceedHandler() {
     if (!userData) {
-      return navigate("/login?shipping");
+      return navigate("/login?select-address");
     }
-    navigate("/shipping");
+    navigate("/select-address");
   }
   return (
     <Wrapper>

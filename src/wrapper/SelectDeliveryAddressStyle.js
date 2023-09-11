@@ -55,6 +55,21 @@ const Wrapper = styled.div`
               margin-left: 5px;
             }
           }
+          > .btn {
+            cursor: pointer;
+            margin: 30px 0;
+            height: 40px;
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            > button {
+              text-transform: uppercase;
+              color: white;
+              border: none;
+              background-color: transparent;
+            }
+          }
         }
       }
     }

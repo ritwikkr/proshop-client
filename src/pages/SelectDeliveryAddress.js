@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import Wrapper from "../wrapper/SelectDeliveryAddressStyle";
 import ProgressBar from "../components/ProgressBar";
-import { useSelector } from "react-redux";
+import { setDeliveryDetails } from "../store/slices/orderSlice";
 
 function SelectDeliveryAddress() {
   // Component State
   const [selectedAddress, setSelectedAddress] = useState({});
+
+  // Redux
+  const dispatch = useDispatch();
+
+  // Navigation
+  const navigate = useNavigate();
 
   const { data } = useSelector((state) => state.user);
 
@@ -17,6 +25,11 @@ function SelectDeliveryAddress() {
       (address) => address._id === selectedId
     );
     setSelectedAddress(selectedAddr);
+  }
+
+  function handleClick() {
+    dispatch(setDeliveryDetails(selectedAddress));
+    navigate("/paymentMethod");
   }
   return (
     <Wrapper>
@@ -50,9 +63,15 @@ function SelectDeliveryAddress() {
                   </label>
                 </div>
               ))}
-              <div className="add-address">
+              <div
+                className="add-address"
+                onClick={() => navigate("/shipping")}
+              >
                 <AiOutlinePlus />
                 <p>Add Address</p>
+              </div>
+              <div className="btn" onClick={handleClick}>
+                <button>Continue</button>
               </div>
             </div>
           </div>

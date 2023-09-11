@@ -22,10 +22,7 @@ export const addUserAddress = createAsyncThunk(
   "addUserAddress",
   async (body) => {
     try {
-      const response = await axios.put(
-        `${BASE_URL}/api/v1/user/addAddress`,
-        body
-      );
+      const response = await axios.patch(`${BASE_URL}/api/v1/user/addAddress`);
       return response.data;
     } catch (error) {
       console.log(error);

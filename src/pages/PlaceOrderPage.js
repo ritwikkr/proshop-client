@@ -7,7 +7,7 @@ import ProductCard from "../components/ProductCard";
 
 function PlaceOrderPage() {
   const { data } = useSelector((state) => state.cart);
-  const { data: userData } = useSelector((state) => state.user);
+  const { deliveryAddress } = useSelector((state) => state.order);
   const totalItemPrice = data.reduce(
     (acc, item) => acc + item.price * item.qty,
     0
@@ -18,16 +18,25 @@ function PlaceOrderPage() {
     <Wrapper>
       <div className="main">
         <div className="progress-bar">
-          <ProgressBar shipping paymentMethod placeOrder />
+          <ProgressBar shipping paymentMethod placeOrder selectAddress />
         </div>
         <div className="body">
           <div className="product-details">
             <div className="shipping">
               <h2 className="title">shipping</h2>
-              <p>
-                Address:
-                {`${userData.user.address[0].house}, ${userData.user.address[0].city},  ${userData.user.address[0].country} - ${userData.user.address[0].postal}`}
-              </p>
+              <div className="delivery-address">
+                <p className="name">
+                  <span>Name:</span> {deliveryAddress.name}
+                </p>
+                <p className="number">
+                  <span>Phone:</span> {deliveryAddress?.phoneNumber}
+                </p>
+                <p className="address">
+                  <span>Address:</span>
+                  {deliveryAddress.address}, {deliveryAddress.city},
+                  {deliveryAddress.state}, {deliveryAddress.postal}
+                </p>
+              </div>
             </div>
             <hr />
             <div className="payment-method">

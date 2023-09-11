@@ -21,8 +21,8 @@ function Loginpage() {
 
   useEffect(() => {
     if (data) {
-      if (location.search.includes("shipping")) {
-        return navigate("/shipping");
+      if (location.search.includes("select-address")) {
+        return navigate("/select-address");
       }
       setTimeout(() => {
         navigate("/");

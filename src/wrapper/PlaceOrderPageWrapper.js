@@ -22,8 +22,16 @@ const Wrapper = styled.div`
             font-weight: lighter;
             margin-bottom: 10px;
           }
-          p {
-            letter-spacing: 1.1px;
+          > .delivery-address {
+            > .name > span,
+            > .number > span,
+            > .address > span {
+              margin-right: 5px;
+              font-weight: bold;
+            }
+            > p {
+              margin-bottom: 5px;
+            }
           }
         }
         hr {
