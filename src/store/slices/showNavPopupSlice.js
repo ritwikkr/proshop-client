@@ -7,7 +7,6 @@ const showNavPopup = createSlice({
   },
   reducers: {
     togglePopUp: (state, action) => {
-      console.log(`Trigerred`);
       state.show = action.payload;
     },
   },
