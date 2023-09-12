@@ -22,8 +22,26 @@ export const addUserAddress = createAsyncThunk(
   "addUserAddress",
   async (body) => {
     try {
-      const response = await axios.patch(`${BASE_URL}/api/v1/user/addAddress`);
+      const response = await axios.patch(
+        `${BASE_URL}/api/v1/user/addAddress`,
+        body
+      );
       return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const deleteUserAddress = createAsyncThunk(
+  "deleteUserAddress",
+  async (body) => {
+    try {
+      const { userId, addressId } = body;
+      const { data } = await axios.delete(
+        `${BASE_URL}/api/v1/user/deleteAddress?userId=${userId}&addressId=${addressId}`
+      );
+      return data;
     } catch (error) {
       console.log(error);
     }
@@ -134,6 +152,20 @@ const userSlice = createSlice({
       state.data = action.payload;
     });
     builder.addCase(updatePassword.rejected, (state, action) => {
+      state.isError = true;
+      state.errorMsg = action.payload;
+    });
+
+    // Delete User Address
+    builder.addCase(deleteUserAddress.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteUserAddress.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.data.user = action.payload;
+      localStorage.setItem("user", JSON.stringify(state.data));
+    });
+    builder.addCase(deleteUserAddress.rejected, (state, action) => {
       state.isError = true;
       state.errorMsg = action.payload;
     });

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 function ProgressBar({ shipping, paymentMethod, placeOrder, selectAddress }) {
+  const { deliveryAddress } = useSelector((state) => state.order);
   const { data } = useSelector((state) => state.user);
   return (
     <Wrapper>
@@ -17,7 +18,7 @@ function ProgressBar({ shipping, paymentMethod, placeOrder, selectAddress }) {
             <Link to={"/select-address"}>Select Delivery Address</Link>
           </li>
           <li className={paymentMethod ? "active" : null}>
-            {data.user.address[0] ? (
+            {deliveryAddress.name ? (
               <Link to={"/paymentMethod"}>Payment</Link>
             ) : (
               <p>Payment</p>

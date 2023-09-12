@@ -12,6 +12,7 @@ const Wrapper = styled.div`
           > .address {
             margin-top: 10px;
             box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+            position: relative;
             > label {
               cursor: pointer;
               padding: 20px;
@@ -41,6 +42,12 @@ const Wrapper = styled.div`
                   }
                 }
               }
+            }
+            > .cross {
+              cursor: pointer;
+              position: absolute;
+              top: 10%;
+              right: 2%;
             }
           }
           > .add-address {

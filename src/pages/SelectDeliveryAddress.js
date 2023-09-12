@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import Wrapper from "../wrapper/SelectDeliveryAddressStyle";
 import ProgressBar from "../components/ProgressBar";
 import { setDeliveryDetails } from "../store/slices/orderSlice";
+import { deleteUserAddress } from "../store/slices/userSlice";
 
 function SelectDeliveryAddress() {
   // Component State
@@ -30,6 +31,11 @@ function SelectDeliveryAddress() {
   function handleClick() {
     dispatch(setDeliveryDetails(selectedAddress));
     navigate("/paymentMethod");
+  }
+
+  // Delete Address Handler
+  function deleteAddressHandler(addressId) {
+    dispatch(deleteUserAddress({ userId: data.user._id, addressId }));
   }
   return (
     <Wrapper>
@@ -61,6 +67,12 @@ function SelectDeliveryAddress() {
                       </div>
                     </div>
                   </label>
+                  <div
+                    className="cross"
+                    onClick={() => deleteAddressHandler(address._id)}
+                  >
+                    <AiOutlineClose />
+                  </div>
                 </div>
               ))}
               <div
