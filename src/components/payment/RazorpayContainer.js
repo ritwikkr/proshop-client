@@ -1,0 +1,85 @@
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+
+import { createOrder } from "../../store/slices/orderSlice";
+
+function RazorpayContainer() {
+  // Component State
+  const [disableHandler, setDisableHandler] = useState(false);
+
+  //   Redux
+  const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.cart);
+  const { data: userData } = useSelector((state) => state.user);
+
+  const totalAmt = data.reduce((acc, item) => {
+    return acc + item.price * item.qty;
+  }, 0);
+
+  //   Side Effect
+  useEffect(() => {
+    // Dynamically load the Razorpay script when the component mounts
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      // Clean up: remove the script when the component unmounts
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const handlePayment = async () => {
+    try {
+      setDisableHandler(true);
+      const URL = "http://localhost:4000/api/v1/payment/razor";
+      console.log("Requesting URL:", URL);
+      const response = await axios.post(URL, { totalAmt });
+
+      const options = {
+        key: "rzp_test_H5m8Qvt4qQxXy5",
+        amount: response.data.amount,
+        currency: response.data.currency,
+        name: "ProShop",
+        description: "Test Payment",
+        image: "",
+        order_id: response.data.id,
+        receipt: Math.random(),
+        handler: () => {
+          // Handle the successful payment response here
+          // Change Stock
+          dispatch(createOrder({ data, userId: userData.user._id, totalAmt }));
+          //   dispatch(changeStock(data));
+          //   dispatch(emptyCart());
+          //   navigate("/");
+        },
+        prefill: {
+          name: "John Doe",
+          email: "john.doe@example.com",
+          contact: "1234567890",
+        },
+        notes: {
+          address: "Test address",
+        },
+        theme: {
+          color: "#F37254",
+        },
+      };
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return (
+    <div>
+      <button onClick={handlePayment} disabled={disableHandler}>
+        {disableHandler ? "Paying..." : "Pay Now"}
+      </button>
+    </div>
+  );
+}
+
+export default RazorpayContainer;

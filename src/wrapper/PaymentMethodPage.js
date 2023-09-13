@@ -20,8 +20,15 @@ const Wrapper = styled.div`
           text-transform: capitalize;
           margin-bottom: 10px;
         }
-        input {
-          margin-right: 5px;
+        > ul {
+          > li {
+            border: 2px solid red;
+            list-style: none;
+            /* cursor: pointer; */
+            input {
+              margin-right: 5px;
+            }
+          }
         }
       }
       .btn {

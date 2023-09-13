@@ -37,6 +37,8 @@ const orderSlice = createSlice({
     isError: false,
     errorMsg: null,
     deliveryAddress: JSON.parse(localStorage.getItem("deliveryAddress")) || {},
+    paymentMethod:
+      JSON.parse(localStorage.getItem("paymentMethod")) || "paypal",
   },
   reducers: {
     setDeliveryDetails: (state, action) => {
@@ -44,6 +46,13 @@ const orderSlice = createSlice({
       localStorage.setItem(
         "deliveryAddress",
         JSON.stringify(state.deliveryAddress)
+      );
+    },
+    changePaymentMethod: (state, action) => {
+      state.paymentMethod = action.payload;
+      localStorage.setItem(
+        "paymentMethod",
+        JSON.stringify(state.paymentMethod)
       );
     },
   },
@@ -71,5 +80,5 @@ const orderSlice = createSlice({
   },
 });
 
-export const { setDeliveryDetails } = orderSlice.actions;
+export const { setDeliveryDetails, changePaymentMethod } = orderSlice.actions;
 export default orderSlice.reducer;

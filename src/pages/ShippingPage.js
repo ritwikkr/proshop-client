@@ -41,6 +41,22 @@ function ShippingPage() {
     navigate("/select-address");
   }
 
+  function numberChangeHandler(e) {
+    const value = e.target.value;
+    // Check if the input is a valid number (contains only digits) and has a length of 10 or less
+    if (/^\d{0,10}$/.test(value)) {
+      setUserAddress({ ...userAddress, phoneNumber: e.target.value });
+    }
+  }
+
+  function postalChangeHandler(e) {
+    const value = e.target.value;
+    // Check if the input is a valid number (contains only digits) and has a length of 6 or less
+    if (/^\d{0,6}$/.test(value)) {
+      setUserAddress({ ...userAddress, postal_code: e.target.value });
+    }
+  }
+
   return (
     <Wrapper>
       <div className="main">
@@ -71,12 +87,7 @@ function ShippingPage() {
                   type="number"
                   value={userAddress.phoneNumber}
                   placeholder="Enter Phone Number"
-                  onChange={(e) =>
-                    setUserAddress({
-                      ...userAddress,
-                      phoneNumber: e.target.value,
-                    })
-                  }
+                  onChange={numberChangeHandler}
                 />
               </div>
               <div className="form-content">
@@ -123,12 +134,7 @@ function ShippingPage() {
                   id="code"
                   placeholder="Enter Postal Code"
                   value={userAddress.postal_code}
-                  onChange={(e) =>
-                    setUserAddress({
-                      ...userAddress,
-                      postal_code: e.target.value,
-                    })
-                  }
+                  onChange={postalChangeHandler}
                 />
               </div>
               <div className="form-content">
