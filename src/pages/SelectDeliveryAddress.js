@@ -11,6 +11,7 @@ import { deleteUserAddress } from "../store/slices/userSlice";
 function SelectDeliveryAddress() {
   // Component State
   const [selectedAddress, setSelectedAddress] = useState({});
+  const [errorMsg, setErrorMsg] = useState(false);
 
   // Redux
   const dispatch = useDispatch();
@@ -21,14 +22,19 @@ function SelectDeliveryAddress() {
   const { data } = useSelector((state) => state.user);
 
   function handleAddressChange(event) {
+    setErrorMsg(false);
     const selectedId = event.target.value;
     const selectedAddr = data?.user?.address.find(
       (address) => address._id === selectedId
     );
+    console.log(selectedAddr);
     setSelectedAddress(selectedAddr);
   }
 
   function handleClick() {
+    if (!selectedAddress.hasOwnProperty("name")) {
+      return setErrorMsg(true);
+    }
     dispatch(setDeliveryDetails(selectedAddress));
     navigate("/paymentMethod");
   }
@@ -42,6 +48,11 @@ function SelectDeliveryAddress() {
       <div className="main">
         <ProgressBar selectAddress shipping />
         <div className="content">
+          {errorMsg && (
+            <div className="error">
+              <p>Please select delivery address</p>
+            </div>
+          )}
           <div className="delivery-address">
             <h3>Select Delivery Address</h3>
             <div className="body">

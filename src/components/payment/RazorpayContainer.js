@@ -34,7 +34,7 @@ function RazorpayContainer() {
   const handlePayment = async () => {
     try {
       setDisableHandler(true);
-      const URL = "http://localhost:4000/api/v1/payment/razor";
+      const URL = "https://proshop-api-n2t7.onrender.com/api/v1/payment/razor";
       console.log("Requesting URL:", URL);
       const response = await axios.post(URL, { totalAmt });
 

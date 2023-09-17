@@ -7,6 +7,17 @@ const Wrapper = styled.div`
     margin: 30px auto 0;
     > .content {
       margin-top: 30px;
+      > .error {
+        border: 2px solid red;
+        height: 40px;
+        margin: 10px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        background-color: #ff0000;
+        color: white;
+      }
       > .delivery-address {
         > .body {
           > .address {

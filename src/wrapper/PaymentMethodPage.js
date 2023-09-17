@@ -22,10 +22,10 @@ const Wrapper = styled.div`
         }
         > ul {
           > li {
-            border: 2px solid red;
+            margin-bottom: 10px;
             list-style: none;
-            /* cursor: pointer; */
             input {
+              border: 2px solid red;
               margin-right: 5px;
             }
           }
