@@ -44,8 +44,7 @@ function PaymentMethodPage() {
                   name="payment"
                   id="paypal"
                   onChange={() => setPaymentMethod("paypal")}
-                  checked
-                  readOnly
+                  defaultChecked={paymentMethod === "paypal"}
                 />
                 <label htmlFor="paypal">PayPal or Credit Card</label>
               </li>
