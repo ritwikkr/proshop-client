@@ -12,8 +12,7 @@ export const createOrder = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      console.log(`OrderSliceError: ${error}`);
-      //   return rejectWithValue(error);
+      return rejectWithValue(error);
     }
   }
 );

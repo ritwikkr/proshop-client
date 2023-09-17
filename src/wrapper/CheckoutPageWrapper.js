@@ -4,11 +4,10 @@ const Wrapper = styled.div`
   min-height: calc(100vh - 130px);
   width: 100%;
   padding: 20px;
-  > .head {
-  }
   > .body {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
     > .left {
       margin-right: 40px;
       flex: 1;
@@ -19,6 +18,7 @@ const Wrapper = styled.div`
     }
     > .right {
       border: 1px solid gray;
+      width: 350px;
       > .order-summary {
         > h2 {
           padding: 20px;

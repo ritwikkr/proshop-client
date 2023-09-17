@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
 import { createOrder } from "../../store/slices/orderSlice";
+import Wrapper from "../../wrapper/RazorpayContainerWrapper";
 
 function RazorpayContainer() {
   // Component State
@@ -26,7 +27,6 @@ function RazorpayContainer() {
     document.body.appendChild(script);
 
     return () => {
-      // Clean up: remove the script when the component unmounts
       document.body.removeChild(script);
     };
   }, []);
@@ -34,7 +34,8 @@ function RazorpayContainer() {
   const handlePayment = async () => {
     try {
       setDisableHandler(true);
-      const URL = "https://proshop-api-n2t7.onrender.com/api/v1/payment/razor";
+      // const URL = "https://proshop-api-n2t7.onrender.com/api/v1/payment/razor";
+      const URL = "http://localhost:4000/api/v1/payment/razor";
       console.log("Requesting URL:", URL);
       const response = await axios.post(URL, { totalAmt });
 
@@ -51,9 +52,9 @@ function RazorpayContainer() {
           // Handle the successful payment response here
           // Change Stock
           dispatch(createOrder({ data, userId: userData.user._id, totalAmt }));
-          //   dispatch(changeStock(data));
-          //   dispatch(emptyCart());
-          //   navigate("/");
+          // dispatch(changeStock(data));
+          // dispatch(emptyCart());
+          // navigate("/");
         },
         prefill: {
           name: "John Doe",
@@ -74,11 +75,11 @@ function RazorpayContainer() {
     }
   };
   return (
-    <div>
+    <Wrapper>
       <button onClick={handlePayment} disabled={disableHandler}>
         {disableHandler ? "Paying..." : "Pay Now"}
       </button>
-    </div>
+    </Wrapper>
   );
 }
 

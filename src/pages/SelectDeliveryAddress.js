@@ -27,7 +27,6 @@ function SelectDeliveryAddress() {
     const selectedAddr = data?.user?.address.find(
       (address) => address._id === selectedId
     );
-    console.log(selectedAddr);
     setSelectedAddress(selectedAddr);
   }
 
@@ -43,6 +42,7 @@ function SelectDeliveryAddress() {
   function deleteAddressHandler(addressId) {
     dispatch(deleteUserAddress({ userId: data.user._id, addressId }));
   }
+
   return (
     <Wrapper>
       <div className="main">
