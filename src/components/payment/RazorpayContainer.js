@@ -55,7 +55,7 @@ function RazorpayContainer() {
           // Change Stock
           dispatch(createOrder({ data, userId: userData.user._id, totalAmt }));
           dispatch(emptyCart());
-          navigate("/");
+          navigate("/payment-success");
         },
         prefill: {
           name: "John Doe",
