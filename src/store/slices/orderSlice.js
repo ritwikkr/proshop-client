@@ -54,6 +54,10 @@ const orderSlice = createSlice({
         JSON.stringify(state.paymentMethod)
       );
     },
+    emptyCart: (state, action) => {
+      state.data = [];
+      localStorage.setItem("cart", JSON.stringify([]));
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(createOrder.pending, (state, action) => {
@@ -79,5 +83,6 @@ const orderSlice = createSlice({
   },
 });
 
-export const { setDeliveryDetails, changePaymentMethod } = orderSlice.actions;
+export const { setDeliveryDetails, changePaymentMethod, emptyCart } =
+  orderSlice.actions;
 export default orderSlice.reducer;
