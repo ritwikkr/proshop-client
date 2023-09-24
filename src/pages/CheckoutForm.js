@@ -8,7 +8,7 @@ import BASE_URL from "../helper/url";
 import Wrapper from "../wrapper/CheckoutFormWrapper";
 import { createOrder } from "../store/slices/orderSlice";
 
-const MyCheckoutForm = ({ totalPrice, orderDetail }) => {
+const MyCheckoutForm = ({ totalPrice, orderDetails }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState(null);
@@ -43,7 +43,7 @@ const MyCheckoutForm = ({ totalPrice, orderDetail }) => {
         setSuccess("Payment succeeded!");
         navigate("/payment-success");
         dispatch(
-          createOrder({ orderDetail, userId: userData.user._id, totalPrice })
+          createOrder({ orderDetails, userId: userData.user._id, totalPrice })
         );
       } catch (error) {
         console.log("Stripe Error: ", error);

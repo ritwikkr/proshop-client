@@ -75,7 +75,7 @@ function CheckoutPage() {
             <RazorpayContainer />
           ) : (
             <StripeContainer>
-              <MyCheckoutForm totalPrice={totalPrice} orderDetail={data} />
+              <MyCheckoutForm totalPrice={totalPrice} orderDetails={data} />
             </StripeContainer>
           )}
         </div>

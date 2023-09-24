@@ -17,7 +17,7 @@ function RazorpayContainer() {
   // Navigate
   const navigate = useNavigate();
 
-  const totalAmt = data.reduce((acc, item) => {
+  const totalPrice = data.reduce((acc, item) => {
     return acc + item.price * item.qty;
   }, 0);
 
@@ -39,7 +39,7 @@ function RazorpayContainer() {
       setDisableHandler(true);
       const URL = "https://proshop-api-n2t7.onrender.com/api/v1/payment/razor";
       console.log("Requesting URL:", URL);
-      const response = await axios.post(URL, { totalAmt });
+      const response = await axios.post(URL, { totalPrice });
 
       const options = {
         key: "rzp_test_H5m8Qvt4qQxXy5",
@@ -53,7 +53,13 @@ function RazorpayContainer() {
         handler: () => {
           // Handle the successful payment response here
           // Change Stock
-          dispatch(createOrder({ data, userId: userData.user._id, totalAmt }));
+          dispatch(
+            createOrder({
+              orderDetails: data,
+              userId: userData.user._id,
+              totalPrice,
+            })
+          );
           dispatch(emptyCart());
           navigate("/payment-success");
         },
