@@ -70,15 +70,42 @@ export const updatePassword = createAsyncThunk(
 
 export const forgotPassword = createAsyncThunk(
   "forgotPassword",
-  async (user) => {
+  async (user, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(
         `${BASE_URL}/api/v1/user/forgotPassword`,
         { user }
       );
-      console.log(data);
+      return data;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const resetPassword = createAsyncThunk("resetPassword", async (body) => {
+  try {
+    const { data } = await axios.patch(
+      `${BASE_URL}/api/v1/user/resetPassword`,
+      body
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const checkJWTExpiry = createAsyncThunk(
+  "checkJWTExpiry",
+  async (body, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(
+        `${BASE_URL}/api/v1/user/checkJWTExpiry`,
+        body
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -93,6 +120,9 @@ const userSlice = createSlice({
     isError: false,
     errorMsg: "",
     updationComplete: false,
+    emailSent: false,
+    passwordReseted: false,
+    jwtExpired: false,
   },
   reducers: {
     logOut: (state, action) => {
@@ -168,6 +198,50 @@ const userSlice = createSlice({
     builder.addCase(deleteUserAddress.rejected, (state, action) => {
       state.isError = true;
       state.errorMsg = action.payload;
+    });
+
+    // Forgot Password
+    builder.addCase(forgotPassword.pending, (state, action) => {
+      state.isLoading = true;
+      state.emailSent = false;
+      state.isError = false;
+    });
+    builder.addCase(forgotPassword.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.emailSent = true;
+    });
+    builder.addCase(forgotPassword.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.emailSent = false;
+    });
+
+    // Add Case
+    builder.addCase(resetPassword.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(resetPassword.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.passwordReseted = true;
+    });
+    builder.addCase(resetPassword.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.passwordReseted = false;
+    });
+
+    // Check JWT Expiry
+    builder.addCase(checkJWTExpiry.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(checkJWTExpiry.fulfilled, (state) => {
+      state.isLoading = false;
+      state.jwtExpired = false;
+    });
+    builder.addCase(checkJWTExpiry.rejected, (state) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.jwtExpired = true;
     });
   },
 });

@@ -16,6 +16,7 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import CheckoutPage from "./pages/CheckoutPage";
 import ForgotPassword from "./pages/ForgotPassword";
 import SelectDeliveryAddress from "./pages/SelectDeliveryAddress";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />
