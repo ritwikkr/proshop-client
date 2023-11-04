@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FaCheck } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 import Wrapper from "../wrapper/ProfilePageWrapper";
 import { updateUser } from "../store/slices/userSlice";
@@ -12,12 +13,12 @@ function ProfilePage() {
   const data = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [userDetails, setUserDetails] = useState({
     name: data.data.user.name,
     email: data.data.user.email,
   });
-
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
@@ -114,7 +115,13 @@ function ProfilePage() {
                           <FaCheck />
                         </td>
                         <td>
-                          <button>Details</button>
+                          <button
+                            onClick={() =>
+                              navigate(`/order-details-page/${order._id}`)
+                            }
+                          >
+                            Details
+                          </button>
                         </td>
                       </tr>
                     </tbody>

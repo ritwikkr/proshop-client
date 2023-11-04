@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+
+import axiosInstanceWithJWT from "../../helper/axiosInstanceWithJWT";
 import BASE_URL from "../../helper/url";
 
 export const createOrder = createAsyncThunk(
@@ -28,6 +30,19 @@ export const fetchOrders = createAsyncThunk("fetchOrder", async (userId) => {
   }
 });
 
+// GET: Fetch Single Order
+export const getSingleOrder = createAsyncThunk(
+  "getSingleOrder",
+  async (orderId) => {
+    try {
+      const { data } = await axiosInstanceWithJWT.get(`/order/${orderId}`);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 const orderSlice = createSlice({
   name: "order",
   initialState: {
@@ -35,6 +50,7 @@ const orderSlice = createSlice({
     data: [],
     isError: false,
     errorMsg: null,
+    singleOrder: null,
     deliveryAddress: JSON.parse(localStorage.getItem("deliveryAddress")) || {},
     paymentMethod:
       JSON.parse(localStorage.getItem("paymentMethod")) || "paypal",
@@ -80,6 +96,15 @@ const orderSlice = createSlice({
     builder.addCase(fetchOrders.rejected, (state, action) => {
       state.isError = true;
     });
+    // GET: Single Order
+    builder.addCase(getSingleOrder.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getSingleOrder.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.singleOrder = action.payload;
+    });
+    builder.addCase(getSingleOrder.rejected, (state, action) => {});
   },
 });
 

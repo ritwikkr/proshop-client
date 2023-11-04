@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import BASE_URL from "../../helper/url";
+import axiosInstanceWithJWT from "../../helper/axiosInstanceWithJWT";
 
 // Action
 export const createSession = createAsyncThunk(
@@ -85,9 +86,15 @@ export const forgotPassword = createAsyncThunk(
 
 export const resetPassword = createAsyncThunk("resetPassword", async (body) => {
   try {
-    const { data } = await axios.patch(
+    const axiosInstanceWithJWT = axios.create({
+      headers: {
+        Authorization: `Bearer ${body?.token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    const { data } = await axiosInstanceWithJWT.patch(
       `${BASE_URL}/api/v1/user/resetPassword`,
-      body
+      body?.password
     );
     return data;
   } catch (error) {
@@ -97,11 +104,16 @@ export const resetPassword = createAsyncThunk("resetPassword", async (body) => {
 
 export const checkJWTExpiry = createAsyncThunk(
   "checkJWTExpiry",
-  async (body, { rejectWithValue }) => {
+  async ({ token }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post(
-        `${BASE_URL}/api/v1/user/checkJWTExpiry`,
-        body
+      const axiosInstanceWithJWT = axios.create({
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      const { data } = await axiosInstanceWithJWT.post(
+        `${BASE_URL}/api/v1/user/checkJWTExpiry`
       );
       return data;
     } catch (error) {
