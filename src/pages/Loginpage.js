@@ -56,7 +56,12 @@ function Loginpage() {
         </div>
         <div className="body">
           {isError && <Alert message={isError} type="error" />}
-          {data && <Alert message={"Redirecting..."} type="success" />}
+          {data && (
+            <Alert
+              message={"Authentication successful. Redirecting..."}
+              type="success"
+            />
+          )}
           <form onSubmit={formSubmitHandler}>
             {!showLogin && (
               <div className="form-content">
@@ -124,7 +129,7 @@ function Loginpage() {
               {showLogin ? (
                 <>
                   <Link to={"/forgot-password"}>
-                    <p>Forgot Password</p>
+                    <p className="forgot-password">Forgot Password</p>
                   </Link>
                   <p>
                     new customer?

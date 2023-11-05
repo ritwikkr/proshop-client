@@ -75,9 +75,10 @@ const Wrapper = styled.div`
             transform: translateX(50%);
             width: 200px;
             background-color: white;
-            color: black;
             display: none;
             li {
+              color: gray;
+              width: 100%;
               list-style: none;
               font-size: 15px;
               cursor: pointer;

@@ -34,12 +34,14 @@ const Wrapper = styled.div`
   font-weight: bold;
   margin-bottom: 20px;
   .home {
-    background-color: rgb(202, 229, 245);
+    background-color: green;
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
   }
   .error {
     background-color: red;

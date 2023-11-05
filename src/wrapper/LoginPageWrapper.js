@@ -40,6 +40,10 @@ const Wrapper = styled.div`
             cursor: pointer;
             width: 100%;
             margin: 20px 0;
+            &:disabled {
+              opacity: 0.5;
+              cursor: not-allowed;
+            }
           }
           > p {
             text-transform: capitalize;
@@ -47,6 +51,13 @@ const Wrapper = styled.div`
               font-weight: bold;
               cursor: pointer;
               margin-left: 5px;
+            }
+          }
+          a {
+            width: fit-content;
+            margin-bottom: 10px;
+            .forgot-password {
+              font-weight: bold;
             }
           }
         }
