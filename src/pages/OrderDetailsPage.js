@@ -11,7 +11,7 @@ import { getSingleOrder } from "../store/slices/orderSlice";
 function OrderDetailsPage() {
   // Redux
   const dispatch = useDispatch();
-  const { singleOrder, loading } = useSelector((state) => state.order);
+  const { singleOrder, isLoading } = useSelector((state) => state.order);
 
   //   Extracting id from params
   const { id } = useParams();
@@ -21,7 +21,7 @@ function OrderDetailsPage() {
     dispatch(getSingleOrder(id));
   }, [dispatch, id]);
 
-  if (loading) {
+  if (isLoading) {
     return <Loading />;
   }
   const roundedSavingAmount = singleOrder?.amount * 0.1;
