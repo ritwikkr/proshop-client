@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import BASE_URL from "../../helper/url";
-import axiosInstanceWithJWT from "../../helper/axiosInstanceWithJWT";
 
 // Action
 export const createSession = createAsyncThunk(
