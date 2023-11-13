@@ -8,9 +8,11 @@ import { updateUser } from "../store/slices/userSlice";
 import Alert from "../components/Alert";
 import { fetchOrders } from "../store/slices/orderSlice";
 import ProfilePagePreLoader from "../components/ProfilePagePreLoader";
+import Loading from "../components/Loading";
 
 function ProfilePage() {
   const data = useSelector((state) => state.user);
+  const { isLoading } = useSelector((state) => state.order);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -39,6 +41,10 @@ function ProfilePage() {
       return;
     }
     dispatch(updateUser({ ...userDetails, id: data.data.user._id }));
+  }
+
+  if (isLoading) {
+    return <Loading />;
   }
   return (
     <Wrapper>

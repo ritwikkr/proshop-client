@@ -4,7 +4,7 @@ import styled from "styled-components";
 function Loading() {
   return (
     <Wrapper>
-      <div className="loader">Loading</div>
+      <div className="loader"></div>
     </Wrapper>
   );
 }
@@ -25,5 +25,13 @@ const Wrapper = styled.div`
     height: 120px;
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
+  }
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 `;
