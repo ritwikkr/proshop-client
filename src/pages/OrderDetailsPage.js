@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { FaFileInvoiceDollar } from "react-icons/fa";
+import { BsFillPiggyBankFill } from "react-icons/bs";
 
 import Wrapper from "../wrapper/OrderDetailsPageWrapper";
 import Loading from "../components/Loading";
@@ -19,11 +21,10 @@ function OrderDetailsPage() {
     dispatch(getSingleOrder(id));
   }, [dispatch, id]);
 
-  console.log("SOSOSOSOSO", singleOrder);
-
   if (loading) {
     return <Loading />;
   }
+  const roundedSavingAmount = singleOrder?.amount * 0.1;
   return (
     <Wrapper>
       <div className="delivery-address">
@@ -34,48 +35,51 @@ function OrderDetailsPage() {
               {singleOrder?.shippingAddress?.name}
             </div>
             <div className="user-address">
-              {singleOrder?.shippingAddress?.address},{" "}
-              {singleOrder?.shippingAddress?.city},
-              {singleOrder?.shippingAddress?.state},
-              {singleOrder?.shippingAddress?.pinCode}
+              <p>{singleOrder?.shippingAddress?.address}</p>,
+              <p>{singleOrder?.shippingAddress?.city}</p>,
+              <p>{singleOrder?.shippingAddress?.state}</p>,
+              <p>{singleOrder?.shippingAddress?.pinCode}</p>
             </div>
             <div className="user-number">
               <p>Phone Number: {singleOrder?.shippingAddress?.phoneNumber}</p>
             </div>
           </div>
         </div>
+        <hr />
+        <div className="middle">
+          <h3>Total Saving:</h3>
+          <div className="saving">
+            <div className="icon">
+              <BsFillPiggyBankFill />
+            </div>
+            <p>₹{roundedSavingAmount.toFixed(2)}</p>
+          </div>
+        </div>
+        <hr />
         <div className="right">
           <h3>More actions</h3>
           <div className="body">
-            <p>Download Invoice</p>
+            <p>
+              <FaFileInvoiceDollar />
+              Download Invoice
+            </p>
             <button>Download</button>
           </div>
         </div>
       </div>
       <div className="delivery-status">
-        <div className="product">
-          <div className="product-image">
-            <img
-              src={singleOrder?.items[0]?.productId?.images[0]}
-              alt={singleOrder?.items[0]?.productId?.title}
-            />
-          </div>
-          <div className="product-details">
-            <div className="product-title">
-              <p>{singleOrder?.items[0]?.productId?.title}</p>
+        {singleOrder?.products.map((item) => (
+          <div className="product">
+            <div className="product-image">
+              <img src={item?.productId?.image} alt={item?.productId?.name} />
             </div>
-            <div className="product-brand">
-              {singleOrder?.items[0]?.productId?.brand}
-            </div>
-            <div className="product-price">
-              ₹{singleOrder?.items[0]?.productId?.price}
+            <div className="product-details">
+              <div className="product-title">{item?.productId?.name}</div>
+              <div className="product-brand">{item?.productId?.brand}</div>
+              <div className="product-price">₹{item?.productId?.price}</div>
             </div>
           </div>
-        </div>
-        <div className="status">
-          {/* <DeliveryTracker status={singleOrder?.status} /> */}
-        </div>
-        <div className="help"></div>
+        ))}
       </div>
     </Wrapper>
   );
