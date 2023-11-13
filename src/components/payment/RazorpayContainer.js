@@ -14,6 +14,7 @@ function RazorpayContainer() {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.cart);
   const { data: userData } = useSelector((state) => state.user);
+  const { deliveryAddress } = useSelector((state) => state.order);
   // Navigate
   const navigate = useNavigate();
 
@@ -58,6 +59,7 @@ function RazorpayContainer() {
               orderDetails: data,
               userId: userData.user._id,
               totalPrice,
+              deliveryAddress,
             })
           );
           dispatch(emptyCart());

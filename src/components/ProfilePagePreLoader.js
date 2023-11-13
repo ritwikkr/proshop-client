@@ -4,14 +4,14 @@ import styled from "styled-components";
 function ProfilePagePreLoader() {
   return (
     <Wrapper>
-      <div class="page-container">
-        <header class="header"></header>
-        <header class="header"></header>
-        <header class="header"></header>
-        <header class="header"></header>
-        <header class="header"></header>
-        <header class="header"></header>
-        <header class="header"></header>
+      <div className="page-container">
+        <header className="header"></header>
+        <header className="header"></header>
+        <header className="header"></header>
+        <header className="header"></header>
+        <header className="header"></header>
+        <header className="header"></header>
+        <header className="header"></header>
       </div>
     </Wrapper>
   );
