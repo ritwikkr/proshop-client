@@ -35,7 +35,9 @@ export const getSingleOrder = createAsyncThunk(
   "getSingleOrder",
   async (orderId) => {
     try {
-      const { data } = await axiosInstanceWithJWT.get(`/order/${orderId}`);
+      const { data } = await axiosInstanceWithJWT.get(
+        `/api/v1/order/${orderId}`
+      );
       return data;
     } catch (error) {
       console.log(error);
