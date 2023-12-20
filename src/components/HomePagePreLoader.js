@@ -4,13 +4,13 @@ import styled from "styled-components";
 function HomePagePreLoader() {
   return (
     <Wrapper>
-      <div class="page-container">
-        <div class="header skeleton"></div>
-        <div class="banner skeleton"></div>
-        <div class="content-wrapper">
-          <div class="content-box skeleton"></div>
-          <div class="content-box skeleton"></div>
-          <div class="content-box skeleton"></div>
+      <div className="page-container">
+        <div className="header skeleton"></div>
+        <div className="banner skeleton"></div>
+        <div className="content-wrapper">
+          <div className="content-box skeleton"></div>
+          <div className="content-box skeleton"></div>
+          <div className="content-box skeleton"></div>
           {/* <!-- Add more content boxes as needed --> */}
         </div>
       </div>

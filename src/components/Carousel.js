@@ -10,7 +10,7 @@ function DemoCarousel({ featuredProducts }) {
     <Wrapper>
       <Carousel>
         {featuredProducts.map((item) => (
-          <Link to={`/productPage/${item._id}`}>
+          <Link to={`/productPage/${item._id}`} key={item._id}>
             <div className="image">
               <img src={item.image} alt={item.name} />
               <p className="legend">{item.name}</p>
