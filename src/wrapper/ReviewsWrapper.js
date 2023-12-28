@@ -11,13 +11,29 @@ const Wrapper = styled.div`
   .body {
     .review {
       padding: 10px;
-      p.content {
-        margin-top: 10px;
+      > .author {
+        margin-bottom: 10px;
+      }
+      > p.content {
+        color: gray;
+        font-size: 15px;
       }
     }
     hr {
       margin: 20px 0 10px 0;
       border: 1px solid lightgray;
+    }
+    > .give-review {
+      > button {
+        background-color: black;
+        color: white;
+        text-transform: uppercase;
+        cursor: pointer;
+        font-weight: bold;
+        width: 120px;
+        height: 40px;
+        border: none;
+      }
     }
   }
 `;
