@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Wrapper from "../wrapper/ProductWrapper";
 import Ratings from "./Ratings";
 
-function Product({ _id, name, image, price, ratings, numReviews }) {
+function Product({ _id, name, image, price, ratingsAndReviews }) {
   return (
     <Wrapper>
       <Link to={`/productPage/${_id}`}>
@@ -16,7 +16,8 @@ function Product({ _id, name, image, price, ratings, numReviews }) {
               <p>{name}</p>
             </div>
             <div className="rating">
-              <Ratings stars={ratings} /> <span>{numReviews} reviews</span>
+              <Ratings stars={ratingsAndReviews.totalRatings} />
+              <span>{ratingsAndReviews.totalReviews} reviews</span>
             </div>
             <div className="price">
               <p>$ {price}</p>
