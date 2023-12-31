@@ -28,7 +28,7 @@ function ProductPage() {
     return <ProductPagePreLoader />;
   }
 
-  const { name, image, rating, numReviews, price, description, countInStock } =
+  const { name, image, price, description, countInStock, ratingsAndReviews } =
     data;
 
   // Product Quantity
@@ -72,8 +72,8 @@ function ProductPage() {
           <div className="title">{name}</div>
           <hr />
           <div className="rating">
-            <Ratings stars={rating} />
-            <span>{numReviews} reviews</span>
+            <Ratings stars={ratingsAndReviews.totalRatings} />
+            <span>{ratingsAndReviews.totalReviews} reviews</span>
           </div>
           <hr />
           <div className="price">
@@ -116,7 +116,7 @@ function ProductPage() {
         </div>
       </div>
       <div className="reviews">
-        <Reviews />
+        <Reviews reviews={ratingsAndReviews.ratingAndReview} />
       </div>
     </Wrapper>
   );

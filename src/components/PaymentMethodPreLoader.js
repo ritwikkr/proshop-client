@@ -4,11 +4,11 @@ import styled from "styled-components";
 function PaymentMethodPreLoader() {
   return (
     <Wrapper>
-      <div class="page-container">
-        <div class="box-container">
-          <div class="box skeleton"></div>
-          <div class="box-with-button skeleton">
-            <button class="button"></button>
+      <div className="page-container">
+        <div className="box-container">
+          <div className="box skeleton"></div>
+          <div className="box-with-button skeleton">
+            <button className="button"></button>
           </div>
         </div>
       </div>

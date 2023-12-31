@@ -4,16 +4,16 @@ import styled from "styled-components";
 function ProductPagePreLoader() {
   return (
     <Wrapper>
-      <div class="page-container">
-        <div class="product-details skeleton">
-          <div class="product-image"></div>
-          <div class="product-info">
-            <div class="product-title"></div>
-            <div class="product-rating"></div>
-            <div class="product-description"></div>
+      <div className="page-container">
+        <div className="product-details skeleton">
+          <div className="product-image"></div>
+          <div className="product-info">
+            <div className="product-title"></div>
+            <div className="product-rating"></div>
+            <div className="product-description"></div>
           </div>
-          <div class="product-price-add-to-cart"></div>
-          <div class="product-reviews"></div>
+          <div className="product-price-add-to-cart"></div>
+          <div className="product-reviews"></div>
         </div>
       </div>
     </Wrapper>
