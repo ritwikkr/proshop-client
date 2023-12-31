@@ -61,7 +61,6 @@ const singleProductSlice = createSlice({
     });
     builder.addCase(giveProductReview.fulfilled, (state, action) => {
       state.isLoading = false;
-      console.log(`PAYLOAD`, action.payload);
       state.data.ratingsAndReviews = action.payload.ratingsAndReviews;
     });
     builder.addCase(giveProductReview.rejected, (state, action) => {});
