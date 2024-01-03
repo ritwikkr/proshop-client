@@ -36,6 +36,22 @@ export const giveProductReview = createAsyncThunk(
   }
 );
 
+// PATCH: Delete reviews
+export const deleteProductReview = createAsyncThunk(
+  "deleteProductReview",
+  async (body) => {
+    try {
+      const { data } = await axiosInstance.delete(
+        `${BASE_URL}/api/v1/product/reviews`,
+        { data: body }
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 const singleProductSlice = createSlice({
   name: "product",
   initialState: {
@@ -64,6 +80,16 @@ const singleProductSlice = createSlice({
       state.data.ratingsAndReviews = action.payload.ratingsAndReviews;
     });
     builder.addCase(giveProductReview.rejected, (state, action) => {});
+
+    // deleteProductReview
+    builder.addCase(deleteProductReview.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteProductReview.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.data.ratingsAndReviews = action.payload;
+    });
+    builder.addCase(deleteProductReview.rejected, (state, action) => {});
   },
 });
 

@@ -9,20 +9,41 @@ const Wrapper = styled.div`
     }
   }
   .body {
-    .review {
-      padding: 10px;
-      > .author {
-        margin-bottom: 10px;
+    .reviews {
+      position: relative;
+      .review {
+        padding: 10px;
+        > .author {
+          margin-bottom: 10px;
+        }
+        > p.content {
+          color: gray;
+          font-size: 15px;
+        }
       }
-      > p.content {
-        color: gray;
-        font-size: 15px;
+      .delete-btn {
+        width: 50px;
+        height: 50px;
+        background-color: lightgray;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        position: absolute;
+        right: 2%;
+        top: 5%;
+        &:hover {
+          color: white;
+          background-color: black;
+        }
+      }
+
+      hr {
+        margin: 20px 0 10px 0;
+        border: 1px solid lightgray;
       }
     }
-    hr {
-      margin: 20px 0 10px 0;
-      border: 1px solid lightgray;
-    }
+
     > .give-review {
       > button {
         background-color: black;
