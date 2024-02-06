@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { createSession } from "../store/slices/userSlice";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import Alert from "../components/Alert";
+import { AppDispatch } from "../store/store";
+import { RootState } from "../interface/store/storeTypes";
 
 function Loginpage() {
   const [showLogin, setShowLogin] = useState(true);
@@ -13,11 +15,13 @@ function Loginpage() {
     password: "",
     confirmPassword: "",
   });
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { data, isLoading, isError } = useSelector((state) => state.user);
+  const { data, isLoading, isError, errorMsg } = useSelector(
+    (state: RootState) => state.user
+  );
 
   useEffect(() => {
     if (data) {
@@ -30,7 +34,7 @@ function Loginpage() {
     }
   }, [data, navigate, location.search]);
 
-  function formSubmitHandler(e) {
+  function formSubmitHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const { name, email, password, confirmPassword } = userDetails;
 
@@ -55,7 +59,7 @@ function Loginpage() {
           <h1> {showLogin ? <p>sign in</p> : <p>sign up</p>} </h1>
         </div>
         <div className="body">
-          {isError && <Alert message={isError} type="error" />}
+          {isError && <Alert message={errorMsg} type="error" />}
           {data && (
             <Alert
               message={"Authentication successful. Redirecting..."}

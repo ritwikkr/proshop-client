@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+
+import { AppDispatch } from "../store/store";
 import DemoCarousel from "../components/Carousel";
 import Product from "../components/Product";
 import Wrapper from "../wrapper/HomePageWrapper";
@@ -8,6 +10,7 @@ import {
   fetchProducts,
   fetchFeaturedProducts,
 } from "../store/slices/productsSlice";
+import { RootState } from "../interface/store/storeTypes";
 
 function Homepage() {
   // Component State
@@ -15,7 +18,7 @@ function Homepage() {
   const pageSize = 6;
 
   // Fetch all products when HomePage loads
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     dispatch(fetchProducts({ page: currentPage, pageSize }));
   }, [dispatch, currentPage]);
@@ -27,10 +30,10 @@ function Homepage() {
 
   // Extracts products from Global State
   const { isLoading, products, totalCount, featuredProducts } = useSelector(
-    (state) => state.products
+    (state: RootState) => state.products
   );
   // Extracts search words from Global State
-  const { searchText } = useSelector((state) => state.searchText);
+  const { searchText } = useSelector((state: RootState) => state.searchText);
 
   // Calculate total pages based on the total product count and page size
   const totalPages = Math.ceil(totalCount / pageSize);
@@ -41,14 +44,23 @@ function Homepage() {
   }
 
   // Filters products according to searched keywords
-  let productList = products
+  const productList = products
     ?.filter((item) =>
       item.name.toLowerCase().includes(searchText.toLowerCase())
     )
-    .map((item) => <Product key={item._id} {...item} />);
+    .map((item) => (
+      <Product
+        key={item._id}
+        _id={item._id}
+        name={item.name}
+        image={item.image}
+        price={item.price}
+        ratingsAndReviews={item.ratingsAndReviews}
+      />
+    ));
 
   // Handle pagination
-  const handlePageChange = (newPage) => {
+  const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
   };
 

@@ -2,7 +2,7 @@ import React from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import styled from "styled-components";
 
-function Ratings({ stars }) {
+function Ratings({ stars }: { stars: number }) {
   return (
     <Wrapper>
       {stars >= 1 ? <FaStar /> : stars >= 0.5 ? <FaStarHalfAlt /> : null}

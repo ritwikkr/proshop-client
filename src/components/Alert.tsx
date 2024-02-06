@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-function Alert(props) {
+interface AlertTypes {
+  message: string;
+  type: string;
+}
+
+function Alert(props: AlertTypes) {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {

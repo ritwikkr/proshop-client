@@ -4,8 +4,9 @@ import { Carousel } from "react-responsive-carousel";
 import { Link } from "react-router-dom";
 
 import Wrapper from "../wrapper/CarouselWrapper";
+import { DemoCarouselProps } from "../interface/components/CarouselTypes";
 
-function DemoCarousel({ featuredProducts }) {
+function DemoCarousel({ featuredProducts }: DemoCarouselProps) {
   return (
     <Wrapper>
       <Carousel>

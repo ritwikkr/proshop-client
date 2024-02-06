@@ -13,7 +13,7 @@ export const fetchProduct = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error);
     }
   }
 );
@@ -21,17 +21,22 @@ export const fetchProduct = createAsyncThunk(
 // PATCH: Give reviews
 export const giveProductReview = createAsyncThunk(
   "giveProductReview",
-  async ({ productId, review, rating }) => {
+  async (
+    {
+      productId,
+      review,
+      rating,
+    }: { productId: string; review: string; rating: number },
+    { rejectWithValue }
+  ) => {
     try {
-      const { user } = JSON.parse(localStorage.getItem("user"));
       const { data } = await axiosInstance.patch(
         `${BASE_URL}/api/v1/product/reviews`,
-        { userId: user?._id, review, rating, productId }
+        { review, rating, productId }
       );
       return data;
     } catch (error) {
-      console.log(error);
-      throw error;
+      return rejectWithValue(error);
     }
   }
 );
@@ -39,7 +44,7 @@ export const giveProductReview = createAsyncThunk(
 // PATCH: Delete reviews
 export const deleteProductReview = createAsyncThunk(
   "deleteProductReview",
-  async (body) => {
+  async (body, { rejectWithValue }) => {
     try {
       const { data } = await axiosInstance.delete(
         `${BASE_URL}/api/v1/product/reviews`,
@@ -47,7 +52,7 @@ export const deleteProductReview = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error);
     }
   }
 );
@@ -59,37 +64,40 @@ const singleProductSlice = createSlice({
     data: null,
     isError: false,
   },
+  reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchProduct.pending, (state, action) => {
+    builder.addCase(fetchProduct.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(fetchProduct.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
     });
-    builder.addCase(fetchProduct.rejected, (state, action) => {
-      state.isError = action.payload;
+    builder.addCase(fetchProduct.rejected, (state) => {
+      state.isError = true;
     });
 
     // Give Product Review
-    builder.addCase(giveProductReview.pending, (state, action) => {
+    builder.addCase(giveProductReview.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(giveProductReview.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.data.ratingsAndReviews = action.payload.ratingsAndReviews;
+      if (state.data) {
+        state.data.ratingsAndReviews = action.payload.ratingsAndReviews;
+      }
     });
-    builder.addCase(giveProductReview.rejected, (state, action) => {});
+    builder.addCase(giveProductReview.rejected, () => {});
 
     // deleteProductReview
-    builder.addCase(deleteProductReview.pending, (state, action) => {
+    builder.addCase(deleteProductReview.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(deleteProductReview.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data.ratingsAndReviews = action.payload;
     });
-    builder.addCase(deleteProductReview.rejected, (state, action) => {});
+    builder.addCase(deleteProductReview.rejected, () => {});
   },
 });
 

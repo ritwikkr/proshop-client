@@ -4,10 +4,11 @@ import { FaTrash } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "../store/slices/cartSlice";
 import { Link, useNavigate } from "react-router-dom";
+import { RootState } from "../interface/store/storeTypes";
 
 function CartPage() {
-  const { data } = useSelector((state) => state.cart);
-  const { data: userData } = useSelector((state) => state.user);
+  const { data } = useSelector((state: RootState) => state.cart);
+  const { data: userData } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -15,7 +16,7 @@ function CartPage() {
     return acc + item.price * item.qty;
   }, 0);
 
-  function itemRemoveHandler(id) {
+  function itemRemoveHandler(id: string) {
     dispatch(removeFromCart(id));
   }
 
@@ -29,9 +30,7 @@ function CartPage() {
     <Wrapper>
       <div className="cart">
         <div className="back-btn">
-          <Link to={-1}>
-            <button>Go back</button>
-          </Link>
+          <button onClick={() => navigate(-1)}>Go back</button>
         </div>
         <div className="title">
           <p>shopping cart</p>

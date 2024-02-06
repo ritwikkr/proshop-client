@@ -3,8 +3,12 @@ import BASE_URL from "./url";
 
 // Function to get the token from localStorage
 const getToken = () => {
-  const { token } = JSON.parse(localStorage.getItem("user"));
-  return token ? token : null;
+  const user = localStorage.getItem("user");
+  if (user) {
+    const { token } = JSON.parse(user);
+    return token ? token : null;
+  }
+  return null;
 };
 
 const axiosInstance = axios.create({
@@ -15,7 +19,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = getToken();
-    if (token) {
+    if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;

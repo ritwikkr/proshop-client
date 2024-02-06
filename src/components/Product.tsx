@@ -2,8 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Wrapper from "../wrapper/ProductWrapper";
 import Ratings from "./Ratings";
+import { RatingsAndReviews } from "../interface/store/slice/productTypes";
 
-function Product({ _id, name, image, price, ratingsAndReviews }) {
+function Product({
+  _id,
+  name,
+  image,
+  price,
+  ratingsAndReviews,
+}: {
+  _id: string;
+  name: string;
+  image: string;
+  price: number;
+  ratingsAndReviews: RatingsAndReviews;
+}) {
   return (
     <Wrapper>
       <Link to={`/productPage/${_id}`}>

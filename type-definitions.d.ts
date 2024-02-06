@@ -2,3 +2,4 @@
 
 // declare module "src/wrapper/HeaderWrapper.js";
 declare module "src/store/slices/userSlice.js";
+declare module "src/store/slices/userSlice.js";
