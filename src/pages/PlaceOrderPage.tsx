@@ -4,10 +4,11 @@ import ProgressBar from "../components/ProgressBar";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
+import { RootState } from "../interface/store/storeTypes";
 
 function PlaceOrderPage() {
-  const { data } = useSelector((state) => state.cart);
-  const { deliveryAddress } = useSelector((state) => state.order);
+  const { data } = useSelector((state: RootState) => state.cart);
+  const { deliveryAddress } = useSelector((state: RootState) => state.order);
   const totalItemPrice = data.reduce(
     (acc, item) => acc + item.price * item.qty,
     0

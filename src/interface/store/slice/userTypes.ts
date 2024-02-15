@@ -58,10 +58,14 @@ interface DeleteUserAddressThunkArgs {
   addressId: string;
 }
 
-interface UpdatePasswordThunkArgs {
+interface PasswordDetails {
   currPassword: string;
   newPassword: string;
   renewPassword: string;
+}
+
+interface UpdatePasswordThunkArgs {
+  passwordDetails: PasswordDetails;
   id: string;
 }
 

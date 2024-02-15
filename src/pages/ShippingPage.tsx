@@ -4,6 +4,8 @@ import ProgressBar from "../components/ProgressBar";
 import { useNavigate } from "react-router-dom";
 import { addUserAddress } from "../store/slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../store/store";
+import { RootState } from "../interface/store/storeTypes";
 
 function ShippingPage() {
   // Component State
@@ -18,18 +20,19 @@ function ShippingPage() {
   });
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.user);
+  const dispatch = useDispatch<AppDispatch>();
+  const { data } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    setUserAddress({
-      address: data.user.address.length > 0 ? data.user.address[0].house : "",
-      city: data.user.address.length > 0 ? data.user.address[0].city : "",
-      postal_code:
-        data.user.address.length > 0 ? data.user.address[0].postal : "",
-      country: data.user.address.length > 0 ? data.user.address[0].country : "",
-    });
-  }, [data.address, data.user]);
+    if (data && data.user && data.user.address.length > 0) {
+      setUserAddress({
+        address: data.user.address[0].house,
+        city: data.user.address[0].city,
+        postal_code: data.user.address[0].postal,
+        country: data.user.address[0].country,
+      });
+    }
+  }, [data]);
 
   function formSubmitHandler(e) {
     e.preventDefault();
@@ -37,7 +40,7 @@ function ShippingPage() {
     if (!address || !city || !postal_code || !country) {
       return;
     }
-    dispatch(addUserAddress({ userAddress, userId: data.user._id }));
+    if (data) dispatch(addUserAddress({ userAddress, userId: data.user._id }));
     navigate("/select-address");
   }
 

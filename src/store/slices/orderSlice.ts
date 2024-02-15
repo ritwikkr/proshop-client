@@ -3,10 +3,15 @@ import axios from "axios";
 
 import axiosInstanceWithJWT from "../../helper/axiosInstanceWithJWT";
 import BASE_URL from "../../helper/url";
+import { CheckoutFormProps } from "../../pages/CheckoutForm";
+
+interface OrderDetailsType extends CheckoutFormProps {
+  userId: string;
+}
 
 export const createOrder = createAsyncThunk(
   "createOrder",
-  async (orderDetails, { rejectWithValue }) => {
+  async (orderDetails: OrderDetailsType, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(
         `${BASE_URL}/api/v1/order/create`,
@@ -19,21 +24,24 @@ export const createOrder = createAsyncThunk(
   }
 );
 
-export const fetchOrders = createAsyncThunk("fetchOrder", async (userId) => {
-  try {
-    const { data } = await axios.post(`${BASE_URL}/api/v1/order/getOrder`, {
-      userId,
-    });
-    return data;
-  } catch (error) {
-    console.log(`FetchOrderError: ${error}`);
+export const fetchOrders = createAsyncThunk(
+  "fetchOrder",
+  async (userId: string) => {
+    try {
+      const { data } = await axios.post(`${BASE_URL}/api/v1/order/getOrder`, {
+        userId,
+      });
+      return data;
+    } catch (error) {
+      console.log(`FetchOrderError: ${error}`);
+    }
   }
-});
+);
 
 // GET: Fetch Single Order
 export const getSingleOrder = createAsyncThunk(
   "getSingleOrder",
-  async (orderId) => {
+  async (orderId: string) => {
     try {
       const { data } = await axiosInstanceWithJWT.get(
         `/api/v1/order/${orderId}`

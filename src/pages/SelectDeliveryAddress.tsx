@@ -7,31 +7,53 @@ import Wrapper from "../wrapper/SelectDeliveryAddressStyle";
 import ProgressBar from "../components/ProgressBar";
 import { setDeliveryDetails } from "../store/slices/orderSlice";
 import { deleteUserAddress } from "../store/slices/userSlice";
+import { RootState } from "../interface/store/storeTypes";
+import { AppDispatch } from "../store/store";
+
+interface SelectAddressState {
+  name: string;
+  phoneNumber: string;
+  address: string;
+  city: string;
+  state: string;
+  postal: number | null;
+  country: string;
+  _id: string;
+}
 
 function SelectDeliveryAddress() {
   // Component State
-  const [selectedAddress, setSelectedAddress] = useState({});
+  const [selectedAddress, setSelectedAddress] = useState<SelectAddressState>({
+    name: "",
+    phoneNumber: "",
+    address: "",
+    city: "",
+    state: "",
+    postal: null,
+    country: "",
+    _id: "",
+  });
   const [errorMsg, setErrorMsg] = useState(false);
 
   // Redux
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   // Navigation
   const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.user);
+  const { data } = useSelector((state: RootState) => state.user);
 
-  function handleAddressChange(event) {
+  function handleAddressChange(event: React.ChangeEvent<HTMLInputElement>) {
     setErrorMsg(false);
     const selectedId = event.target.value;
     const selectedAddr = data?.user?.address.find(
       (address) => address._id === selectedId
     );
-    setSelectedAddress(selectedAddr);
+    if (selectedAddr) setSelectedAddress(selectedAddr);
   }
 
   function handleClick() {
-    if (!selectedAddress.hasOwnProperty("name")) {
+    if (!Object.prototype.hasOwnProperty.call(selectedAddress, "name")) {
       return setErrorMsg(true);
     }
     dispatch(setDeliveryDetails(selectedAddress));
@@ -39,8 +61,8 @@ function SelectDeliveryAddress() {
   }
 
   // Delete Address Handler
-  function deleteAddressHandler(addressId) {
-    dispatch(deleteUserAddress({ userId: data.user._id, addressId }));
+  function deleteAddressHandler(addressId: string) {
+    if (data) dispatch(deleteUserAddress({ userId: data.user._id, addressId }));
   }
 
   return (

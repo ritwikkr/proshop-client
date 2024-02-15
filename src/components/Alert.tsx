@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 interface AlertTypes {
   message: string;
-  type: string;
+  type?: string;
 }
 
 function Alert(props: AlertTypes) {

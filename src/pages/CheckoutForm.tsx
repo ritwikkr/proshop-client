@@ -7,49 +7,76 @@ import { useDispatch, useSelector } from "react-redux";
 import BASE_URL from "../helper/url";
 import Wrapper from "../wrapper/CheckoutFormWrapper";
 import { createOrder } from "../store/slices/orderSlice";
+import { CartItem } from "../interface/store/slice/cartTypes";
+import { OrderTypes } from "../interface/store/slice/orderTypes";
+import { RootState } from "../interface/store/storeTypes";
+import { AppDispatch } from "../store/store";
 
-const MyCheckoutForm = ({ totalPrice, orderDetails, deliveryAddress }) => {
+export interface CheckoutFormProps {
+  totalPrice: number;
+  orderDetails: { data: CartItem[] };
+  deliveryAddress: OrderTypes;
+}
+
+const MyCheckoutForm = ({
+  totalPrice,
+  orderDetails,
+  deliveryAddress,
+}: CheckoutFormProps) => {
   const stripe = useStripe();
   const elements = useElements();
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const { data: userData } = useSelector((state) => state.user);
+  const { data: userData } = useSelector((state: RootState) => state.user);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setIsLoading(true);
 
+    if (!stripe || !elements) {
+      // Stripe.js has not yet loaded.
+      // Make sure to disable form submission until Stripe.js has loaded.
+      return;
+    }
+
+    const cardElement = elements.getElement(CardElement);
+
+    if (!cardElement) {
+      return;
+    }
+
     const result = await stripe.createPaymentMethod({
       type: "card",
-      card: elements.getElement(CardElement),
+      card: cardElement,
     });
 
     if (result.error) {
-      setError(result.error.message);
+      setError(result.error.message || null);
       setSuccess(null);
     } else {
       setError(null);
       try {
         await axios.post(`${BASE_URL}/api/v1/payment`, {
-          amount: totalPrice.toFixed(0) * 100,
+          amount: +totalPrice.toFixed(0) * 100,
           currency: "inr",
           payment_method: result.paymentMethod.id,
         });
         setSuccess("Payment succeeded!");
         navigate("/payment-success");
-        dispatch(
-          createOrder({
-            orderDetails,
-            userId: userData.user._id,
-            totalPrice,
-            deliveryAddress,
-          })
-        );
+        if (userData)
+          dispatch(
+            createOrder({
+              orderDetails,
+              userId: userData.user._id,
+              totalPrice,
+              deliveryAddress,
+            })
+          );
       } catch (error) {
         console.log("Stripe Error: ", error);
       }

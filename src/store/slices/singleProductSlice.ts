@@ -6,14 +6,14 @@ import axiosInstance from "../../helper/axiosInstanceWithJWT";
 // Action
 export const fetchProduct = createAsyncThunk(
   "fetchProduct",
-  async (id, { rejectWithValue }) => {
+  async (id: string, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(
         `${BASE_URL}/api/v1/product/getProduct/${id}`
       );
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue("error");
     }
   }
 );

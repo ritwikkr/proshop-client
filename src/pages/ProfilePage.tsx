@@ -9,17 +9,20 @@ import Alert from "../components/Alert";
 import { fetchOrders } from "../store/slices/orderSlice";
 import ProfilePagePreLoader from "../components/ProfilePagePreLoader";
 import Loading from "../components/Loading";
+import { RootState } from "../interface/store/storeTypes";
+import { AppDispatch } from "../store/store";
+import { Order } from "../interface/store/slice/orderTypes";
 
 function ProfilePage() {
-  const data = useSelector((state) => state.user);
-  const { isLoading } = useSelector((state) => state.order);
+  const data = useSelector((state: RootState) => state.user);
+  const { isLoading } = useSelector((state: RootState) => state.order);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const [userDetails, setUserDetails] = useState({
-    name: data.data.user.name,
-    email: data.data.user.email,
+    name: data?.data?.user.name,
+    email: data?.data?.user.email,
   });
   const [showAlert, setShowAlert] = useState(false);
 
@@ -30,17 +33,18 @@ function ProfilePage() {
   }, [data.updationComplete]);
 
   useEffect(() => {
-    dispatch(fetchOrders(data.data.user._id));
+    if (data && data.data) dispatch(fetchOrders(data.data.user._id));
   }, [dispatch, data]);
-  const orderData = useSelector((state) => state.order);
+  const orderData = useSelector((state: RootState) => state.order);
 
-  function formSubmitHandler(e) {
+  function formSubmitHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const { password, confirmPassword } = userDetails;
-    if (password !== confirmPassword) {
-      return;
-    }
-    dispatch(updateUser({ ...userDetails, id: data.data.user._id }));
+    // const { password, confirmPassword } = userDetails;
+    // if (password !== confirmPassword) {
+    //   return;
+    // }
+    if (data && data.data)
+      dispatch(updateUser({ ...userDetails, id: data.data.user._id }));
   }
 
   if (isLoading) {
@@ -99,7 +103,7 @@ function ProfilePage() {
                 <h1>You haven't ordered yet</h1>
               </>
             ) : (
-              orderData.data.map((order) => (
+              orderData.data.map((order: Order) => (
                 <div className="body" key={order._id}>
                   <table>
                     <thead>

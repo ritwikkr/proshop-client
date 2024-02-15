@@ -6,13 +6,14 @@ import StripeContainer from "../components/payment/StripeContainer";
 import MyCheckoutForm from "./CheckoutForm";
 import ProductCard from "../components/ProductCard";
 import RazorpayContainer from "../components/payment/RazorpayContainer";
+import { RootState } from "../interface/store/storeTypes";
 
 function CheckoutPage() {
   // Redux
-  const { data } = useSelector((state) => state.cart);
+  const { data } = useSelector((state: RootState) => state.cart);
   const { data: userData } = useSelector((state) => state.user);
   const { deliveryAddress, paymentMethod } = useSelector(
-    (state) => state.order
+    (state: RootState) => state.order
   );
   const totalPrice = data.reduce((acc, items) => {
     return (acc += items.price * items.qty);

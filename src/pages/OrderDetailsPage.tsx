@@ -7,18 +7,22 @@ import { BsFillPiggyBankFill } from "react-icons/bs";
 import Wrapper from "../wrapper/OrderDetailsPageWrapper";
 import Loading from "../components/Loading";
 import { getSingleOrder } from "../store/slices/orderSlice";
+import { RootState } from "../interface/store/storeTypes";
+import { AppDispatch } from "../store/store";
 
 function OrderDetailsPage() {
   // Redux
-  const dispatch = useDispatch();
-  const { singleOrder, isLoading } = useSelector((state) => state.order);
+  const dispatch = useDispatch<AppDispatch>();
+  const { singleOrder, isLoading } = useSelector(
+    (state: RootState) => state.order
+  );
 
   //   Extracting id from params
   const { id } = useParams();
 
   // Side Effect -> Fetching Order from Order Id
   useEffect(() => {
-    dispatch(getSingleOrder(id));
+    if (id) dispatch(getSingleOrder(id));
   }, [dispatch, id]);
 
   if (isLoading) {

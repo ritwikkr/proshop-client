@@ -6,6 +6,8 @@ import { AiFillHome } from "react-icons/ai";
 import { resetPassword, checkJWTExpiry } from "../store/slices/userSlice";
 import Wrapper from "../wrapper/ResetPasswordWrapper";
 import Alert from "../components/Alert";
+import { RootState } from "../interface/store/storeTypes";
+import { AppDispatch } from "../store/store";
 
 function ResetPasswordPage() {
   // Component State
@@ -17,9 +19,11 @@ function ResetPasswordPage() {
 
   const currentURL = window.location.href;
   // Redux
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { passwordReseted, jwtExpired } = useSelector((state) => state.user);
+  const { passwordReseted, jwtExpired } = useSelector(
+    (state: RootState) => state.user
+  );
 
   // Side Effect
   useEffect(() => {
@@ -35,7 +39,7 @@ function ResetPasswordPage() {
   }, [dispatch, currentURL]);
 
   // Handle Forgot Password
-  function resetPasswordHandler(e) {
+  function resetPasswordHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (
       !password.newPassword ||

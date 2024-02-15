@@ -1,7 +1,8 @@
-import Header from "./components/Header";
 import React from "react";
-import Homepage from "./pages/Homepage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Header from "./components/Header";
+import Homepage from "./pages/Homepage";
 // Start renaming files from .js to .tsx/.ts to solve file not found error
 import Cartpage from "./pages/CartPage";
 import Loginpage from "./pages/Loginpage";

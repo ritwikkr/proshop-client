@@ -8,19 +8,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../store/slices/cartSlice";
 import Alert from "../components/Alert";
 import ProductPagePreLoader from "../components/ProductPagePreLoader";
+import { RootState } from "../interface/store/storeTypes";
+import { AppDispatch } from "../store/store";
 
 function ProductPage() {
   // Component State
   const [qty, setQty] = useState(1);
   const [showAlert, setShowAlert] = useState(false);
 
-  const dispatch = useDispatch();
-  const { data, isLoading } = useSelector((state) => state.product);
+  const dispatch = useDispatch<AppDispatch>();
+  const { data, isLoading } = useSelector((state: RootState) => state.product);
 
   // Fetched the product from back-end through product ID
   const { id } = useParams();
   useEffect(() => {
-    dispatch(fetchProduct(id));
+    if (id) dispatch(fetchProduct(id));
   }, [dispatch, id]);
 
   // Loading

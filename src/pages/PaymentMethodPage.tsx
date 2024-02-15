@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import PaymentMethodPreLoader from "../components/PaymentMethodPreLoader";
 import { changePaymentMethod } from "../store/slices/orderSlice";
+import { RootState } from "../interface/store/storeTypes";
 
 function PaymentMethodPage() {
   // Component State
@@ -17,7 +18,7 @@ function PaymentMethodPage() {
   // Navigation
   const navigate = useNavigate();
 
-  const { isLoading } = useSelector((state) => state.user);
+  const { isLoading } = useSelector((state: RootState) => state.user);
 
   if (isLoading) {
     return <PaymentMethodPreLoader />;

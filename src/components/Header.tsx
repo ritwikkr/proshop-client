@@ -9,13 +9,14 @@ import Wrapper from "../wrapper/HeaderWrapper";
 import { logOut } from "../store/slices/userSlice";
 import { addSearchText } from "../store/slices/searchSlice";
 import { togglePopUp } from "../store/slices/showNavPopupSlice";
+import { RootState } from "../interface/store/storeTypes";
 
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.user);
-  const { data: cartItems } = useSelector((state) => state.cart);
-  const { show } = useSelector((state) => state.showNavPopup);
+  const { data } = useSelector((state: RootState) => state.user);
+  const { data: cartItems } = useSelector((state: RootState) => state.cart);
+  const { show } = useSelector((state: RootState) => state.showNavPopup);
 
   // Show Header PopUp
   function toggleAccountSection() {
@@ -27,7 +28,7 @@ function Header() {
   }
 
   // Dispatches the searched keyword into Global State
-  function changeHandler(e) {
+  function changeHandler(e: React.ChangeEvent<HTMLInputElement>) {
     dispatch(addSearchText(e.target.value));
   }
 
@@ -77,7 +78,7 @@ function Header() {
                     <AiFillCaretDown />
                   </span>
                 </p>
-                <ul className={show ? "showAccount" : null}>
+                <ul className={show ? "showAccount" : undefined}>
                   <Link to={"/profile"}>
                     <li>Profile</li>
                   </Link>

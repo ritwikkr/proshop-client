@@ -1,7 +1,12 @@
 import React from "react";
 import Wrapper from "../wrapper/ProductCardWrapper";
+import { CartItem } from "../interface/store/slice/cartTypes";
 
-function ProductCard({ item }) {
+interface ProductCardProps {
+  item: CartItem;
+}
+
+function ProductCard({ item }: ProductCardProps) {
   // Round the item price to two decimal places
   const roundedPrice = item.price.toFixed(2);
 

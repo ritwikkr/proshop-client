@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Wrapper from "../wrapper/PasswordUpdateWrapper";
 import { updatePassword } from "../store/slices/userSlice";
 import Alert from "../components/Alert";
+import { RootState } from "../interface/store/storeTypes";
+import { AppDispatch } from "../store/store";
 
 function PasswordUpdate() {
   const [passwordDetails, setPasswordDetails] = useState({
@@ -13,27 +15,28 @@ function PasswordUpdate() {
   });
   const [showAlert] = useState(false);
 
-  const dispatch = useDispatch();
-  const data = useSelector((state) => state.user);
+  const dispatch = useDispatch<AppDispatch>();
+  const data = useSelector((state: RootState) => state.user);
 
-  function passwordUpdateHandler(e) {
+  function passwordUpdateHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const { currPassword, newPassword, renewPassword } = passwordDetails;
     if (!currPassword || !newPassword || !renewPassword) {
-      console.log(`Please fill up first`);
+      // console.log(`Please fill up first`);
       return;
     }
     if (newPassword !== renewPassword) {
-      console.log(`Passwords do not match`);
+      // console.log(`Passwords do not match`);
       return;
     }
-    dispatch(updatePassword({ passwordDetails, id: data.data.user._id }));
+    if (data && data.data)
+      dispatch(updatePassword({ passwordDetails, id: data.data.user._id }));
   }
 
   return (
     <Wrapper>
       <div className="alert">
-        {showAlert && data.isError && <Alert msg={data.errorMsg} />}
+        {showAlert && data.isError && <Alert message={data.errorMsg} />}
       </div>
       <form onSubmit={passwordUpdateHandler}>
         <div className="heading">

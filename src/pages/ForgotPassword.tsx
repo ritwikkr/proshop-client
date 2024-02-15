@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Wrapper from "../wrapper/ForgotPasswordWrapper";
 import { forgotPassword } from "../store/slices/userSlice";
 import Alert from "../components/Alert";
+import { RootState } from "../interface/store/storeTypes";
+import { AppDispatch } from "../store/store";
 
 function ForgotPassword() {
   // Component State
@@ -12,8 +14,10 @@ function ForgotPassword() {
   const [successAlert, setSuccessAlert] = useState(false);
 
   // Redux
-  const dispatch = useDispatch();
-  const { isLoading, emailSent, isError } = useSelector((state) => state.user);
+  const dispatch = useDispatch<AppDispatch>();
+  const { isLoading, emailSent, isError } = useSelector(
+    (state: RootState) => state.user
+  );
 
   // Side Effect
   useEffect(() => {
@@ -36,9 +40,9 @@ function ForgotPassword() {
   }, [isError, isLoading, emailSent]);
 
   // Handle Forgot Password
-  function forgotPasswordHandler(e) {
+  function forgotPasswordHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    dispatch(forgotPassword(email));
+    dispatch(forgotPassword({ email }));
   }
   return (
     <Wrapper>

@@ -3,7 +3,6 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   height: calc(100vh - 130px);
   > .body {
-    /* border: 2px solid red; */
     width: 400px;
     margin: 50px auto;
     > form {

@@ -2,29 +2,42 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { RootState } from "../interface/store/storeTypes";
 
-function ProgressBar({ shipping, paymentMethod, placeOrder, selectAddress }) {
-  const { deliveryAddress } = useSelector((state) => state.order);
-  const { data } = useSelector((state) => state.user);
+interface ProgressBarProps {
+  shipping: boolean;
+  paymentMethod?: boolean;
+  placeOrder?: boolean;
+  selectAddress: boolean;
+}
+
+function ProgressBar({
+  shipping,
+  paymentMethod,
+  placeOrder,
+  selectAddress,
+}: ProgressBarProps) {
+  const { deliveryAddress } = useSelector((state: RootState) => state.order);
+  const { data } = useSelector((state: RootState) => state.user);
   return (
     <Wrapper>
       <div className="progress-bar">
         <ul>
-          <li className={data ? "active" : null}>Sign In</li>
-          <li className={shipping ? "active" : null}>
+          <li className={data ? "active" : undefined}>Sign In</li>
+          <li className={shipping ? "active" : undefined}>
             <Link to={"/shipping"}>Shipping</Link>
           </li>
-          <li className={selectAddress ? "active" : null}>
+          <li className={selectAddress ? "active" : undefined}>
             <Link to={"/select-address"}>Select Delivery Address</Link>
           </li>
-          <li className={paymentMethod ? "active" : null}>
+          <li className={paymentMethod ? "active" : undefined}>
             {deliveryAddress.name ? (
               <Link to={"/paymentMethod"}>Payment</Link>
             ) : (
               <p>Payment</p>
             )}
           </li>
-          <li className={placeOrder ? "active" : null}>Place Order</li>
+          <li className={placeOrder ? "active" : undefined}>Place Order</li>
         </ul>
       </div>
     </Wrapper>
