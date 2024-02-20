@@ -8,7 +8,7 @@ import HomePagePreLoader from "../components/HomePagePreLoader";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProducts,
-  fetchFeaturedProducts,
+  // fetchFeaturedProducts,
 } from "../store/slices/productsSlice";
 import { RootState } from "../interface/store/storeTypes";
 
@@ -23,13 +23,8 @@ function Homepage() {
     dispatch(fetchProducts({ page: currentPage, pageSize }));
   }, [dispatch, currentPage]);
 
-  // Fetch Featured Products
-  useEffect(() => {
-    dispatch(fetchFeaturedProducts());
-  }, [dispatch]);
-
   // Extracts products from Global State
-  const { isLoading, products, totalCount, featuredProducts } = useSelector(
+  const { isLoading, products, totalCount } = useSelector(
     (state: RootState) => state.products
   );
   // Extracts search words from Global State
@@ -42,6 +37,8 @@ function Homepage() {
   if (isLoading) {
     return <HomePagePreLoader />;
   }
+
+  const featuredProducts = products?.filter((product) => product.featured);
 
   // Filters products according to searched keywords
   const productList = products
@@ -73,7 +70,7 @@ function Homepage() {
   return (
     <Wrapper>
       <div className="body">
-        {searchText.length === 0 && (
+        {searchText.length === 0 && featuredProducts && (
           <DemoCarousel featuredProducts={featuredProducts} />
         )}
         <div className="featured">

@@ -30,7 +30,6 @@ interface ProductsState {
   products: Product[] | null;
   totalCount: number;
   isError: boolean;
-  featuredProducts: Product[];
 }
 
 export { Product, ProductsState, RatingsAndReviews, Review };
