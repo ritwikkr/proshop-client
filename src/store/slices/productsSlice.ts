@@ -4,13 +4,16 @@ import axios from "axios";
 import BASE_URL from "../../helper/url";
 import { ProductsState } from "../../interface/store/slice/productTypes";
 
-// Actions
+// Action Interface
+interface fetchProducts {
+  page: number;
+  pageSize: number;
+}
+
+// Action -> Fetch Products from API
 export const fetchProducts = createAsyncThunk(
   "fetchProducts",
-  async (
-    { page, pageSize }: { page: number; pageSize: number },
-    { rejectWithValue }
-  ) => {
+  async ({ page, pageSize }: fetchProducts, { rejectWithValue }) => {
     try {
       const response = await axios.get(
         `${BASE_URL}/api/v1/product/getProducts?page=${page}&pageSize=${pageSize}`
@@ -22,26 +25,11 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
-export const fetchFeaturedProducts = createAsyncThunk(
-  "fetchFeaturedProducts",
-  async () => {
-    try {
-      const { data } = await axios.get(
-        `${BASE_URL}/api/v1/product/getFeaturedProduct`
-      );
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
-
 const initialState: ProductsState = {
   isLoading: true,
   products: null,
   totalCount: 0,
   isError: false,
-  featuredProducts: [],
 };
 
 export const productsSlice = createSlice({
@@ -61,16 +49,6 @@ export const productsSlice = createSlice({
       state.isLoading = false;
       state.isError = true;
     });
-
-    // Featured Product
-    builder.addCase(fetchFeaturedProducts.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(fetchFeaturedProducts.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.featuredProducts = action.payload;
-    });
-    builder.addCase(fetchFeaturedProducts.rejected, () => {});
   },
 });
 
