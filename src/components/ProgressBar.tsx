@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { RootState } from "../interface/store/storeTypes";
 
 interface ProgressBarProps {
-  shipping: boolean;
+  shipping?: boolean;
   paymentMethod?: boolean;
   placeOrder?: boolean;
-  selectAddress: boolean;
+  selectAddress?: boolean;
 }
 
 function ProgressBar({

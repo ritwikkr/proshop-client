@@ -95,4 +95,5 @@ export {
   AddUserAddressThunkArgs,
   UpdateUserThunkArgs,
   CreateSessionThunkArgs,
+  UserData,
 };

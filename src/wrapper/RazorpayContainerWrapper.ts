@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   margin: 10px;
-  /* border: 2px solid red; */
   > button {
     cursor: pointer;
     width: 100%;

@@ -11,7 +11,7 @@ import { RootState } from "../interface/store/storeTypes";
 function CheckoutPage() {
   // Redux
   const { data } = useSelector((state: RootState) => state.cart);
-  const { data: userData } = useSelector((state) => state.user);
+  const { data: userData } = useSelector((state: RootState) => state.user);
   const { deliveryAddress, paymentMethod } = useSelector(
     (state: RootState) => state.order
   );
@@ -27,7 +27,7 @@ function CheckoutPage() {
           <div className="shipping">
             <h2>SHIPPING</h2>
             <p className="name">Name: {deliveryAddress?.name}</p>
-            <p className="email">Email: {userData.user.email}</p>
+            <p className="email">Email: {userData?.user.email}</p>
             <p className="number">Phone: {deliveryAddress.phoneNumber}</p>
             <p className="address">
               Address: {deliveryAddress.address}, {deliveryAddress.city},

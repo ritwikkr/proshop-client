@@ -7,24 +7,33 @@ import Ratings from "./Ratings";
 // import Loading from "../components/Loading";
 import RatingsAndReviewsForm from "./RatingsAndReviewsForm";
 import { deleteProductReview } from "../store/slices/singleProductSlice";
+import { AppDispatch } from "../store/store";
+import { RootState } from "../interface/store/storeTypes";
+import { Review } from "../interface/store/slice/productTypes";
 
-function Reviews({ reviews }) {
+function Reviews({ reviews }: { reviews: Review[] }) {
   // Component State
   const [showRatingForm, setShowRatingForm] = useState(false);
 
   // Redux
-  const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.user);
-  const { data: productData } = useSelector((state) => state.product);
+  const dispatch = useDispatch<AppDispatch>();
+  const { data } = useSelector((state: RootState) => state.user);
+  const { data: productData } = useSelector(
+    (state: RootState) => state.product
+  );
 
   const handleRateProduct = () => {
     setShowRatingForm(true); // Show the rating form/modal upon clicking "Rate Product"
   };
 
   function deleteReviewHandler() {
-    dispatch(
-      deleteProductReview({ productID: productData._id, userID: data.user._id })
-    );
+    if (productData && data)
+      dispatch(
+        deleteProductReview({
+          productID: productData._id,
+          userID: data.user._id,
+        })
+      );
   }
 
   return (
@@ -49,7 +58,7 @@ function Reviews({ reviews }) {
           </div>
         ))}
         {data &&
-          !productData.ratingsAndReviews.ratingAndReview.some(
+          !productData?.ratingsAndReviews.ratingAndReview.some(
             (rating) => rating.userId._id === data?.user?._id
           ) &&
           data?.user && (

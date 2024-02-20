@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Wrapper from "../wrapper/ShippingPageWrapper";
 import ProgressBar from "../components/ProgressBar";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,15 @@ import { RootState } from "../interface/store/storeTypes";
 
 function ShippingPage() {
   // Component State
-  const [userAddress, setUserAddress] = useState({
+  const [userAddress, setUserAddress] = useState<{
+    name: string;
+    phoneNumber: string;
+    address: string;
+    city: string;
+    state: string;
+    postal_code: string;
+    country: string;
+  }>({
     name: "",
     phoneNumber: "",
     address: "",
@@ -23,18 +31,7 @@ function ShippingPage() {
   const dispatch = useDispatch<AppDispatch>();
   const { data } = useSelector((state: RootState) => state.user);
 
-  useEffect(() => {
-    if (data && data.user && data.user.address.length > 0) {
-      setUserAddress({
-        address: data.user.address[0].house,
-        city: data.user.address[0].city,
-        postal_code: data.user.address[0].postal,
-        country: data.user.address[0].country,
-      });
-    }
-  }, [data]);
-
-  function formSubmitHandler(e) {
+  function formSubmitHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const { address, city, postal_code, country } = userAddress;
     if (!address || !city || !postal_code || !country) {
@@ -44,7 +41,7 @@ function ShippingPage() {
     navigate("/select-address");
   }
 
-  function numberChangeHandler(e) {
+  function numberChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
     // Check if the input is a valid number (contains only digits) and has a length of 10 or less
     if (/^\d{0,10}$/.test(value)) {
@@ -52,7 +49,7 @@ function ShippingPage() {
     }
   }
 
-  function postalChangeHandler(e) {
+  function postalChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
     // Check if the input is a valid number (contains only digits) and has a length of 6 or less
     if (/^\d{0,6}$/.test(value)) {
@@ -125,6 +122,7 @@ function ShippingPage() {
                 <input
                   type="text"
                   placeholder="Enter State"
+                  value={userAddress.state}
                   onChange={(e) =>
                     setUserAddress({ ...userAddress, state: e.target.value })
                   }

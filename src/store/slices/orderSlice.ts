@@ -4,6 +4,7 @@ import axios from "axios";
 import axiosInstanceWithJWT from "../../helper/axiosInstanceWithJWT";
 import BASE_URL from "../../helper/url";
 import { CheckoutFormProps } from "../../pages/CheckoutForm";
+import { OrderTypes } from "../../interface/store/slice/orderTypes";
 
 interface OrderDetailsType extends CheckoutFormProps {
   userId: string;
@@ -61,10 +62,13 @@ const orderSlice = createSlice({
     isError: false,
     errorMsg: null,
     singleOrder: null,
-    deliveryAddress: JSON.parse(localStorage.getItem("deliveryAddress")) || {},
-    paymentMethod:
-      JSON.parse(localStorage.getItem("paymentMethod")) || "paypal",
-  },
+    deliveryAddress: localStorage.getItem("deliveryAddress")
+      ? JSON.parse(localStorage.getItem("deliveryAddress") as string)
+      : {},
+    paymentMethod: localStorage.getItem("paymentMethod")
+      ? JSON.parse(localStorage.getItem("paymentMethod") as string)
+      : "paypal",
+  } as OrderTypes,
   reducers: {
     setDeliveryDetails: (state, action) => {
       state.deliveryAddress = action.payload;
@@ -80,41 +84,41 @@ const orderSlice = createSlice({
         JSON.stringify(state.paymentMethod)
       );
     },
-    emptyCart: (state, action) => {
+    emptyCart: (state) => {
       state.data = [];
       localStorage.setItem("cart", JSON.stringify([]));
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(createOrder.pending, (state, action) => {
+    builder.addCase(createOrder.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(createOrder.fulfilled, (state, action) => {
+    builder.addCase(createOrder.fulfilled, (state) => {
       state.isLoading = false;
     });
-    builder.addCase(createOrder.rejected, (state, action) => {
+    builder.addCase(createOrder.rejected, (state) => {
       state.isError = true;
     });
 
-    builder.addCase(fetchOrders.pending, (state, action) => {
+    builder.addCase(fetchOrders.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(fetchOrders.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
     });
-    builder.addCase(fetchOrders.rejected, (state, action) => {
+    builder.addCase(fetchOrders.rejected, (state) => {
       state.isError = true;
     });
     // GET: Single Order
-    builder.addCase(getSingleOrder.pending, (state, action) => {
+    builder.addCase(getSingleOrder.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(getSingleOrder.fulfilled, (state, action) => {
       state.isLoading = false;
       state.singleOrder = action.payload;
     });
-    builder.addCase(getSingleOrder.rejected, (state, action) => {});
+    builder.addCase(getSingleOrder.rejected, () => {});
   },
 });
 

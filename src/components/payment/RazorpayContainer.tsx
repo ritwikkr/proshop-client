@@ -5,16 +5,25 @@ import axios from "axios";
 
 import { createOrder, emptyCart } from "../../store/slices/orderSlice";
 import Wrapper from "../../wrapper/RazorpayContainerWrapper";
+import { RootState } from "../../interface/store/storeTypes";
+import { AppDispatch } from "../../store/store";
+
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Razorpay: any;
+  }
+}
 
 function RazorpayContainer() {
   // Component State
   const [disableHandler, setDisableHandler] = useState(false);
 
   //   Redux
-  const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.cart);
-  const { data: userData } = useSelector((state) => state.user);
-  const { deliveryAddress } = useSelector((state) => state.order);
+  const dispatch = useDispatch<AppDispatch>();
+  const { data } = useSelector((state: RootState) => state.cart);
+  const { data: userData } = useSelector((state: RootState) => state.user);
+  const { deliveryAddress } = useSelector((state: RootState) => state.order);
   // Navigate
   const navigate = useNavigate();
 
@@ -54,14 +63,15 @@ function RazorpayContainer() {
         handler: () => {
           // Handle the successful payment response here
           // Change Stock
-          dispatch(
-            createOrder({
-              orderDetails: data,
-              userId: userData.user._id,
-              totalPrice,
-              deliveryAddress,
-            })
-          );
+          if (userData)
+            dispatch(
+              createOrder({
+                orderDetails: data,
+                userId: userData.user._id,
+                totalPrice,
+                deliveryAddress,
+              })
+            );
           dispatch(emptyCart());
           navigate("/payment-success");
         },

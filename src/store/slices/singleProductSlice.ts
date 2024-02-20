@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import BASE_URL from "../../helper/url";
 import axiosInstance from "../../helper/axiosInstanceWithJWT";
+import { SingleProductType } from "../../interface/store/slice/singleProductTypes";
 
 // Action
 export const fetchProduct = createAsyncThunk(
@@ -44,7 +45,7 @@ export const giveProductReview = createAsyncThunk(
 // PATCH: Delete reviews
 export const deleteProductReview = createAsyncThunk(
   "deleteProductReview",
-  async (body, { rejectWithValue }) => {
+  async (body: { productID: string; userID: string }, { rejectWithValue }) => {
     try {
       const { data } = await axiosInstance.delete(
         `${BASE_URL}/api/v1/product/reviews`,
@@ -63,7 +64,7 @@ const singleProductSlice = createSlice({
     isLoading: true,
     data: null,
     isError: false,
-  },
+  } as SingleProductType,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchProduct.pending, (state) => {
@@ -95,7 +96,7 @@ const singleProductSlice = createSlice({
     });
     builder.addCase(deleteProductReview.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.data.ratingsAndReviews = action.payload;
+      if (state.data) state.data.ratingsAndReviews = action.payload;
     });
     builder.addCase(deleteProductReview.rejected, () => {});
   },

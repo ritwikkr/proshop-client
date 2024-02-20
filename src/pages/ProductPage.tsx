@@ -10,6 +10,7 @@ import Alert from "../components/Alert";
 import ProductPagePreLoader from "../components/ProductPagePreLoader";
 import { RootState } from "../interface/store/storeTypes";
 import { AppDispatch } from "../store/store";
+import Loading from "../components/Loading";
 
 function ProductPage() {
   // Component State
@@ -29,13 +30,16 @@ function ProductPage() {
   if (isLoading) {
     return <ProductPagePreLoader />;
   }
+  if (!data) {
+    return <Loading />;
+  }
 
   const { name, image, price, description, countInStock, ratingsAndReviews } =
     data;
 
   // Product Quantity
   function increaseQty() {
-    if (qty >= data.countInStock) {
+    if (data && qty >= data.countInStock) {
       return;
     }
     setQty(qty + 1);

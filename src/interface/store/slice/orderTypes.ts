@@ -10,10 +10,11 @@ interface ShippingAddress {
 }
 
 interface Order {
+  // Order Schema
   shippingAddress: ShippingAddress;
   _id: string;
-  products: Product[];
   amount: number;
+  products: Product[];
   userId: string;
   createdAt: string;
   updatedAt: string;
@@ -24,8 +25,8 @@ interface OrderTypes {
   isLoading: boolean;
   data: Order[]; // data is an array of Order objects;
   isError: boolean;
-  errorMsg: string;
-  singleOrder: Order;
+  errorMsg: string | null;
+  singleOrder: Order | null;
   deliveryAddress: DeliveryAddress;
   paymentMethod: string;
 }
@@ -41,4 +42,4 @@ interface DeliveryAddress {
   _id: string;
 }
 
-export { OrderTypes, Order };
+export { OrderTypes, Order, DeliveryAddress };

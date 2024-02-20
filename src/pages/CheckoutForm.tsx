@@ -8,14 +8,14 @@ import BASE_URL from "../helper/url";
 import Wrapper from "../wrapper/CheckoutFormWrapper";
 import { createOrder } from "../store/slices/orderSlice";
 import { CartItem } from "../interface/store/slice/cartTypes";
-import { OrderTypes } from "../interface/store/slice/orderTypes";
+import { DeliveryAddress } from "../interface/store/slice/orderTypes";
 import { RootState } from "../interface/store/storeTypes";
 import { AppDispatch } from "../store/store";
 
 export interface CheckoutFormProps {
   totalPrice: number;
-  orderDetails: { data: CartItem[] };
-  deliveryAddress: OrderTypes;
+  orderDetails: CartItem[];
+  deliveryAddress: DeliveryAddress;
 }
 
 const MyCheckoutForm = ({

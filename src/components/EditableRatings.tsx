@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import styled from "styled-components";
 
-function EditableRatings({ stars: initialStars, onChange }) {
+interface EditableRatings {
+  stars: number;
+  onChange: (selectedStars: number) => void;
+}
+
+function EditableRatings({ stars: initialStars, onChange }: EditableRatings) {
   const [hoverStars, setHoverStars] = useState(0); // State to track hovered stars
   const [selectedStars, setSelectedStars] = useState(initialStars); // State to track selected stars
 
-  const handleStarClick = (selectedStars) => {
+  const handleStarClick = (selectedStars: number) => {
     setSelectedStars(selectedStars);
     onChange(selectedStars); // Call the onChange prop to pass the selected stars to the parent component
   };
@@ -37,6 +42,8 @@ const Wrapper = styled.div`
   color: rgb(250, 218, 56);
 `;
 
-const StarIcon = styled.span`
+const StarIcon = styled.span<
+  { children: React.ReactNode } & React.HTMLAttributes<HTMLSpanElement>
+>`
   cursor: pointer;
 `;

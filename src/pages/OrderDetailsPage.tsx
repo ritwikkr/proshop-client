@@ -25,10 +25,10 @@ function OrderDetailsPage() {
     if (id) dispatch(getSingleOrder(id));
   }, [dispatch, id]);
 
-  if (isLoading) {
+  if (isLoading || !singleOrder) {
     return <Loading />;
   }
-  const roundedSavingAmount = singleOrder?.amount * 0.1;
+  const roundedSavingAmount = singleOrder.amount * 0.1;
   return (
     <Wrapper>
       <div className="delivery-address">
@@ -75,12 +75,12 @@ function OrderDetailsPage() {
         {singleOrder?.products.map((item) => (
           <div className="product">
             <div className="product-image">
-              <img src={item?.productId?.image} alt={item?.productId?.name} />
+              <img src={item?.image} alt={item?.name} />
             </div>
             <div className="product-details">
-              <div className="product-title">{item?.productId?.name}</div>
-              <div className="product-brand">{item?.productId?.brand}</div>
-              <div className="product-price">₹{item?.productId?.price}</div>
+              <div className="product-title">{item?.name}</div>
+              <div className="product-brand">{item?.brand}</div>
+              <div className="product-price">₹{item?.price}</div>
             </div>
           </div>
         ))}

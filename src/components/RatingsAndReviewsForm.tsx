@@ -5,6 +5,7 @@ import { giveProductReview } from "../store/slices/singleProductSlice";
 import EditableRatings from "./EditableRatings";
 import Wrapper from "../wrapper/RatingsAndReviewsFormWrapper";
 import Alert from "./Alert";
+import { AppDispatch } from "../store/store";
 
 function RatingsAndReviewsForm() {
   // Component State
@@ -13,7 +14,7 @@ function RatingsAndReviewsForm() {
   const [showAlert, setShowAlert] = useState(false);
 
   // Redux
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const { id } = useParams();
 
@@ -21,16 +22,17 @@ function RatingsAndReviewsForm() {
     if (selectedStars === 0) {
       return setShowAlert(true);
     }
-    dispatch(
-      giveProductReview({
-        productId: id,
-        review,
-        rating: selectedStars,
-      })
-    );
+    if (id)
+      dispatch(
+        giveProductReview({
+          productId: id,
+          review,
+          rating: selectedStars,
+        })
+      );
   }
 
-  const handleRatingChange = (stars) => {
+  const handleRatingChange = (stars: number) => {
     setSelectedStars(stars); // Update the selected stars
   };
   return (
@@ -40,8 +42,8 @@ function RatingsAndReviewsForm() {
       <textarea
         name="review"
         id="review"
-        cols="30"
-        rows="10"
+        cols={30}
+        rows={10}
         onChange={(e) => setReview(e.target.value)}
       ></textarea>
       <button onClick={submitReviews}>POST</button>

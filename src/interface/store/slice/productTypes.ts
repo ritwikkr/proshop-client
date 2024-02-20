@@ -13,9 +13,16 @@ interface Product {
 }
 
 interface RatingsAndReviews {
-  ratingAndReview: [];
+  ratingAndReview: Review[];
   totalRatings: number;
   totalReviews: number;
+}
+
+interface Review {
+  userId: { _id: string; name: string };
+  ratings: number;
+  review: string;
+  _id: string;
 }
 
 interface ProductsState {
@@ -26,4 +33,4 @@ interface ProductsState {
   featuredProducts: Product[];
 }
 
-export { Product, ProductsState, RatingsAndReviews };
+export { Product, ProductsState, RatingsAndReviews, Review };

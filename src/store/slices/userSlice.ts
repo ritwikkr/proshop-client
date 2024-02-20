@@ -10,6 +10,7 @@ import {
   ResetPasswordThunkArgs,
   UpdatePasswordThunkArgs,
   UpdateUserThunkArgs,
+  UserData,
   UserState,
 } from "../../interface/store/slice/userTypes";
 
@@ -25,7 +26,7 @@ export const createSession = createAsyncThunk(
         `${BASE_URL}/api/v1/user/${sessionType}`,
         userData
       );
-      return response.data as { user: object; token: string };
+      return response.data as UserData;
     } catch (error) {
       return rejectWithValue((error as AxiosError).response?.data);
     }
@@ -64,9 +65,13 @@ export const deleteUserAddress = createAsyncThunk(
 
 export const updateUser = createAsyncThunk(
   "updateUser",
-  async (body: UpdateUserThunkArgs) => {
-    const response = await axios.put(`${BASE_URL}/api/v1/user/update`, body);
-    return response.data;
+  async (body: UpdateUserThunkArgs, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(`${BASE_URL}/api/v1/user/update`, body);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
 );
 
@@ -175,10 +180,10 @@ const userSlice = createSlice({
       state.isError = false;
       localStorage.setItem("user", JSON.stringify(action.payload));
     });
-    builder.addCase(createSession.rejected, (state, action) => {
+    builder.addCase(createSession.rejected, (state) => {
       state.isLoading = false;
       state.data = null;
-      state.errorMsg = action.payload.error;
+      // state.errorMsg = action.payload.error;
       state.isError = true;
     });
 
@@ -203,7 +208,7 @@ const userSlice = createSlice({
       state.updationComplete = true;
     });
     builder.addCase(updateUser.rejected, (state, action) => {
-      state.isError = action.payload;
+      state.isError = Boolean(action.payload);
       state.updationComplete = false;
     });
 
@@ -217,21 +222,21 @@ const userSlice = createSlice({
     });
     builder.addCase(updatePassword.rejected, (state, action) => {
       state.isError = true;
-      state.errorMsg = action.payload;
+      state.errorMsg = String(action.payload);
     });
 
     // Delete User Address
-    builder.addCase(deleteUserAddress.pending, (state, action) => {
+    builder.addCase(deleteUserAddress.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(deleteUserAddress.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.data.user = action.payload;
+      if (state.data) state.data.user = action.payload;
       localStorage.setItem("user", JSON.stringify(state.data));
     });
     builder.addCase(deleteUserAddress.rejected, (state, action) => {
       state.isError = true;
-      state.errorMsg = action.payload;
+      state.errorMsg = String(action.payload);
     });
 
     // Forgot Password

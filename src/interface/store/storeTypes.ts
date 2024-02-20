@@ -1,6 +1,7 @@
 import { CartItem } from "./slice/cartTypes";
-import { Order, OrderTypes } from "./slice/orderTypes";
+import { OrderTypes } from "./slice/orderTypes";
 import { ProductsState } from "./slice/productTypes";
+import { SingleProductType } from "./slice/singleProductTypes";
 import { UserState } from "./slice/userTypes";
 
 interface RootState {
@@ -9,7 +10,7 @@ interface RootState {
   cart: { data: CartItem[] };
   user: UserState;
   showNavPopup: { show: boolean };
-  product: Order;
+  product: SingleProductType;
   order: OrderTypes;
   // other state properties...
 }
