@@ -76,9 +76,8 @@ function RazorpayContainer() {
           navigate("/payment-success");
         },
         prefill: {
-          name: "John Doe",
-          email: "john.doe@example.com",
-          contact: "1234567890",
+          name: deliveryAddress?.name,
+          contact: deliveryAddress?.phoneNumber,
         },
         notes: {
           address: "Test address",
@@ -89,6 +88,7 @@ function RazorpayContainer() {
       };
       const rzp = new window.Razorpay(options);
       rzp.open();
+      setDisableHandler(false);
     } catch (error) {
       console.log(error);
     }

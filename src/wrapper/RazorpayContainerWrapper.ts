@@ -8,6 +8,10 @@ const Wrapper = styled.div`
     height: 40px;
     background-color: black;
     color: white;
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 `;
 
