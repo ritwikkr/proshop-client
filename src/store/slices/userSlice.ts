@@ -180,11 +180,11 @@ const userSlice = createSlice({
       state.isError = false;
       localStorage.setItem("user", JSON.stringify(action.payload));
     });
-    builder.addCase(createSession.rejected, (state) => {
+    builder.addCase(createSession.rejected, (state, action) => {
       state.isLoading = false;
       state.data = null;
-      // state.errorMsg = action.payload.error;
       state.isError = true;
+      state.errorMsg = action.payload.message;
     });
 
     builder.addCase(addUserAddress.pending, (state) => {
