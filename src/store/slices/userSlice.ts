@@ -184,7 +184,7 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.data = null;
       state.isError = true;
-      state.errorMsg = action.payload.message;
+      state.errorMsg = (action.payload as AxiosError).message;
     });
 
     builder.addCase(addUserAddress.pending, (state) => {
