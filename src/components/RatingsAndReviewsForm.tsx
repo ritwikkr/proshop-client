@@ -7,7 +7,12 @@ import Wrapper from "../wrapper/RatingsAndReviewsFormWrapper";
 import Alert from "./Alert";
 import { AppDispatch } from "../store/store";
 
-function RatingsAndReviewsForm() {
+interface RatingsAndReviewsFormProps {
+  onClose: () => void;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function RatingsAndReviewsForm({ onClose }: RatingsAndReviewsFormProps) {
   // Component State
   const [review, setReview] = useState("");
   const [selectedStars, setSelectedStars] = useState(0);
