@@ -53,7 +53,7 @@ function SelectDeliveryAddress() {
   }
 
   function handleClick() {
-    if (!Object.prototype.hasOwnProperty.call(selectedAddress, "name")) {
+    if (selectedAddress.name.length < 1) {
       return setErrorMsg(true);
     }
     dispatch(setDeliveryDetails(selectedAddress));

@@ -85,6 +85,7 @@ const Wrapper = styled.div`
               text-transform: uppercase;
               color: white;
               border: none;
+              cursor: pointer;
               background-color: transparent;
             }
           }

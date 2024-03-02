@@ -14,7 +14,7 @@ import { RootState } from "../interface/store/storeTypes";
 
 function Homepage() {
   // Component State
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const pageSize = 6;
 
   // Fetch all products when HomePage loads

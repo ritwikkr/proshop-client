@@ -47,12 +47,18 @@ function RazorpayContainer() {
   const handlePayment = async () => {
     try {
       setDisableHandler(true);
-      const URL = "https://proshop-api-n2t7.onrender.com/api/v1/payment/razor";
+      const URL =
+        process.env.REACT_APP_ENV === "production"
+          ? "https://proshop-api-n2t7.onrender.com/api/v1/payment/razor"
+          : "http://localhost:4000/api/v1/payment/razor";
       console.log("Requesting URL:", URL);
-      const response = await axios.post(URL, { totalPrice });
+      const taxPrice = totalPrice * 0.1;
+      const response = await axios.post(URL, {
+        totalPrice: (totalPrice + taxPrice).toFixed(0),
+      });
 
       const options = {
-        key: "rzp_test_H5m8Qvt4qQxXy5",
+        key: process.env.REACT_APP_RAZOR_KEY,
         amount: response.data.amount,
         currency: response.data.currency,
         name: "ProShop",
