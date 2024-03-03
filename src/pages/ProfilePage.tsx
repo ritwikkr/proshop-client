@@ -27,14 +27,8 @@ function ProfilePage() {
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
-    if (data.updationComplete) {
-      setShowAlert(true);
-    }
-  }, [data.updationComplete]);
-
-  useEffect(() => {
     if (data && data.data) dispatch(fetchOrders(data.data.user._id));
-  }, [dispatch, data]);
+  }, [dispatch]);
   const orderData = useSelector((state: RootState) => state.order);
 
   function formSubmitHandler(e: React.FormEvent<HTMLFormElement>) {
@@ -45,9 +39,10 @@ function ProfilePage() {
     // }
     if (data && data.data)
       dispatch(updateUser({ ...userDetails, id: data.data.user._id }));
+    setShowAlert(true);
   }
 
-  if (isLoading) {
+  if (isLoading || data.isLoading) {
     return <Loading />;
   }
   return (
