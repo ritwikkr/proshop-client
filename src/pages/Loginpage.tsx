@@ -15,13 +15,21 @@ function Loginpage() {
     password: "",
     confirmPassword: "",
   });
+  const [btnDisabled, setBtnDisabled] = useState(false);
+
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { data, isLoading, isError, errorMsg } = useSelector(
+  const { data, isError, errorMsg } = useSelector(
     (state: RootState) => state.user
   );
+
+  useEffect(() => {
+    if (isError) {
+      setBtnDisabled(false);
+    }
+  }, [isError]);
 
   useEffect(() => {
     if (data) {
@@ -37,6 +45,7 @@ function Loginpage() {
   function formSubmitHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const { name, email, password, confirmPassword } = userDetails;
+    setBtnDisabled(true);
 
     if (showLogin) {
       dispatch(
@@ -119,8 +128,8 @@ function Loginpage() {
               </div>
             )}
             <div className="form-content">
-              <button type="submit" disabled={isLoading}>
-                {isLoading ? (
+              <button type="submit" disabled={btnDisabled}>
+                {btnDisabled ? (
                   "Please Wait"
                 ) : showLogin ? (
                   <p>sign in</p>
