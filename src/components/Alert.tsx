@@ -38,6 +38,9 @@ const Wrapper = styled.div`
   height: 50px;
   font-weight: bold;
   margin-bottom: 20px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   .home {
     background-color: green;
     width: 100%;
@@ -50,6 +53,13 @@ const Wrapper = styled.div`
   }
   .error {
     background-color: red;
+  }
+
+  @media only screen and (max-width: 1100px) {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
+    top: 5%;
   }
 
   @media only screen and (max-width: 900px) {
