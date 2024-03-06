@@ -62,7 +62,7 @@ const Wrapper = styled.div`
     top: 5%;
   }
 
-  @media only screen and (max-width: 900px) {
-    width: 100%;
+  @media only screen and (max-width: 400px) {
+    width: 90%;
   }
 `;
