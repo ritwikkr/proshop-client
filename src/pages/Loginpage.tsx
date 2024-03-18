@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 import Wrapper from "../wrapper/LoginPageWrapper";
 import { useDispatch, useSelector } from "react-redux";
-import { createSession } from "../store/slices/userSlice";
+import { createSession, resetError } from "../store/slices/userSlice";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import Alert from "../components/Alert";
 import { AppDispatch } from "../store/store";
 import { RootState } from "../interface/store/storeTypes";
 
@@ -25,11 +25,20 @@ function Loginpage() {
     (state: RootState) => state.user
   );
 
+  // Alert Functionality
   useEffect(() => {
     if (isError) {
-      setBtnDisabled(false);
+      toast.error(errorMsg);
+    } else if (data) {
+      toast.success("Authentication successful. Redirecting...", {
+        autoClose: 2000,
+      });
+      setBtnDisabled(true);
     }
-  }, [isError]);
+    return () => {
+      dispatch(resetError());
+    };
+  }, [isError, data]);
 
   useEffect(() => {
     if (data) {
@@ -38,14 +47,13 @@ function Loginpage() {
       }
       setTimeout(() => {
         navigate("/");
-      }, 3000);
+      }, 2000);
     }
   }, [data, navigate, location.search]);
 
   function formSubmitHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const { name, email, password, confirmPassword } = userDetails;
-    setBtnDisabled(true);
 
     if (showLogin) {
       dispatch(
@@ -68,13 +76,6 @@ function Loginpage() {
           <h1> {showLogin ? <p>sign in</p> : <p>sign up</p>} </h1>
         </div>
         <div className="body">
-          {isError && <Alert message={errorMsg} type="error" />}
-          {data && (
-            <Alert
-              message={"Authentication successful. Redirecting..."}
-              type="success"
-            />
-          )}
           <form onSubmit={formSubmitHandler}>
             {!showLogin && (
               <div className="form-content">

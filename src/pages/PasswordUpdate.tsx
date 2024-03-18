@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 import Wrapper from "../wrapper/PasswordUpdateWrapper";
 import { updatePassword } from "../store/slices/userSlice";
-import Alert from "../components/Alert";
 import { RootState } from "../interface/store/storeTypes";
 import { AppDispatch } from "../store/store";
 
@@ -13,7 +13,7 @@ function PasswordUpdate() {
     newPassword: "",
     renewPassword: "",
   });
-  const [showAlert] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
   const data = useSelector((state: RootState) => state.user);
@@ -33,11 +33,17 @@ function PasswordUpdate() {
       dispatch(updatePassword({ passwordDetails, id: data.data.user._id }));
   }
 
+  // Alert Functionality
+  useEffect(() => {
+    if (showAlert && data.isError) {
+      toast.error(data.errorMsg);
+      setShowAlert(false);
+    }
+  }, [showAlert]);
+
   return (
     <Wrapper>
-      <div className="alert">
-        {showAlert && data.isError && <Alert message={data.errorMsg} />}
-      </div>
+      <div className="alert"></div>
       <form onSubmit={passwordUpdateHandler}>
         <div className="heading">
           <h2>Change Password</h2>

@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { giveProductReview } from "../store/slices/singleProductSlice";
 import EditableRatings from "./EditableRatings";
 import Wrapper from "../wrapper/RatingsAndReviewsFormWrapper";
-import Alert from "./Alert";
 import { AppDispatch } from "../store/store";
+import { toast } from "react-toastify";
 
 interface RatingsAndReviewsFormProps {
   onClose: () => void;
@@ -16,7 +16,6 @@ function RatingsAndReviewsForm({ onClose }: RatingsAndReviewsFormProps) {
   // Component State
   const [review, setReview] = useState("");
   const [selectedStars, setSelectedStars] = useState(0);
-  const [showAlert, setShowAlert] = useState(false);
 
   // Redux
   const dispatch = useDispatch<AppDispatch>();
@@ -25,7 +24,10 @@ function RatingsAndReviewsForm({ onClose }: RatingsAndReviewsFormProps) {
 
   function submitReviews() {
     if (selectedStars === 0) {
-      return setShowAlert(true);
+      return toast.error("Please select stars", {
+        autoClose: 1000,
+        draggable: true,
+      });
     }
     if (id)
       dispatch(
@@ -40,9 +42,9 @@ function RatingsAndReviewsForm({ onClose }: RatingsAndReviewsFormProps) {
   const handleRatingChange = (stars: number) => {
     setSelectedStars(stars); // Update the selected stars
   };
+
   return (
     <Wrapper>
-      {showAlert && <Alert message={`Please select stars`} type="error" />}
       <EditableRatings stars={selectedStars} onChange={handleRatingChange} />
       <textarea
         name="review"
