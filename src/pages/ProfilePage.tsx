@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FaCheck } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import Wrapper from "../wrapper/ProfilePageWrapper";
-import { updateUser } from "../store/slices/userSlice";
-import Alert from "../components/Alert";
+import { resetUpdationComplete, updateUser } from "../store/slices/userSlice";
 import { fetchOrders } from "../store/slices/orderSlice";
 import ProfilePagePreLoader from "../components/ProfilePagePreLoader";
 import Loading from "../components/Loading";
@@ -14,42 +14,53 @@ import { AppDispatch } from "../store/store";
 import { Order } from "../interface/store/slice/orderTypes";
 
 function ProfilePage() {
-  const data = useSelector((state: RootState) => state.user);
-  const { isLoading } = useSelector((state: RootState) => state.order);
+  const {
+    data,
+    isLoading: userLoading,
+    isError,
+    updationComplete,
+  } = useSelector((state: RootState) => state.user);
+  const { isLoading, data: orderData } = useSelector(
+    (state: RootState) => state.order
+  );
+
+  console.log(isError);
 
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const [userDetails, setUserDetails] = useState({
-    name: data?.data?.user.name,
-    email: data?.data?.user.email,
+    name: data?.user.name,
+    email: data?.user.email,
   });
-  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
-    if (data && data.data) dispatch(fetchOrders(data.data.user._id));
+    if (data) dispatch(fetchOrders(data.user._id));
   }, [dispatch]);
-  const orderData = useSelector((state: RootState) => state.order);
+
+  // Alert Functionality
+  useEffect(() => {
+    if (updationComplete) {
+      toast.success("Profile Updated Successfully");
+    }
+    return () => {
+      dispatch(resetUpdationComplete());
+    };
+  }, [updationComplete]);
 
   function formSubmitHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // const { password, confirmPassword } = userDetails;
-    // if (password !== confirmPassword) {
-    //   return;
-    // }
-    if (data && data.data)
-      dispatch(updateUser({ ...userDetails, id: data.data.user._id }));
-    setShowAlert(true);
+    if (data) dispatch(updateUser({ ...userDetails, id: data.user._id }));
   }
 
-  if (isLoading || data.isLoading) {
+  if (isLoading || userLoading) {
     return <Loading />;
   }
+
   return (
     <Wrapper>
       <div className="main">
         <div className="user">
-          {showAlert && <Alert message={"Details Updated"} />}
           <div className="title">
             <p>USER PROFILE</p>
           </div>
@@ -86,19 +97,19 @@ function ProfilePage() {
             </form>
           </div>
         </div>
-        {orderData.isLoading ? (
+        {isLoading ? (
           <ProfilePagePreLoader />
         ) : (
           <div className="orders">
             <div className="title">
               <p>MY ORDERS</p>
             </div>
-            {orderData.data.length === 0 ? (
+            {orderData.length === 0 ? (
               <>
                 <h1>You haven't ordered yet</h1>
               </>
             ) : (
-              orderData.data.map((order: Order) => (
+              orderData.map((order: Order) => (
                 <div className="body" key={order._id}>
                   <table>
                     <thead>

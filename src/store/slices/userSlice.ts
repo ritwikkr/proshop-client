@@ -167,6 +167,13 @@ const userSlice = createSlice({
       state.data = null;
       localStorage.removeItem("user");
     },
+    resetError: (state) => {
+      state.isError = false;
+      state.errorMsg = "";
+    },
+    resetUpdationComplete: (state) => {
+      state.updationComplete = false;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(createSession.pending, (state) => {
@@ -285,5 +292,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { logOut } = userSlice.actions;
+export const { logOut, resetError, resetUpdationComplete } = userSlice.actions;
 export default userSlice.reducer;

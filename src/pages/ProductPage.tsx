@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+
 import Ratings from "../components/Ratings";
 import Reviews from "../components/Reviews";
 import Wrapper from "../wrapper/ProductPageWrapper";
 import { fetchProduct } from "../store/slices/singleProductSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../store/slices/cartSlice";
-import Alert from "../components/Alert";
 import ProductPagePreLoader from "../components/ProductPagePreLoader";
 import { RootState } from "../interface/store/storeTypes";
 import { AppDispatch } from "../store/store";
@@ -15,7 +16,6 @@ import Loading from "../components/Loading";
 function ProductPage() {
   // Component State
   const [qty, setQty] = useState(1);
-  const [showAlert, setShowAlert] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
   const { data, isLoading } = useSelector((state: RootState) => state.product);
@@ -55,11 +55,8 @@ function ProductPage() {
   // Add to Cart Function
   function addToCartHandler() {
     dispatch(addToCart({ ...data, qty }));
-    setShowAlert(true);
     setQty(1);
-    setTimeout(() => {
-      setShowAlert(false);
-    }, 3000);
+    toast.success("Item added to cart", { autoClose: 1000, draggable: true });
   }
 
   return (
@@ -68,7 +65,6 @@ function ProductPage() {
         <Link to={"/"}>
           <button>go back</button>
         </Link>
-        {showAlert && <Alert message={"Item added to cart"} />}
       </div>
       <div className="dashboard">
         <div className="image">

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 import { resetPassword, checkJWTExpiry } from "../store/slices/userSlice";
 import Wrapper from "../wrapper/ResetPasswordWrapper";
-import Alert from "../components/Alert";
 import { RootState } from "../interface/store/storeTypes";
 import { AppDispatch } from "../store/store";
 
@@ -70,18 +70,19 @@ function ResetPasswordPage() {
       </Wrapper>
     );
   }
+
+  // Alert Functionality
+  useEffect(() => {
+    if (showAlert) {
+      toast.error("Passwords do not match");
+    } else if (passwordReseted) {
+      toast.success("Password reset successfully");
+    }
+  }, [showAlert, passwordReseted]);
+
   return (
     <Wrapper>
       <div className="body">
-        {showAlert && (
-          <Alert
-            type="error"
-            message="Please fill in the password fields and make sure they match."
-          />
-        )}
-        {passwordReseted && (
-          <Alert type="success" message="Password Reset Successfully" />
-        )}
         <form onSubmit={resetPasswordHandler}>
           <div className="form-content">
             <label htmlFor="email">New Password</label>
