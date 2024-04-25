@@ -30,6 +30,7 @@ interface ProductsState {
   products: Product[] | null;
   totalCount: number;
   isError: boolean;
+  wishlistedProducts: Product[];
 }
 
 export { Product, ProductsState, RatingsAndReviews, Review };

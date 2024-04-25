@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   margin: 10px;
   cursor: pointer;
   .body {
+    position: relative;
     > .image {
       width: 90%;
       margin: 10px auto;

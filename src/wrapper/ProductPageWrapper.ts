@@ -23,6 +23,7 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     .image {
+      position: relative;
       width: 500px;
       img {
         width: 100%;

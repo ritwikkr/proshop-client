@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Wrapper from "../wrapper/ProductWrapper";
 import Ratings from "./Ratings";
 import { RatingsAndReviews } from "../interface/store/slice/productTypes";
+import Wishlist from "./Wishlist";
 
 function Product({
   _id,
@@ -21,6 +22,7 @@ function Product({
     <Wrapper>
       <Link to={`/productPage/${_id}`}>
         <div className="body">
+          <Wishlist productId={_id} />
           <div className="image">
             <img src={image} alt={name} />
           </div>

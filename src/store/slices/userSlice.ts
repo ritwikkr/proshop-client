@@ -13,6 +13,7 @@ import {
   UserData,
   UserState,
 } from "../../interface/store/slice/userTypes";
+import axiosInstance from "../../helper/axiosInstanceWithJWT";
 
 // Action
 export const createSession = createAsyncThunk(
@@ -140,6 +141,28 @@ export const checkJWTExpiry = createAsyncThunk(
       });
       const { data } = await axiosInstanceWithJWT.post(
         `${BASE_URL}/api/v1/user/checkJWTExpiry`
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue((error as AxiosError).response?.data);
+    }
+  }
+);
+
+// Add To Wishlist
+export const toggleWishlist = createAsyncThunk(
+  "toggleWishlist",
+  async (
+    { userId, productId }: { userId: string; productId: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      const { data } = await axiosInstance.post(
+        `${BASE_URL}/api/v1/user/toggleWishlist`,
+        {
+          userId,
+          productId,
+        }
       );
       return data;
     } catch (error) {
@@ -288,6 +311,20 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.isError = true;
       state.jwtExpired = true;
+    });
+
+    // Add To Wishlist
+    builder.addCase(toggleWishlist.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(toggleWishlist.fulfilled, (state, action) => {
+      if (state.data) state.data.user = action.payload;
+      state.isLoading = false;
+      localStorage.setItem("user", JSON.stringify(state.data));
+    });
+    builder.addCase(toggleWishlist.rejected, (state) => {
+      state.isError = true;
+      state.errorMsg = "Some error occured";
     });
   },
 });
