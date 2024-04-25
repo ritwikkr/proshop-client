@@ -45,14 +45,15 @@ const Wrapper = styled.div`
       display: flex;
       align-items: center;
       .cart,
-      .profile {
+      .profile,
+      .wishlist {
         display: flex;
         align-items: center;
         margin: 0 15px;
+        cursor: pointer;
         a,
         p {
           display: flex;
-          cursor: pointer;
           text-transform: uppercase;
           font-size: 15px;
           color: rgb(146, 150, 159);
@@ -98,15 +99,21 @@ const Wrapper = styled.div`
           }
         }
         span {
-          width: 20px;
-          height: 20px;
+          width: 15px;
+          height: 15px;
           background-color: white;
           color: black;
           display: flex;
           align-items: center;
           justify-content: center;
           border-radius: 50%;
-          margin-left: 10px;
+          margin-left: 2px;
+        }
+      }
+      > .wishlist {
+        > .icon {
+          margin-right: 5px;
+          color: rgb(146, 150, 159);
         }
       }
     }
@@ -114,7 +121,7 @@ const Wrapper = styled.div`
       display: none;
     }
   }
-  @media only screen and (max-width: 900px) {
+  @media only screen and (max-width: 970px) {
     height: 100px;
     width: 100%;
     .body {
@@ -144,6 +151,24 @@ const Wrapper = styled.div`
       .left {
         .logo {
           margin-right: 0;
+        }
+      }
+      > .navigation {
+        > .cart {
+          position: relative;
+          .text {
+            display: none;
+          }
+          .length {
+            position: absolute;
+            left: 40%;
+            top: -30%;
+          }
+        }
+        > .wishlist {
+          p {
+            display: none;
+          }
         }
       }
     }

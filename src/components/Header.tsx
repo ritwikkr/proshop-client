@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { BsFillCartFill } from "react-icons/bs";
-import { FaUserAlt } from "react-icons/fa";
+import { FaUserAlt, FaHeart } from "react-icons/fa";
 import { AiFillCaretDown } from "react-icons/ai";
 
 import Wrapper from "../wrapper/HeaderWrapper";
@@ -63,8 +63,8 @@ function Header() {
               <div className="icon">
                 <BsFillCartFill />
               </div>
-              <p>
-                cart
+              <p className="text">cart</p>
+              <p className="length">
                 {cartItems.length > 0 && <span>{cartItems.length}</span>}
               </p>
             </Link>
@@ -95,6 +95,16 @@ function Header() {
               </Link>
             )}
           </div>
+          {data && (
+            <div className="wishlist">
+              <Link to={"/wishlist"}>
+                <div className="icon">
+                  <FaHeart />
+                </div>
+                <p>Wishlist</p>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </Wrapper>

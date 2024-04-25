@@ -12,6 +12,7 @@ import ProductPagePreLoader from "../components/ProductPagePreLoader";
 import { RootState } from "../interface/store/storeTypes";
 import { AppDispatch } from "../store/store";
 import Loading from "../components/Loading";
+import Wishlist from "../components/Wishlist";
 
 function ProductPage() {
   // Component State
@@ -69,6 +70,7 @@ function ProductPage() {
       <div className="dashboard">
         <div className="image">
           <img src={image} alt={name} />
+          {id && <Wishlist productId={id} />}
         </div>
         <div className="prod-details">
           <div className="title">{name}</div>

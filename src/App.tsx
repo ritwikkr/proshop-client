@@ -20,6 +20,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import SelectDeliveryAddress from "./pages/SelectDeliveryAddress";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import OrderDetailsPage from "./pages/OrderDetailsPage";
+import WishlistPage from "./pages/WishlistPage";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/order-details-page/:id" element={<OrderDetailsPage />} />
+        <Route path="/wishlist" element={<WishlistPage />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />

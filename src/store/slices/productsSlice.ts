@@ -3,6 +3,7 @@ import axios from "axios";
 
 import BASE_URL from "../../helper/url";
 import { ProductsState } from "../../interface/store/slice/productTypes";
+import axiosInstance from "../../helper/axiosInstanceWithJWT";
 
 // Action Interface
 interface fetchProducts {
@@ -25,11 +26,27 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
+// Action => Fetch Wishlisted Products
+export const fetchWishlistedProducts = createAsyncThunk(
+  "fetchWishlistedProducts",
+  async () => {
+    try {
+      const { data } = await axiosInstance.get(
+        `${BASE_URL}/api/v1/product/getWishlistedProducts`
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 const initialState: ProductsState = {
   isLoading: true,
   products: null,
   totalCount: 0,
   isError: false,
+  wishlistedProducts: [],
 };
 
 export const productsSlice = createSlice({
@@ -47,6 +64,18 @@ export const productsSlice = createSlice({
     });
     builder.addCase(fetchProducts.rejected, (state) => {
       state.isLoading = false;
+      state.isError = true;
+    });
+
+    // fetchWishlistedProducts
+    builder.addCase(fetchWishlistedProducts.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchWishlistedProducts.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.wishlistedProducts = action.payload;
+    });
+    builder.addCase(fetchWishlistedProducts.rejected, (state) => {
       state.isError = true;
     });
   },

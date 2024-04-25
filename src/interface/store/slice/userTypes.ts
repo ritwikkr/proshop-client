@@ -25,6 +25,7 @@ interface UserData {
       country: string;
       _id: string;
     }>;
+    wishlist: string[];
   };
 }
 
