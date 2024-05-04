@@ -1,20 +1,22 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { FaHeartCirclePlus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
 import Wrapper from "../wrapper/WishlistPage";
-import { fetchWishlistedProducts } from "../store/slices/productsSlice";
 import { AppDispatch } from "../store/store";
 import { RootState } from "../interface/store/storeTypes";
 import Loading from "../components/Loading";
 import Product from "../components/Product";
+import { fetchWishlist } from "../store/slices/wishlistSlice";
+import { toast } from "react-toastify";
 
 function WishlistPage() {
   // Redux
   const dispatch = useDispatch<AppDispatch>();
-  const { wishlistedProducts, isLoading } = useSelector(
-    (state: RootState) => state.products
+  const { data } = useSelector((state: RootState) => state.user);
+  const { items, status, error } = useSelector(
+    (state: RootState) => state.wishlist
   );
 
   // Navigation
@@ -22,14 +24,15 @@ function WishlistPage() {
 
   // Side Effect => Fetch all wishlisted product
   useEffect(() => {
-    dispatch(fetchWishlistedProducts());
+    if (data) dispatch(fetchWishlist());
   }, []);
 
-  if (isLoading) return <Loading />;
+  if (status === "loading") return <Loading />;
+  if (status === "failed") toast.error(error);
 
   return (
     <Wrapper>
-      {wishlistedProducts.length > 0 && (
+      {items.length > 0 && (
         <>
           <div className="back-btn">
             <button onClick={() => navigate("/")}>go back</button>
@@ -40,7 +43,7 @@ function WishlistPage() {
         </>
       )}
       <div className="products">
-        {wishlistedProducts.length === 0 ? (
+        {items.length === 0 ? (
           <div className="no-items">
             <h2>your wishlist is empty</h2>
             <p>
@@ -53,7 +56,7 @@ function WishlistPage() {
             <button onClick={() => navigate("/")}>Continue Shopping</button>
           </div>
         ) : (
-          wishlistedProducts.map((item) => (
+          items.map((item) => (
             <div className="product" key={item._id}>
               <Product
                 _id={item._id}

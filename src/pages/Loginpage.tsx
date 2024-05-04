@@ -6,6 +6,7 @@ import { createSession, resetError } from "../store/slices/userSlice";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { AppDispatch } from "../store/store";
 import { RootState } from "../interface/store/storeTypes";
+import { fetchWishlist } from "../store/slices/wishlistSlice";
 
 function Loginpage() {
   const [showLogin, setShowLogin] = useState(true);
@@ -42,6 +43,7 @@ function Loginpage() {
 
   useEffect(() => {
     if (data) {
+      dispatch(fetchWishlist());
       if (location.search.includes("select-address")) {
         return navigate("/select-address");
       }
