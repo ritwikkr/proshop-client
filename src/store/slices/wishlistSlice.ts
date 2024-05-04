@@ -85,7 +85,6 @@ const wishlistSlice = createSlice({
       })
       .addCase(toggleWishlist.pending, (state) => {
         state.status = "loading";
-        state.items = [];
         state.error = null;
       })
       .addCase(toggleWishlist.fulfilled, (state, action) => {
