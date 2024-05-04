@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../interface/store/storeTypes";
 import { AppDispatch } from "../store/store";
@@ -11,6 +11,7 @@ interface WishlistPropType {
 }
 
 function Wishlist({ productId }: WishlistPropType) {
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const { data } = useSelector((state: RootState) => state.user);
   const { items } = useSelector((state: RootState) => state.wishlist);
@@ -20,17 +21,27 @@ function Wishlist({ productId }: WishlistPropType) {
 
   function toggleWishlistHandler(e: React.MouseEvent) {
     e.preventDefault();
-    dispatch(toggleWishlist({ itemId: productId }));
+    setLoading(true);
+    dispatch(toggleWishlist({ itemId: productId })).then(() => {
+      setLoading(false);
+    });
   }
 
   return (
     <Wrapper>
       {data && (
         <div className="wishlist">
-          <FaHeart
-            onClick={toggleWishlistHandler}
-            style={isWishlisted ? { color: "red" } : {}}
-          />
+          <div className={`heart-icon ${loading ? "clicked" : ""}`}>
+            {loading ? (
+              <div className="loading-circle"></div>
+            ) : (
+              <FaHeart
+                className="heart-icon"
+                onClick={toggleWishlistHandler}
+                style={isWishlisted ? { color: "red" } : {}}
+              />
+            )}
+          </div>
         </div>
       )}
     </Wrapper>
