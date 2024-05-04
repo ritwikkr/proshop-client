@@ -6,11 +6,9 @@ import Product from "../components/Product";
 import Wrapper from "../wrapper/HomePageWrapper";
 import HomePagePreLoader from "../components/HomePagePreLoader";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchProducts,
-  // fetchFeaturedProducts,
-} from "../store/slices/productsSlice";
+import { fetchProducts } from "../store/slices/productsSlice";
 import { RootState } from "../interface/store/storeTypes";
+import { toast } from "react-toastify";
 
 function Homepage() {
   // Component State
@@ -29,6 +27,13 @@ function Homepage() {
   );
   // Extracts search words from Global State
   const { searchText } = useSelector((state: RootState) => state.searchText);
+  const { error } = useSelector((state: RootState) => state.wishlist);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   // Calculate total pages based on the total product count and page size
   const totalPages = Math.ceil(totalCount / pageSize);
