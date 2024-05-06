@@ -1,4 +1,4 @@
-let BASE_URL = `https://proshop-api-n2t7.onrender.com`;
+let BASE_URL = `https://api.shopease.site`;
 
 if (process.env.REACT_APP_ENV === "development") {
   BASE_URL = `http://localhost:4000`;
