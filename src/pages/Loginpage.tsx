@@ -29,12 +29,12 @@ function Loginpage() {
   // Alert Functionality
   useEffect(() => {
     if (isError) {
+      setBtnDisabled(false);
       toast.error(errorMsg);
     } else if (data) {
       toast.success("Authentication successful. Redirecting...", {
         autoClose: 2000,
       });
-      setBtnDisabled(true);
     }
     return () => {
       dispatch(resetError());
@@ -55,6 +55,7 @@ function Loginpage() {
 
   function formSubmitHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setBtnDisabled(true);
     const { name, email, password, confirmPassword } = userDetails;
 
     if (showLogin) {
