@@ -1,4 +1,4 @@
-import { Product } from "./productTypes";
+import { ProductType } from "./productTypes";
 
 interface ShippingAddress {
   name: string;
@@ -14,7 +14,7 @@ interface Order {
   shippingAddress: ShippingAddress;
   _id: string;
   amount: number;
-  products: Product[];
+  products: ProductType[];
   userId: string;
   createdAt: string;
   updatedAt: string;

@@ -1,8 +1,8 @@
-import { Product } from "./productTypes";
+import { ProductType } from "./productTypes";
 
 interface SingleProductType {
   isLoading: boolean;
-  data: Product | null;
+  data: ProductType | null;
   isError: boolean;
 }
 

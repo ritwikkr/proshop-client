@@ -50,16 +50,7 @@ function Homepage() {
     ?.filter((item) =>
       item.name.toLowerCase().includes(searchText.toLowerCase())
     )
-    .map((item) => (
-      <Product
-        key={item._id}
-        _id={item._id}
-        name={item.name}
-        image={item.image}
-        price={item.price}
-        ratingsAndReviews={item.ratingsAndReviews}
-      />
-    ));
+    .map((item) => <Product item={item} key={item._id} />);
 
   // Handle pagination
   const handlePageChange = (newPage: number) => {

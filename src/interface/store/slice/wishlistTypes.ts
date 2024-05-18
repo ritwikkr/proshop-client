@@ -1,7 +1,7 @@
-import { Product } from "./productTypes";
+import { ProductType } from "./productTypes";
 
 interface WishlistType {
-  items: Product[];
+  items: ProductType[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string;
 }
