@@ -1,4 +1,4 @@
-interface Product {
+interface ProductType {
   // Define your product structure here
   _id: string;
   name: string;
@@ -27,9 +27,9 @@ interface Review {
 
 interface ProductsState {
   isLoading: boolean;
-  products: Product[] | null;
+  products: ProductType[] | null;
   totalCount: number;
   isError: boolean;
 }
 
-export { Product, ProductsState, RatingsAndReviews, Review };
+export { ProductType, ProductsState, RatingsAndReviews, Review };

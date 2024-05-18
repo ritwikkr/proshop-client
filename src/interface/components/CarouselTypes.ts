@@ -1,7 +1,7 @@
-import { Product } from "../store/slice/productTypes";
+import { ProductType } from "../store/slice/productTypes";
 
 interface DemoCarouselProps {
-  featuredProducts: Product[];
+  featuredProducts: ProductType[];
 }
 
 export { DemoCarouselProps };

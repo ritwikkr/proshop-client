@@ -2,44 +2,38 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Wrapper from "../wrapper/ProductWrapper";
 import Ratings from "./Ratings";
-import { RatingsAndReviews } from "../interface/store/slice/productTypes";
+import { ProductType } from "../interface/store/slice/productTypes";
 import Wishlist from "./Wishlist";
+import AddToCartButton from "../utilities/AddToCartButton";
 
-function Product({
-  _id,
-  name,
-  image,
-  price,
-  ratingsAndReviews,
-}: {
-  _id: string;
-  name: string;
-  image: string;
-  price: number;
-  ratingsAndReviews: RatingsAndReviews;
-}) {
+function Product({ item }: { item: ProductType }) {
   return (
     <Wrapper>
-      <Link to={`/productPage/${_id}`}>
+      <Link to={`/productPage/${item._id}`}>
         <div className="body">
-          <Wishlist productId={_id} />
+          <Wishlist productId={item._id} />
           <div className="image">
-            <img src={image} alt={name} />
+            <img src={item.image} alt={item.name} />
           </div>
           <div className="description">
             <div className="title">
-              <p>{name}</p>
+              <p>{item.name}</p>
             </div>
             <div className="rating">
-              <Ratings stars={ratingsAndReviews.totalRatings} />
-              <span>{ratingsAndReviews.totalReviews} reviews</span>
+              <Ratings stars={item.ratingsAndReviews.totalRatings} />
+              <span>{item.ratingsAndReviews.totalReviews} reviews</span>
             </div>
             <div className="price">
-              <p>$ {price}</p>
+              <p>$ {item.price}</p>
             </div>
           </div>
         </div>
       </Link>
+      {window.location.pathname === "/wishlist" && (
+        <div className="add-to-cart">
+          <AddToCartButton data={item} />
+        </div>
+      )}
     </Wrapper>
   );
 }

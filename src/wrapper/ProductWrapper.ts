@@ -37,7 +37,12 @@ const Wrapper = styled.div`
       .price {
         font-size: 28px;
         font-weight: 500;
+        margin-bottom: 10px;
       }
+    }
+    > .add-to-cart {
+      width: 95%;
+      margin: auto;
     }
   }
 `;

@@ -58,13 +58,7 @@ function WishlistPage() {
         ) : (
           items.map((item) => (
             <div className="product" key={item._id}>
-              <Product
-                _id={item._id}
-                name={item.name}
-                image={item.image}
-                price={item.price}
-                ratingsAndReviews={item.ratingsAndReviews}
-              />
+              <Product item={item} />
             </div>
           ))
         )}

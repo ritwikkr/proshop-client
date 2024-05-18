@@ -94,22 +94,6 @@ const Wrapper = styled.div`
         padding-right: 10px;
         border-bottom: none;
         height: 70px;
-        button {
-          width: 95%;
-          height: 50px;
-          background-color: black;
-          color: white;
-          margin: auto;
-          cursor: pointer;
-          text-transform: uppercase;
-          font-weight: 600;
-          border: none;
-          font-size: 16px;
-          &:disabled {
-            cursor: not-allowed;
-            opacity: 0.5;
-          }
-        }
       }
     }
   }

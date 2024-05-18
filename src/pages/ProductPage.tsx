@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
-
 import Ratings from "../components/Ratings";
 import Reviews from "../components/Reviews";
 import Wrapper from "../wrapper/ProductPageWrapper";
 import { fetchProduct } from "../store/slices/singleProductSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../store/slices/cartSlice";
 import ProductPagePreLoader from "../components/ProductPagePreLoader";
 import { RootState } from "../interface/store/storeTypes";
 import { AppDispatch } from "../store/store";
 import Loading from "../components/Loading";
+import AddToCartButton from "../utilities/AddToCartButton";
 
 function ProductPage() {
   // Component State
@@ -50,13 +48,6 @@ function ProductPage() {
       return;
     }
     setQty(qty - 1);
-  }
-
-  // Add to Cart Function
-  function addToCartHandler() {
-    dispatch(addToCart({ ...data, qty }));
-    setQty(1);
-    toast.success("Item added to cart", { autoClose: 1000, draggable: true });
   }
 
   return (
@@ -108,12 +99,7 @@ function ProductPage() {
             </div>
           </div>
           <div className="btn">
-            <button
-              onClick={() => addToCartHandler()}
-              disabled={countInStock - qty + 1 < 1}
-            >
-              add to cart
-            </button>
+            <AddToCartButton data={data} />
           </div>
         </div>
       </div>

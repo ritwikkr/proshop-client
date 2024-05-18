@@ -2,11 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import axiosInstance from "../../helper/axiosInstanceWithJWT";
 import BASE_URL from "../../helper/url";
-import { Product } from "../../interface/store/slice/productTypes";
+import { ProductType } from "../../interface/store/slice/productTypes";
 
 // Define the initial state type
 interface WishlistState {
-  items: Product[];
+  items: ProductType[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null | undefined;
 }
@@ -26,7 +26,7 @@ interface ErrorResponse {
 
 // Async thunks
 export const fetchWishlist = createAsyncThunk<
-  Product[],
+  ProductType[],
   void,
   {
     rejectValue: ErrorResponse; // Specify the type of the reject value (error response)
@@ -45,7 +45,7 @@ export const fetchWishlist = createAsyncThunk<
 });
 
 export const toggleWishlist = createAsyncThunk<
-  Product[],
+  ProductType[],
   { itemId: string },
   { rejectValue: ErrorResponse }
 >(
