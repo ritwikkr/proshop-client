@@ -29,7 +29,7 @@ const Wrapper = styled.div`
               outline: none;
               font-size: 18px;
             }
-            button {
+            > button {
               height: 40px;
               width: 100px;
               border: none;
@@ -37,6 +37,10 @@ const Wrapper = styled.div`
               color: white;
               cursor: pointer;
               text-transform: uppercase;
+              &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+              }
             }
           }
         }
