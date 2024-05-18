@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Wrapper from "../wrapper/ShippingPageWrapper";
 import ProgressBar from "../components/ProgressBar";
 import { useNavigate } from "react-router-dom";
@@ -26,6 +26,24 @@ function ShippingPage() {
     postal_code: "",
     country: "",
   });
+  const [btnDisabled, setBtnDisabled] = useState<boolean>(true);
+
+  // Side Effect -> Checking when to enable button
+  useEffect(() => {
+    const { name, phoneNumber, address, city, state, postal_code, country } =
+      userAddress;
+    if (
+      name &&
+      phoneNumber &&
+      address &&
+      city &&
+      state &&
+      postal_code &&
+      country
+    )
+      setBtnDisabled(false);
+    else setBtnDisabled(true);
+  }, [userAddress]);
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -154,7 +172,9 @@ function ShippingPage() {
                 />
               </div>
               <div className="form-content">
-                <button type="submit">Continue</button>
+                <button type="submit" disabled={btnDisabled}>
+                  Continue
+                </button>
               </div>
             </form>
           </div>
