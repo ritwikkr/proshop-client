@@ -167,6 +167,7 @@ const userSlice = createSlice({
       state.data = null;
       localStorage.removeItem("user");
       localStorage.removeItem("wishlist");
+      localStorage.removeItem("deliveryAddress");
     },
     resetError: (state) => {
       state.isError = false;
