@@ -77,6 +77,18 @@ const orderSlice = createSlice({
         JSON.stringify(state.deliveryAddress)
       );
     },
+    removeDeliveryDetails: (state) => {
+      state.deliveryAddress = {
+        address: "",
+        city: "",
+        country: "",
+        name: "",
+        phoneNumber: "",
+        postal: 0,
+        state: "",
+        _id: "",
+      };
+    },
     changePaymentMethod: (state, action) => {
       state.paymentMethod = action.payload;
       localStorage.setItem(
@@ -122,6 +134,10 @@ const orderSlice = createSlice({
   },
 });
 
-export const { setDeliveryDetails, changePaymentMethod, emptyCart } =
-  orderSlice.actions;
+export const {
+  setDeliveryDetails,
+  changePaymentMethod,
+  emptyCart,
+  removeDeliveryDetails,
+} = orderSlice.actions;
 export default orderSlice.reducer;
