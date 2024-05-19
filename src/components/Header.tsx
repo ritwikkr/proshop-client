@@ -10,6 +10,7 @@ import { logOut } from "../store/slices/userSlice";
 import { addSearchText } from "../store/slices/searchSlice";
 import { togglePopUp } from "../store/slices/showNavPopupSlice";
 import { RootState } from "../interface/store/storeTypes";
+import { removeDeliveryDetails } from "../store/slices/orderSlice";
 
 function Header() {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ function Header() {
   // Logout Handler Function
   function logoutHandler() {
     dispatch(logOut());
+    dispatch(removeDeliveryDetails());
     dispatch(togglePopUp(false));
     navigate("/");
   }
