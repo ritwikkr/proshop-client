@@ -5,13 +5,15 @@ const Wrapper = styled.div`
   padding: 10px;
   border-radius: 10px;
   width: 350px;
-  margin: 10px;
+  margin: 0 10px 10px 0;
   cursor: pointer;
   .body {
     position: relative;
     > .image {
       width: 90%;
+      border-radius: 8px;
       margin: 10px auto;
+      overflow: hidden;
       > img {
         width: 100%;
         height: 100%;

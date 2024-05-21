@@ -9,20 +9,12 @@ const Wrapper = styled.div`
     margin: 20px 0;
     display: flex;
     justify-content: space-between;
-    button {
-      width: 100px;
-      height: 40px;
-      text-transform: uppercase;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-    }
   }
-  .dashboard {
+  > .dashboard {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    .image {
+    justify-content: flex-start;
+    > .image {
       position: relative;
       width: 500px;
       img {
@@ -104,7 +96,6 @@ const Wrapper = styled.div`
 
   @media only screen and (max-width: 1595px) {
     .dashboard {
-      justify-content: center;
       .prod-details {
         width: 25%;
       }

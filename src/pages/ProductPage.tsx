@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Ratings from "../components/Ratings";
 import Reviews from "../components/Reviews";
 import Wrapper from "../wrapper/ProductPageWrapper";
@@ -10,6 +10,7 @@ import { RootState } from "../interface/store/storeTypes";
 import { AppDispatch } from "../store/store";
 import Loading from "../components/Loading";
 import AddToCartButton from "../utilities/AddToCartButton";
+import GoBackButton from "../utilities/GoBackButton";
 
 function ProductPage() {
   // Component State
@@ -53,9 +54,7 @@ function ProductPage() {
   return (
     <Wrapper>
       <div className="back-btn">
-        <Link to={"/"}>
-          <button>go back</button>
-        </Link>
+        <GoBackButton />
       </div>
       <div className="dashboard">
         <div className="image">

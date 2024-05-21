@@ -7,15 +7,9 @@ const Wrapper = styled.div`
   margin: auto;
   justify-content: space-between;
   .cart {
+    margin-top: 20px;
     .back-btn {
-      button {
-        text-transform: uppercase;
-        height: 40px;
-        width: 100px;
-        border: none;
-        background-color: transparent;
-        cursor: pointer;
-      }
+      width: 100px;
     }
     .title {
       margin: 20px 0;

@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "../store/slices/cartSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { RootState } from "../interface/store/storeTypes";
+import GoBackButton from "../utilities/GoBackButton";
 
 function CartPage() {
   const { data } = useSelector((state: RootState) => state.cart);
@@ -30,7 +31,7 @@ function CartPage() {
     <Wrapper>
       <div className="cart">
         <div className="back-btn">
-          <button onClick={() => navigate(-1)}>Go back</button>
+          <GoBackButton />
         </div>
         <div className="title">
           <p>shopping cart</p>

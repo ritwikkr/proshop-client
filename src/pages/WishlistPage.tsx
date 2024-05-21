@@ -10,6 +10,7 @@ import Loading from "../components/Loading";
 import Product from "../components/Product";
 import { fetchWishlist } from "../store/slices/wishlistSlice";
 import { toast } from "react-toastify";
+import GoBackButton from "../utilities/GoBackButton";
 
 function WishlistPage() {
   // Redux
@@ -33,14 +34,14 @@ function WishlistPage() {
   return (
     <Wrapper>
       {items.length > 0 && (
-        <>
+        <div className="header">
           <div className="back-btn">
-            <button onClick={() => navigate("/")}>go back</button>
+            <GoBackButton />
           </div>
           <div className="header">
             <h2>wishlisted products</h2>
           </div>
-        </>
+        </div>
       )}
       <div className="products">
         {items.length === 0 ? (
