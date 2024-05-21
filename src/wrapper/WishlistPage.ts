@@ -2,35 +2,32 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   min-height: calc(100vh - 130px);
-  padding: 10px;
   display: flex;
   flex-direction: column;
-  .back-btn {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    button {
-      width: 100px;
-      height: 40px;
-      text-transform: uppercase;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-    }
-  }
   > .header {
-    padding-left: 15px;
-    text-transform: uppercase;
-    > h2 {
-      font-weight: lighter;
+    width: 85%;
+    margin: auto;
+    .back-btn {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+    }
+    > .header {
+      text-transform: uppercase;
+      > h2 {
+        font-weight: lighter;
+      }
     }
   }
+
   > .products {
     flex: 1;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
+    width: 85%;
+    margin: auto;
     height: 100%;
     > .no-items {
       text-align: center;
