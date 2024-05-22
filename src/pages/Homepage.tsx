@@ -78,21 +78,23 @@ function Homepage() {
               productList
             )}
           </div>
-          <div className="pagination">
-            <div className="page-number-list">
-              {pageNumbers.map((pageNumber) => (
-                <button
-                  key={pageNumber}
-                  className={`page-number ${
-                    pageNumber === currentPage ? "active" : ""
-                  }`}
-                  onClick={() => handlePageChange(pageNumber)}
-                >
-                  {pageNumber}
-                </button>
-              ))}
+          {productList && productList?.length > 0 && (
+            <div className="pagination">
+              <div className="page-number-list">
+                {pageNumbers.map((pageNumber) => (
+                  <button
+                    key={pageNumber}
+                    className={`page-number ${
+                      pageNumber === currentPage ? "active" : ""
+                    }`}
+                    onClick={() => handlePageChange(pageNumber)}
+                  >
+                    {pageNumber}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </Wrapper>
