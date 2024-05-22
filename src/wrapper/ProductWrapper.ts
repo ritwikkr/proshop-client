@@ -25,11 +25,11 @@ const Wrapper = styled.div`
       .title {
         letter-spacing: 1.2px;
         line-height: 22px;
-        height: 45px;
       }
       .rating {
         margin: 10px 0;
         display: flex;
+        flex-wrap: wrap;
         span {
           color: black;
           margin-left: 10px;
@@ -45,6 +45,26 @@ const Wrapper = styled.div`
     > .add-to-cart {
       width: 95%;
       margin: auto;
+    }
+  }
+
+  @media only screen and (max-width: 802px) {
+    width: 48%;
+  }
+
+  @media only screen and (max-width: 560px) {
+    width: 46%;
+    .body {
+      > .description {
+        > .rating {
+          > span {
+            margin: 0;
+          }
+        }
+        > .price {
+          font-size: 22px;
+        }
+      }
     }
   }
 `;
