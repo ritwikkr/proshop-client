@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   min-height: calc(100vh - 130px);
-  padding: 20px;
   .main {
     max-width: 600px;
     margin: 20px auto 0;
@@ -46,6 +45,9 @@ const Wrapper = styled.div`
         }
       }
     }
+  }
+  @media only screen and (max-width: 600px) {
+    padding: 0 20px;
   }
 `;
 

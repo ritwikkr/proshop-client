@@ -1,8 +1,11 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  position: relative;
+  position: fixed;
+  z-index: 2;
+  top: 0;
   padding: 10px;
+  width: 100%;
   background-color: rgb(46, 50, 56);
   color: rgb(220, 224, 231);
   > .body {
