@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   > .wishlist {
     cursor: pointer;
-    z-index: 100;
+    z-index: 1;
     width: 30px;
     height: 30px;
     border-radius: 50%;

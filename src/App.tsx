@@ -26,25 +26,30 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <Routes>
-        <Route index element={<Homepage />} />
-        <Route path="/productPage/:id" element={<ProductPage />} />
-        <Route path="/cart" element={<Cartpage />} />
-        <Route path="/login" element={<Loginpage />} />
-        <Route path="/shipping" element={<ShippingPage />} />
-        <Route path="/select-address" element={<SelectDeliveryAddress />} />
-        <Route path="/paymentMethod" element={<PaymentMethodPage />} />
-        <Route path="/order" element={<PlaceOrderPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/password" element={<PasswordUpdate />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/payment-success" element={<PaymentSuccess />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
-        <Route path="/order-details-page/:id" element={<OrderDetailsPage />} />
-        <Route path="/wishlist" element={<WishlistPage />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route index element={<Homepage />} />
+          <Route path="/productPage/:id" element={<ProductPage />} />
+          <Route path="/cart" element={<Cartpage />} />
+          <Route path="/login" element={<Loginpage />} />
+          <Route path="/shipping" element={<ShippingPage />} />
+          <Route path="/select-address" element={<SelectDeliveryAddress />} />
+          <Route path="/paymentMethod" element={<PaymentMethodPage />} />
+          <Route path="/order" element={<PlaceOrderPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/password" element={<PasswordUpdate />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/payment-success" element={<PaymentSuccess />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route
+            path="/order-details-page/:id"
+            element={<OrderDetailsPage />}
+          />
+          <Route path="/wishlist" element={<WishlistPage />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </main>
       <Footer />
     </BrowserRouter>
   );
