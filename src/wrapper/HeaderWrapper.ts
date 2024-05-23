@@ -1,47 +1,53 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  height: 80px;
   position: relative;
   padding: 10px;
   background-color: rgb(46, 50, 56);
   color: rgb(220, 224, 231);
   > .body {
-    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 90%;
+    flex-wrap: wrap;
     margin: auto;
-    .left {
-      display: flex;
-      .logo {
-        margin-right: 150px;
-        h2 {
-          height: 100%;
-          text-transform: uppercase;
-        }
-      }
-    }
-    .search-bar {
-      height: 40px;
-      input {
+    display: flex;
+    > .logo {
+      order: 1;
+      h2 {
         height: 100%;
-        margin-right: 10px;
-        border: none;
-        padding-left: 20px;
-        outline: none;
-      }
-      button {
-        height: 100%;
-        width: 70px;
-        background-color: transparent;
-        color: rgb(59, 117, 88);
-        border: 2px solid rgb(59, 117, 88);
         text-transform: uppercase;
       }
     }
+    > .search-bar {
+      height: 40px;
+      width: 300px;
+      order: 2;
+      > form {
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        > input {
+          height: 100%;
+          border: none;
+          width: 70%;
+          padding-left: 20px;
+          outline: none;
+        }
+        button {
+          height: 100%;
+          width: 25%;
+          background-color: transparent;
+          color: rgb(59, 117, 88);
+          border: 2px solid rgb(59, 117, 88);
+          text-transform: uppercase;
+          cursor: pointer;
+        }
+      }
+    }
     > .navigation {
+      order: 3;
       display: flex;
       align-items: center;
       .cart,
@@ -122,25 +128,29 @@ const Wrapper = styled.div`
     }
   }
   @media only screen and (max-width: 970px) {
-    height: 100px;
     width: 100%;
-    .body {
+    > .body {
       display: flex;
       align-items: flex-start;
-      .left {
-        .search-bar {
-          width: 80%;
-          position: absolute;
-          left: 50%;
-          display: flex;
-          top: 50%;
-          transform: translateX(-50%);
-          input {
+      > .logo {
+        order: 1;
+      }
+      > .search-bar {
+        order: 3;
+        width: 100%;
+        margin: 10px auto 0;
+        display: flex;
+        > form {
+          flex: 1;
+          > input {
             flex: 1;
+          }
+          > button {
           }
         }
       }
-      .navigation {
+      > .navigation {
+        order: 2;
         margin-top: 5px;
       }
     }
@@ -148,10 +158,8 @@ const Wrapper = styled.div`
 
   @media only screen and (max-width: 550px) {
     .body {
-      .left {
-        .logo {
-          margin-right: 0;
-        }
+      .logo {
+        margin-right: 0;
       }
       > .navigation {
         > .cart {
