@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { BsFillCartFill } from "react-icons/bs";
@@ -13,11 +13,18 @@ import { RootState } from "../interface/store/storeTypes";
 import { removeDeliveryDetails } from "../store/slices/orderSlice";
 
 function Header() {
+  // Component State
+  const [searchText, setSearchText] = useState("");
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { data } = useSelector((state: RootState) => state.user);
   const { data: cartItems } = useSelector((state: RootState) => state.cart);
   const { show } = useSelector((state: RootState) => state.showNavPopup);
+
+  useEffect(() => {
+    if (searchText.length === 0) dispatch(addSearchText(searchText));
+  }, [searchText]);
 
   // Show Header PopUp
   function toggleAccountSection() {
@@ -30,7 +37,7 @@ function Header() {
 
   // Dispatches the searched keyword into Global State
   function changeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    dispatch(addSearchText(e.target.value));
+    setSearchText(e.target.value);
   }
 
   // Logout Handler Function
@@ -41,23 +48,28 @@ function Header() {
     navigate("/");
   }
 
+  function clickHandler(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    dispatch(addSearchText(searchText));
+  }
+
   return (
     <Wrapper>
       <div className="body">
-        <div className="left">
-          <div className="logo">
-            <Link to={"/"}>
-              <h2>proshop</h2>
-            </Link>
-          </div>
-          <div className="search-bar">
+        <div className="logo">
+          <Link to={"/"}>
+            <h2>proshop</h2>
+          </Link>
+        </div>
+        <div className="search-bar">
+          <form onSubmit={clickHandler}>
             <input
               type="text"
               placeholder="Search Products..."
               onChange={(e) => changeHandler(e)}
             />
             <button type="submit">Search</button>
-          </div>
+          </form>
         </div>
         <div className="navigation">
           <div className="cart">
