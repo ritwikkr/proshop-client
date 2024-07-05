@@ -9,33 +9,42 @@ interface UserState {
   jwtExpired: boolean;
 }
 
+interface Address {
+  name: string;
+  phoneNumber: string;
+  address: string;
+  city: string;
+  state: string;
+  postal: number;
+  country: string;
+  _id: string;
+}
+
 interface UserData {
   token: string;
   user: {
     _id: string;
+    googleId?: string;
     email: string;
     name: string;
-    address: Array<{
-      name: string;
-      phoneNumber: string;
-      address: string;
-      city: string;
-      state: string;
-      postal: number;
-      country: string;
-      _id: string;
-    }>;
+    address: Address[];
     wishlist: string[];
+    isVerified: boolean;
   };
 }
 
 interface CreateSessionThunkArgs {
   sessionType: string;
   userData: {
+    _id?: string;
+    googleId?: string;
     name?: string;
     email: string;
-    password: string;
+    password?: string;
     confirmPassword?: string;
+    token?: string;
+    wishlist?: string[];
+    address?: Address[];
   };
 }
 
@@ -97,4 +106,5 @@ export {
   UpdateUserThunkArgs,
   CreateSessionThunkArgs,
   UserData,
+  Address,
 };

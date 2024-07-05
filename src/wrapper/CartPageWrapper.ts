@@ -20,10 +20,7 @@ const Wrapper = styled.div`
     }
     .body {
       > h1 {
-        a {
-          text-decoration: underline;
-          color: blue;
-        }
+        display: flex;
       }
       .item {
         display: flex;

@@ -21,6 +21,8 @@ import SelectDeliveryAddress from "./pages/SelectDeliveryAddress";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import OrderDetailsPage from "./pages/OrderDetailsPage";
 import WishlistPage from "./pages/WishlistPage";
+import GoogleLoginRedirect from "./pages/GoogleLoginRedirect";
+import OTPVerification from "./pages/OTPVerification";
 
 function App() {
   return (
@@ -32,6 +34,10 @@ function App() {
           <Route path="/productPage/:id" element={<ProductPage />} />
           <Route path="/cart" element={<Cartpage />} />
           <Route path="/login" element={<Loginpage />} />
+          <Route
+            path="/otp-verification/:email"
+            element={<OTPVerification />}
+          />
           <Route path="/shipping" element={<ShippingPage />} />
           <Route path="/select-address" element={<SelectDeliveryAddress />} />
           <Route path="/paymentMethod" element={<PaymentMethodPage />} />
@@ -47,6 +53,10 @@ function App() {
             element={<OrderDetailsPage />}
           />
           <Route path="/wishlist" element={<WishlistPage />} />
+          <Route
+            path="/auth/google/callback"
+            element={<GoogleLoginRedirect />}
+          />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </main>

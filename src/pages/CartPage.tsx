@@ -1,6 +1,6 @@
 import React from "react";
 import Wrapper from "../wrapper/CartPageWrapper";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaHome } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "../store/slices/cartSlice";
 import { Link, useNavigate } from "react-router-dom";
@@ -27,6 +27,7 @@ function CartPage() {
     }
     navigate("/select-address");
   }
+
   return (
     <Wrapper>
       <div className="cart">
@@ -39,7 +40,10 @@ function CartPage() {
         <div className="body">
           {data.length === 0 ? (
             <h1>
-              No items in cart. <Link to={"/"}>Go back to shopping</Link>
+              <p>No items in cart.</p>
+              <Link to={"/"}>
+                <FaHome />
+              </Link>
             </h1>
           ) : (
             <>
@@ -72,19 +76,24 @@ function CartPage() {
           )}
         </div>
       </div>
-      <div className="subtotal">
-        <div className="title">
-          <p>subtotal ({data.length}) items</p>
+      {data.length > 0 && (
+        <div className="subtotal">
+          <div className="title">
+            <p>subtotal ({data.length}) items</p>
+          </div>
+          <div className="amt">
+            <p>$ {totalPrice.toFixed(2)}</p>
+          </div>
+          <div className="btn">
+            <button
+              onClick={() => proceedHandler()}
+              disabled={data.length === 0}
+            >
+              proceed to checkout
+            </button>
+          </div>
         </div>
-        <div className="amt">
-          <p>$ {totalPrice.toFixed(2)}</p>
-        </div>
-        <div className="btn">
-          <button onClick={() => proceedHandler()} disabled={data.length === 0}>
-            proceed to checkout
-          </button>
-        </div>
-      </div>
+      )}
     </Wrapper>
   );
 }

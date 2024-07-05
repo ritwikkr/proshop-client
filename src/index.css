@@ -5,7 +5,14 @@
   font-family: sans-serif;
 }
 main {
-  margin-top: 100px;
+  margin-top: 60px;
+  min-height: 652px;
+}
+
+@media only screen and (max-width: 970px) {
+  main {
+    margin-top: 97.5px;
+  }
 }
 
 a {
