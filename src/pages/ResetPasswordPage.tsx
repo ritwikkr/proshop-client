@@ -82,34 +82,39 @@ function ResetPasswordPage() {
 
   return (
     <Wrapper>
-      <div className="body">
-        <form onSubmit={resetPasswordHandler}>
-          <div className="form-content">
-            <label htmlFor="email">New Password</label>
-            <input
-              type="password"
-              id="email"
-              placeholder="Enter New Password"
-              onChange={(e) =>
-                setPassword({ ...password, newPassword: e.target.value })
-              }
-            />
-          </div>
-          <div className="form-content">
-            <label htmlFor="email">Confirm New Password</label>
-            <input
-              type="password"
-              id="email"
-              placeholder="Confirm Your Password"
-              onChange={(e) =>
-                setPassword({ ...password, confirmPassword: e.target.value })
-              }
-            />
-          </div>
-          <div className="form-content">
-            <button>Reset Password</button>
-          </div>
-        </form>
+      <div className="content">
+        <div className="head">
+          <h1>Reset Password</h1>
+        </div>
+        <div className="body">
+          <form onSubmit={resetPasswordHandler}>
+            <div className="form-content">
+              <label htmlFor="email">New Password</label>
+              <input
+                type="password"
+                id="email"
+                placeholder="Enter New Password"
+                onChange={(e) =>
+                  setPassword({ ...password, newPassword: e.target.value })
+                }
+              />
+            </div>
+            <div className="form-content">
+              <label htmlFor="email">Confirm New Password</label>
+              <input
+                type="password"
+                id="email"
+                placeholder="Confirm Your Password"
+                onChange={(e) =>
+                  setPassword({ ...password, confirmPassword: e.target.value })
+                }
+              />
+            </div>
+            <div className="form-content">
+              <button>Reset Password</button>
+            </div>
+          </form>
+        </div>
       </div>
     </Wrapper>
   );

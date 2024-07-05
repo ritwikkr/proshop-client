@@ -6,6 +6,7 @@ import { forgotPassword, resetError } from "../store/slices/userSlice";
 import { toast } from "react-toastify";
 import { RootState } from "../interface/store/storeTypes";
 import { AppDispatch } from "../store/store";
+import GoBackButton from "../utilities/GoBackButton";
 
 function ForgotPassword() {
   // Component State
@@ -13,7 +14,9 @@ function ForgotPassword() {
 
   // Redux
   const dispatch = useDispatch<AppDispatch>();
-  const { emailSent, isError } = useSelector((state: RootState) => state.user);
+  const { emailSent, isError, isLoading } = useSelector(
+    (state: RootState) => state.user
+  );
 
   // Side Effect
   useEffect(() => {
@@ -32,28 +35,33 @@ function ForgotPassword() {
   // Handle Forgot Password
   function forgotPasswordHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    dispatch(forgotPassword({ email }));
+    dispatch(forgotPassword(email));
   }
   return (
     <Wrapper>
       <div className="body">
+        <GoBackButton />
         <div className="heading">
           <h1>Forgot Password</h1>
         </div>
-        <form onSubmit={forgotPasswordHandler}>
-          <div className="form-content">
-            <label htmlFor="email">Email Address</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="Enter Your Email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="form-content">
-            <button>Send Email</button>
-          </div>
-        </form>
+        {!emailSent ? (
+          <form onSubmit={forgotPasswordHandler}>
+            <div className="form-content">
+              <label htmlFor="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter Your Email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-content">
+              <button disabled={isLoading}>Send Email</button>
+            </div>
+          </form>
+        ) : (
+          <p>Please goto your email and check for the link</p>
+        )}
       </div>
     </Wrapper>
   );

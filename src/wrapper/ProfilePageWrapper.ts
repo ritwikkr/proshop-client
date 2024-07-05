@@ -127,7 +127,6 @@ const Wrapper = styled.div`
 
   @media only screen and (max-width: 800px) {
     > .main {
-      border: 2px solid red;
       > .orders {
         display: none;
       }

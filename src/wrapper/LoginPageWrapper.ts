@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  min-height: calc(100vh - 170px);
+  border: 2px solid transparent;
   .session-form {
     max-width: 400px;
     margin: 40px auto 0;
@@ -60,6 +60,18 @@ const Wrapper = styled.div`
               font-weight: bold;
             }
           }
+        }
+      }
+      > .partition {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        > p {
+          margin: 0 10px;
+        }
+        > hr {
+          height: 1px;
+          flex: 1;
         }
       }
     }

@@ -6,7 +6,6 @@ import {
   CheckJWTExpiryThunkArgs,
   CreateSessionThunkArgs,
   DeleteUserAddressThunkArgs,
-  ForgotPasswordThunkArgs,
   ResetPasswordThunkArgs,
   UpdatePasswordThunkArgs,
   UpdateUserThunkArgs,
@@ -22,10 +21,28 @@ export const createSession = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await axios.post(
-        `${BASE_URL}/api/v1/user/${sessionType}`,
-        userData
-      );
+      let response;
+      if (sessionType === "google") {
+        const { token, wishlist, address, _id } = userData;
+        response = {
+          data: {
+            user: {
+              googleId: userData.googleId,
+              name: userData.name,
+              email: userData.email,
+              address,
+              wishlist,
+              _id,
+            },
+            token,
+          },
+        };
+      } else {
+        response = await axios.post(
+          `${BASE_URL}/api/v1/user/${sessionType}`,
+          userData
+        );
+      }
       return response.data as UserData;
     } catch (error) {
       return rejectWithValue((error as AxiosError).response?.data);
@@ -94,11 +111,11 @@ export const updatePassword = createAsyncThunk(
 
 export const forgotPassword = createAsyncThunk(
   "forgotPassword",
-  async (user: ForgotPasswordThunkArgs, { rejectWithValue }) => {
+  async (email: string, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(
         `${BASE_URL}/api/v1/user/forgotPassword`,
-        { user }
+        { email }
       );
       return data;
     } catch (error) {
@@ -148,6 +165,21 @@ export const checkJWTExpiry = createAsyncThunk(
   }
 );
 
+export const verifyOTP = createAsyncThunk(
+  "verifyOTP",
+  async (body: { otp: string; email: string }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(
+        `${BASE_URL}/api/v1/user/verify-otp`,
+        body
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue((error as AxiosError).response?.data);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -172,6 +204,7 @@ const userSlice = createSlice({
     resetError: (state) => {
       state.isError = false;
       state.errorMsg = "";
+      state.emailSent = false;
     },
     resetUpdationComplete: (state) => {
       state.updationComplete = false;
@@ -182,10 +215,11 @@ const userSlice = createSlice({
       state.isLoading = true;
       state.data = null;
       state.isError = false;
+      state.emailSent = false;
     });
     builder.addCase(createSession.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.data = action.payload;
+      state.emailSent = action.payload ? true : false;
       state.isError = false;
       localStorage.setItem("user", JSON.stringify(action.payload));
     });
@@ -290,6 +324,22 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.isError = true;
       state.jwtExpired = true;
+    });
+
+    // verifyOTP
+    builder.addCase(verifyOTP.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(verifyOTP.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.data = action.payload.data;
+      localStorage.setItem("user", JSON.stringify(state.data));
+      localStorage.setItem("token", JSON.stringify(action.payload.data.token));
+    });
+    builder.addCase(verifyOTP.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.errorMsg = action.payload as string;
     });
   },
 });

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  margin-bottom: 10px;
   .button {
     width: 40px;
     height: 40px;

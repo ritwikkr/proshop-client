@@ -7,6 +7,7 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import { AppDispatch } from "../store/store";
 import { RootState } from "../interface/store/storeTypes";
 import { fetchWishlist } from "../store/slices/wishlistSlice";
+import GoogleLoginButton from "../components/GoogleLoginButton";
 
 function Loginpage() {
   const [showLogin, setShowLogin] = useState(true);
@@ -22,7 +23,7 @@ function Loginpage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { data, isError, errorMsg } = useSelector(
+  const { data, isError, errorMsg, emailSent } = useSelector(
     (state: RootState) => state.user
   );
 
@@ -31,15 +32,15 @@ function Loginpage() {
     if (isError) {
       setBtnDisabled(false);
       toast.error(errorMsg);
-    } else if (data) {
-      toast.success("Authentication successful. Redirecting...", {
-        autoClose: 2000,
-      });
     }
-    return () => {
-      dispatch(resetError());
-    };
-  }, [isError, data]);
+    if (emailSent) {
+      toast.success("Email sent to registered email");
+      navigate(`/otp-verification/${userDetails.email}`);
+    } else
+      return () => {
+        dispatch(resetError());
+      };
+  }, [isError, data, emailSent]);
 
   useEffect(() => {
     if (data) {
@@ -57,7 +58,6 @@ function Loginpage() {
     e.preventDefault();
     setBtnDisabled(true);
     const { name, email, password, confirmPassword } = userDetails;
-
     if (showLogin) {
       dispatch(
         createSession({ sessionType: "login", userData: { email, password } })
@@ -161,6 +161,12 @@ function Loginpage() {
               )}
             </div>
           </form>
+          <div className="partition">
+            <hr />
+            <p>OR</p>
+            <hr />
+          </div>
+          <GoogleLoginButton />
         </div>
       </div>
     </Wrapper>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  height: calc(100vh - 180px);
+  border: 2px solid transparent;
   > .body {
     width: 400px;
     margin: 50px auto;
@@ -37,6 +37,10 @@ const Wrapper = styled.div`
           cursor: pointer;
           width: 100%;
           margin: 20px 0;
+          &:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+          }
         }
       }
     }

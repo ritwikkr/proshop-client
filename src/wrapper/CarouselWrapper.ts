@@ -23,6 +23,9 @@ const Wrapper = styled.div`
           border-radius: 0%;
         }
       }
+      > .control-arrow {
+        z-index: 1;
+      }
       .slider-wrapper {
         height: 100%;
         .slider {
@@ -66,7 +69,6 @@ const Wrapper = styled.div`
       }
 
       .carousel .slide .legend {
-        position: absolute;
         top: 5%;
         left: 50%;
         height: 40px;
